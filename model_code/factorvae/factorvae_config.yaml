@@ -1,0 +1,115 @@
+# ==========================================================
+# 统一全局变量配置区 (修改日期只需在这里改一次即可)
+# ==========================================================
+_train_start: &train_start 2010-01-01
+_train_end: &train_end 2017-12-31
+
+_valid_start: &valid_start 2018-01-01
+_valid_end: &valid_end 2020-12-31
+
+_test_start: &test_start 2021-01-01
+_test_end: &test_end 2026-03-13
+# ==========================================================
+
+qlib_init:
+    provider_uri: "~/.qlib/qlib_data/cn_data"
+    region: cn
+market: &market csi300
+benchmark: &benchmark SH000300
+data_handler_config: &data_handler_config
+    # 整个数据集的起始和结束时间
+    start_time: *train_start
+    end_time: *test_end
+    # 模型 Fit (训练) 阶段的时间特征提取范围
+    fit_start_time: *train_start
+    fit_end_time: *train_end
+    instruments: *market
+    infer_processors:
+        - class: FilterCol
+          kwargs:
+              fields_group: feature
+              col_list: ["RESI5", "WVMA5", "RSQR5", "KLEN", "RSQR10", "CORR5", "CORD5", "CORR10", 
+                            "ROC60", "RESI10", "VSTD5", "RSQR60", "CORR60", "WVMA60", "STD5", 
+                            "RSQR20", "CORD60", "CORD10", "CORR20", "KLOW"
+                        ]
+        - class: RobustZScoreNorm
+          kwargs:
+              fields_group: feature
+              clip_outlier: true
+        - class: Fillna
+          kwargs:
+              fields_group: feature
+    learn_processors:
+        - class: DropnaLabel
+        # - class: CSRankNorm
+          kwargs:
+              fields_group: label
+    label: ["Ref($close, -2) / Ref($close, -1) - 1"]
+
+port_analysis_config: &port_analysis_config
+    strategy:
+        class: TopkDropoutStrategy
+        module_path: qlib.contrib.strategy
+        kwargs:
+            signal: <PRED>
+            topk: 50
+            n_drop: 5
+    backtest:
+        # 回测撮合引擎的时间范围 (通常与测试集完全对齐)
+        start_time: *test_start
+        end_time: *test_end
+        account: 100000000
+        benchmark: *benchmark
+        exchange_kwargs:
+            limit_threshold: 0.095
+            deal_price: close
+            open_cost: 0.0005
+            close_cost: 0.0015
+            min_cost: 5
+task:
+    model:
+        class: FactorVAEModel   # 指向我们刚写的 Wrapper 里的类名
+        module_path: model_code.factorvae.pytorch_factorvae  # 告诉 Qlib Wrapper 文件的位置
+        kwargs:
+            d_feat: 20
+            time_span: 20
+            stock_size: 300     # 沪深300请设为300
+            latent_size: 64
+            factor_size: 16
+            gru_input_size: 20
+            hidden_size: 64
+            gamma: 1.0          # 可以微调这个值(0.1 ~ 1.0)来平衡 VAE 的噪声控制
+            n_epochs: 200
+            lr: 1e-3
+            early_stop: 20
+            GPU: 6
+    dataset:
+        class: TSDatasetH
+        module_path: qlib.data.dataset
+        kwargs:
+            handler:
+                class: Alpha158
+                module_path: qlib.contrib.data.handler
+                kwargs: *data_handler_config
+            segments:
+                # 给模型切分数据的确切时间段
+                train: [*train_start, *train_end]
+                valid: [*valid_start, *valid_end]
+                test: [*test_start, *test_end]
+            step_len: 20
+            batch_size: 512
+    record: 
+        - class: SignalRecord
+          module_path: qlib.workflow.record_temp
+          kwargs: 
+            model: <MODEL>
+            dataset: <DATASET>
+        - class: SigAnaRecord
+          module_path: qlib.workflow.record_temp
+          kwargs: 
+            ana_long_short: False
+            ann_scaler: 252
+        - class: PortAnaRecord
+          module_path: qlib.workflow.record_temp
+          kwargs: 
+            config: *port_analysis_config

@@ -114,21 +114,21 @@ class LSTM(Model):
             np.random.seed(self.seed)
             torch.manual_seed(self.seed)
 
-        self.LSTM_model = LSTMModel(
+        self.model = LSTMModel(
             d_feat=self.d_feat,
             hidden_size=self.hidden_size,
             num_layers=self.num_layers,
             dropout=self.dropout,
         ).to(self.device)
         if optimizer.lower() == "adam":
-            self.train_optimizer = optim.Adam(self.LSTM_model.parameters(), lr=self.lr)
+            self.train_optimizer = optim.Adam(self.model.parameters(), lr=self.lr)
         elif optimizer.lower() == "gd":
-            self.train_optimizer = optim.SGD(self.LSTM_model.parameters(), lr=self.lr)
+            self.train_optimizer = optim.SGD(self.model.parameters(), lr=self.lr)
         else:
             raise NotImplementedError("optimizer {} is not supported!".format(optimizer))
 
         self.fitted = False
-        self.LSTM_model.to(self.device)
+        self.model.to(self.device)
 
     @property
     def use_gpu(self):
@@ -158,22 +158,22 @@ class LSTM(Model):
         raise ValueError("unknown metric `%s`" % self.metric)
 
     def train_epoch(self, data_loader):
-        self.LSTM_model.train()
+        self.model.train()
 
         for data, weight in data_loader:
             feature = data[:, :, 0:-1].to(self.device)
             label = data[:, -1, -1].to(self.device)
 
-            pred = self.LSTM_model(feature.float())
+            pred = self.model(feature.float())
             loss = self.loss_fn(pred, label, weight.to(self.device))
 
             self.train_optimizer.zero_grad()
             loss.backward()
-            torch.nn.utils.clip_grad_value_(self.LSTM_model.parameters(), 3.0)
+            torch.nn.utils.clip_grad_value_(self.model.parameters(), 3.0)
             self.train_optimizer.step()
 
     def test_epoch(self, data_loader):
-        self.LSTM_model.eval()
+        self.model.eval()
 
         scores = []
         losses = []
@@ -183,7 +183,7 @@ class LSTM(Model):
             # feature[torch.isnan(feature)] = 0
             label = data[:, -1, -1].to(self.device)
 
-            pred = self.LSTM_model(feature.float())
+            pred = self.model(feature.float())
             loss = self.loss_fn(pred, label, weight.to(self.device))
             losses.append(loss.item())
 
@@ -259,7 +259,7 @@ class LSTM(Model):
                 best_score = val_score
                 stop_steps = 0
                 best_epoch = step
-                best_param = copy.deepcopy(self.LSTM_model.state_dict())
+                best_param = copy.deepcopy(self.model.state_dict())
             else:
                 stop_steps += 1
                 if stop_steps >= self.early_stop:
@@ -267,7 +267,7 @@ class LSTM(Model):
                     break
 
         self.logger.info("best score: %.6lf @ %d" % (best_score, best_epoch))
-        self.LSTM_model.load_state_dict(best_param)
+        self.model.load_state_dict(best_param)
         torch.save(best_param, save_path)
 
         if self.use_gpu:
@@ -280,14 +280,14 @@ class LSTM(Model):
         dl_test = dataset.prepare("test", col_set=["feature", "label"], data_key=DataHandlerLP.DK_I)
         dl_test.config(fillna_type="ffill+bfill")
         test_loader = DataLoader(dl_test, batch_size=self.batch_size, num_workers=self.n_jobs)
-        self.LSTM_model.eval()
+        self.model.eval()
         preds = []
 
         for data in test_loader:
             feature = data[:, :, 0:-1].to(self.device)
 
             with torch.no_grad():
-                pred = self.LSTM_model(feature.float()).detach().cpu().numpy()
+                pred = self.model(feature.float()).detach().cpu().numpy()
 
             preds.append(pred)
 

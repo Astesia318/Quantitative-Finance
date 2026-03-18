@@ -14,7 +14,6 @@ import warnings
 import os      # [新增] 用于检查文件是否存在
 import torch   # [新增] 用于保存和加载深度学习模型权重
 
-from qlib.contrib.model.pytorch_lstm_ts import LSTM
 from qlib.data.dataset import TSDatasetH
 warnings.filterwarnings("ignore")
 
@@ -25,10 +24,11 @@ class DeepGridStrategy:
         
         self.grid_step = 0.015
         self.trend_threshold = 0.02
-        self.model:LSTM = None
-        self.weight_path = config.WEIGHT_PATH # 设定权重保存路径
+        self.model = None
+        self.weight_path = config.RESULTS_DIR+config.WEIGHT_PATH # 设定权重保存路径
+        self.csv_filename = config.RESULTS_DIR
 
-    def build_dataset_and_model(self, stock_list, start_date, end_date, is_training_day=False, yaml_path="lstm_config.yaml"):
+    def build_dataset_and_model(self, stock_list, start_date, end_date, is_training_day=False, yaml_path=config.YAML_PATH):
         """
         加载 YAML 配置，动态修改时间和股票池，然后根据日期决定是否训练
         """
@@ -50,17 +50,17 @@ class DeepGridStrategy:
             start_str = pd.to_datetime(str(test_segment[0])).strftime('%Y%m%d')
             end_str = pd.to_datetime(str(test_segment[1])).strftime('%Y%m%d')
             # 将动态生成的文件名绑定到 self 上
-            self.csv_filename = f"lstm_predictions_{start_str}_{end_str}.csv"
+            self.csv_filename += f"{config.MODEL_NAME}_predictions_{start_str}_{end_str}.csv"
         except Exception as e:
             print(f"-> [警告] 提取测试日期失败，使用默认文件名。原因: {e}")
-            self.csv_filename = "lstm_predictions_default.csv"
+            self.csv_filename += f"{config.MODEL_NAME}_predictions_default.csv"
 
         print("-> [Strategy] 正在将动态参数注入配置...")
         handler_kwargs = dataset_config["kwargs"]["handler"]["kwargs"]
         handler_kwargs["instruments"] = "all"
         
         print("-> [Strategy] 正在实例化 Dataset 和 Model...")
-        dataset:TSDatasetH = init_instance_by_config(dataset_config)
+        dataset = init_instance_by_config(dataset_config)
         self.model = init_instance_by_config(model_config)
 
         # ========================================================
@@ -78,7 +78,7 @@ class DeepGridStrategy:
             if os.path.exists(self.weight_path):
                 print(f"-> [Strategy] 发现历史权重文件，正在极速加载: {self.weight_path}")
                 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-                self.model.LSTM_model.load_state_dict(torch.load(self.weight_path, map_location=device))
+                self.model.model.load_state_dict(torch.load(self.weight_path, map_location=device))
                 self.model.fitted=True
             else:
                 print("-> [警告] 未找到历史权重文件！触发紧急回退机制：正在强制执行初始训练...")
@@ -88,22 +88,25 @@ class DeepGridStrategy:
         return dataset
 
     def get_model_prediction(self, dataset):
-        print("-> [Strategy] 正在调用 LSTM 模型进行推理...")
+        print(f"-> [Strategy] 正在调用 {config.MODEL_NAME} 模型进行多维推理...")
         predictions = self.model.predict(dataset)
         
+        # 兼容性处理：如果是单列 Series (旧模型)
         if isinstance(predictions, pd.Series):
             pred_df = predictions.to_frame(name='pred_center_return')
         else:
-            pred_df = predictions
-            pred_df.columns = ['pred_center_return']
-            
-        # ========================================================
-        # 【修改】：使用刚才动态生成的文件名进行保存
-        # ========================================================
-        # 使用 getattr 做一层安全防护，防止变量未被初始化的意外
-        export_name = getattr(self, 'csv_filename', 'lstm_predictions.csv')
+            pred_df = predictions.copy()
+            # 如果是 FactorVAE 返回的多列 DataFrame，
+            # 将代表确定性收益的 'pred_mu' 重命名为 'pred_center_return' 喂给下游网格策略
+            if 'pred_mu' in pred_df.columns:
+                pred_df = pred_df.rename(columns={'pred_mu': 'pred_center_return'})
+            else:
+                pred_df.columns = ['pred_center_return']
+                
+        # 动态获取文件名并导出 CSV
+        export_name = getattr(self, 'csv_filename', 'default_predictions.csv')
         pred_df.to_csv(export_name)    
-        print(f"-> [Strategy] 预测结果已导出至: {export_name}")
+        print(f"-> [Strategy] 多维预测结果(包含mu, sigma, sample)已导出至: {export_name}")
         
         return pred_df
 
@@ -182,7 +185,7 @@ if __name__ == '__main__':
     # 2023-10-25 是周三 -> 会触发【工作日极速推理】加载权重 (如果没有权重则紧急训练)
     # 2023-10-28 是周六 -> 会触发【周末重新训练】覆盖权重
     # ==========================================
-    test_today_str = '20231025' 
+    test_today_str = '20231027' 
     
     test_current_prices = {'SZ000001': 10.50, 'SH600050': 8.20}
     test_current_positions = {'SZ000001': 1000, 'SH600050': 0}

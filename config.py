@@ -10,12 +10,16 @@ RESEARCH_START_DATE = '20100101'
 RESEARCH_END_DATE = '20260313'
 
 # --- 路径配置 ---
-CSV_OUTPUT_DIR = './qlib_source_csvs'
 
+MODEL_NAME='factorvae'
 # --- 训练相关 ---
 QLIB_DIR="./qlib_data/my_custom_cn_data"
 #QLIB_DIR="./qlib-main/qlib_data/cn_data"
-WEIGHT_PATH="lstm_model_weights.pth"
+WEIGHT_PATH=f"{MODEL_NAME}_model_weights.pth"
+YAML_PATH = f'./model_code/{MODEL_NAME}/{MODEL_NAME}_config.yaml'
+RESULTS_DIR = './results/'
+CSV_OUTPUT_DIR = './qlib_source_csvs'
+
 FEATURE_DICT = {
     "close_norm": "$close / Mean($close, 15)",
     "volume_norm": "$volume / Mean($volume, 15)",
