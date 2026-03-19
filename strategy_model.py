@@ -5,7 +5,7 @@ from qlib.data.dataset.handler import DataHandlerLP
 from pathlib import Path
 from qlib.data.dataset.processor import RobustZScoreNorm, Fillna
 from qlib.utils import init_instance_by_config
-from qlib.workflow import R     # [新增] 引入 Qlib 的核心工作流引擎，用于回测和记录
+from qlib.workflow import R 
 import pandas as pd
 import numpy as np
 from ruamel.yaml import YAML
@@ -130,12 +130,9 @@ class DeepGridStrategy:
                     
         return actions
 
-    # =====================================================================
-    # 【新增功能】：完全脱离命令行，利用 YAML 在本地直接启动完整的论文复现回测
-    # =====================================================================
     def run_full_backtest(self, yaml_path=config.YAML_PATH):
         print(f"\n==================================================")
-        print(f"🌟 启动完整 YAML 回测工作流: {yaml_path}")
+        print(f" 启动完整 YAML 回测工作流: {yaml_path}")
         print(f"==================================================")
         yaml = YAML(typ="safe", pure=True)
         task_config = yaml.load(Path(yaml_path).absolute().open(encoding='utf-8'))["task"]
@@ -225,7 +222,7 @@ if __name__ == '__main__':
     print("=== 开始本地独立调试 strategy_model ===")
     
     test_stock_list = ['SZ000001', 'SH600050']
-    test_today_str = '20231027' 
+    test_today_str = '20231028' 
     test_current_prices = {'SZ000001': 10.50, 'SH600050': 8.20}
     test_current_positions = {'SZ000001': 1000, 'SH600050': 0}
 

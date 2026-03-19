@@ -18,7 +18,6 @@ class FactorVAE(nn.Module):
         time_span,
         gru_input_size,
         hidden_size=64,
-        alpha_h_size=64,
     ):
         super(FactorVAE, self).__init__()
 
@@ -45,12 +44,11 @@ class FactorVAE(nn.Module):
             latent_size=latent_size,
             factor_size=factor_size,
             stock_size=stock_size,
-            alpha_h_size=alpha_h_size,
             hidden_size=hidden_size,
         )
 
         self.factor_predictor = FactorPredictor(
-            latent_size=latent_size, factor_size=factor_size, stock_size=stock_size
+            latent_size=latent_size, factor_size=factor_size, hidden_size=hidden_size
         )
 
     def run_model(self, characteristics, future_returns, gamma=1,mask=None):
@@ -76,16 +74,15 @@ class FactorVAE(nn.Module):
         if mask is not None:
             log_prob_matrix = log_prob_matrix * mask.unsqueeze(-1)
         
-        loss_negloglike = log_prob_matrix.sum()
+        loss_negloglike = -log_prob_matrix.mean()
         valid_count = mask.sum() if mask is not None else (self.stock_size * latent_features.shape[0])
 
-        loss_negloglike = loss_negloglike * (-1 / (self.stock_size * latent_features.shape[0]))
         # latent_features.shape[0] is the batch_size
 
         mu_prior, sigma_prior = self.factor_predictor(latent_features)
         m_predictor = Normal(mu_prior, sigma_prior)
 
-        loss_KL = kl_divergence(m_encoder, m_predictor).sum()
+        loss_KL = kl_divergence(m_encoder, m_predictor).mean()
         # print(f"loss_neg:{loss_negloglike},loss_KL:{loss_KL}")
         loss = loss_negloglike + gamma * loss_KL
 

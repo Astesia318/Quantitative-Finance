@@ -33,12 +33,9 @@ class FeatureExtractor(nn.Module):
         self.gru_input_size = gru_input_size
         self.latent_size = latent_size
 
-        self.proj = MLP(
-            input_size=characteristic_size,
-            output_size=gru_input_size,
-            hidden_size=32,
-            activation=nn.LeakyReLU(),
-            out_activation=nn.LeakyReLU(),
+        self.proj = nn.Sequential(
+            nn.Linear(characteristic_size,gru_input_size),
+            nn.LeakyReLU()
         )
         self.gru = nn.GRU(input_size=gru_input_size, hidden_size=latent_size)
 

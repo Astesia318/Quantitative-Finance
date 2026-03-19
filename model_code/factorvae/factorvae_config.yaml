@@ -82,8 +82,8 @@ task:
             n_epochs: 200
             lr: 1e-3
             early_stop: 20
-            batch_size: 1
-            GPU: 6
+            batch_size: 512
+            GPU: 0
     dataset:
         class: TSDatasetH
         module_path: qlib.data.dataset

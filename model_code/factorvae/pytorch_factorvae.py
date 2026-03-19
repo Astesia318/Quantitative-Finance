@@ -24,7 +24,6 @@ class FactorVAEModel(Model):
         factor_size=16,
         gru_input_size=20,    
         hidden_size=64,
-        alpha_h_size=64,
         gamma=1.0,            
         n_epochs=200,
         lr=0.001,
@@ -61,7 +60,6 @@ class FactorVAEModel(Model):
             time_span=time_span,
             gru_input_size=gru_input_size,
             hidden_size=hidden_size,
-            alpha_h_size=alpha_h_size,
         ).to(self.device)
 
         if optimizer.lower() == "adam":
@@ -143,12 +141,12 @@ class FactorVAEModel(Model):
         dates = idx.get_level_values("datetime").unique().sort_values()
         dates = np.random.permutation(dates) 
 
-        total_loss = 0
-        valid_batches = 0
+        total_loss = 0.0
+        total_samples = 0
         
         for i in range(0, len(dates), self.batch_size):
             batch_dates = dates[i : i + self.batch_size]
-            
+            current_b_size = len(batch_dates)
             # 【修改】：接收解包出来的 mask_tensor
             x_tensor, y_tensor, mask_tensor, _ = self._extract_batch_data(sampler, batch_dates, idx)
             if x_tensor is None:
@@ -167,23 +165,23 @@ class FactorVAEModel(Model):
             torch.nn.utils.clip_grad_value_(self.model.parameters(), 3.0)
             self.train_optimizer.step()
             
-            total_loss += loss.item()
-            valid_batches += 1
+            total_loss += loss.item() * current_b_size
+            total_samples += current_b_size
             
-        return total_loss / max(valid_batches, 1)
+        return total_loss / total_samples
 
     def test_epoch(self, sampler):
         self.model.eval()
         idx = sampler.get_index()
         dates = idx.get_level_values("datetime").unique().sort_values()
         
-        total_loss = 0
-        valid_batches = 0
+        total_loss = 0.0
+        total_samples = 0
         
         with torch.no_grad():
             for i in range(0, len(dates), self.batch_size):
                 batch_dates = dates[i : i + self.batch_size]
-                
+                current_b_size = len(batch_dates)
                 # 【修改】：接收解包出来的 mask_tensor
                 x_tensor, y_tensor, mask_tensor, _ = self._extract_batch_data(sampler, batch_dates, idx)
                 if x_tensor is None:
@@ -197,10 +195,10 @@ class FactorVAEModel(Model):
                     mask=mask_tensor
                 )
                 
-                total_loss += loss.item()
-                valid_batches += 1
+                total_loss += loss.item() * current_b_size
+            total_samples += current_b_size
                 
-        return total_loss / max(valid_batches, 1)
+        return total_loss / total_samples
 
     def fit(self, dataset: TSDatasetH, evals_result=dict(), save_path=None):
         sampler_train = dataset.prepare("train", col_set=["feature", "label"], data_key=DataHandlerLP.DK_L)
