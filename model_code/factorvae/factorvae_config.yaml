@@ -8,14 +8,14 @@ _valid_start: &valid_start 2018-01-01
 _valid_end: &valid_end 2020-12-31
 
 _test_start: &test_start 2021-01-01
-_test_end: &test_end 2026-03-13
+_test_end: &test_end 2026-03-10
 # ==========================================================
 
 qlib_init:
     provider_uri: "~/.qlib/qlib_data/cn_data"
     region: cn
-market: &market csi300
-benchmark: &benchmark SH000300
+market: &market all
+benchmark: &benchmark SH600050
 data_handler_config: &data_handler_config
     # 整个数据集的起始和结束时间
     start_time: *train_start
@@ -41,10 +41,10 @@ data_handler_config: &data_handler_config
               fields_group: feature
     learn_processors:
         - class: DropnaLabel
-        # - class: CSRankNorm
+        - class: CSRankNorm
           kwargs:
               fields_group: label
-    label: ["Ref($close, -2) / Ref($close, -1) - 1"]
+    label: ["(Ref($close, -2) / Ref($close, -1) - 1)"]
 
 port_analysis_config: &port_analysis_config
     strategy:
@@ -82,7 +82,8 @@ task:
             n_epochs: 200
             lr: 1e-3
             early_stop: 20
-            GPU: 6
+            batch_size: 512
+            GPU: 0
     dataset:
         class: TSDatasetH
         module_path: qlib.data.dataset
@@ -97,7 +98,7 @@ task:
                 valid: [*valid_start, *valid_end]
                 test: [*test_start, *test_end]
             step_len: 20
-            batch_size: 512
+            batch_size: 2048
     record: 
         - class: SignalRecord
           module_path: qlib.workflow.record_temp

@@ -4,7 +4,7 @@ __pycache__
 #qlib-main/
 qlib_source_csvs*/
 qlib_data*/
-
+FactorVAE/
 test.py
 qtest.py
 
