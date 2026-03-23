@@ -8,47 +8,37 @@ from .factor_decoder import FactorDecoder
 from .factor_predictor import FactorPredictor
 
 
+# factor_VAE.py 的修改示例
 class FactorVAE(nn.Module):
-    def __init__(
-        self,
-        characteristic_size,
-        stock_size,
-        latent_size,
-        factor_size,
-        time_span,
-        gru_input_size,
-        hidden_size=64,
-    ):
+    def __init__(self, num_feature, num_latent, num_factor, num_portfolio, hidden_size,seq_len):
         super(FactorVAE, self).__init__()
 
-        self.characteristic_size = characteristic_size
-        self.stock_size = stock_size
-        self.latent_size = latent_size
-
+        # Feature Extractor 只需要知道输入特征数和输出隐变量数
         self.feature_extractor = FeatureExtractor(
-            time_span=time_span,
-            characteristic_size=characteristic_size,
-            latent_size=latent_size,
-            stock_size=stock_size,
-            gru_input_size=gru_input_size,
+            num_input=num_feature,    # 原 gru_input_size
+            num_latent=num_latent,     # 原 latent_size
+            seq_len=seq_len
         )
-
+        
+        # Encoder 需要隐变量数、因子数、以及构建组合的 M
         self.factor_encoder = FactorEncoder(
-            latent_size=latent_size,
-            stock_size=stock_size,
-            factor_size=factor_size,
-            hidden_size=hidden_size,
+            num_latent=num_latent, 
+            num_factor=num_factor, 
+            num_portfolio=num_portfolio
         )
-
-        self.factor_decoder = FactorDecoder(
-            latent_size=latent_size,
-            factor_size=factor_size,
-            stock_size=stock_size,
-            hidden_size=hidden_size,
-        )
-
+        
+        # Predictor 只需要隐变量数和因子数
         self.factor_predictor = FactorPredictor(
-            latent_size=latent_size, factor_size=factor_size, hidden_size=hidden_size
+            num_latent=num_latent, 
+            num_factor=num_factor,
+            hidden_size=hidden_size
+        )
+        
+        # Decoder 将因子转化为重建收益率
+        self.factor_decoder = FactorDecoder(
+            num_latent=num_latent, 
+            num_factor=num_factor,
+            hidden_size=hidden_size
         )
 
     def run_model(self, characteristics, future_returns, gamma=1,mask=None):
@@ -75,7 +65,7 @@ class FactorVAE(nn.Module):
             log_prob_matrix = log_prob_matrix * mask.unsqueeze(-1)
         
         loss_negloglike = -log_prob_matrix.mean()
-        valid_count = mask.sum() if mask is not None else (self.stock_size * latent_features.shape[0])
+        # valid_count = mask.sum() if mask is not None else (self.stock_size * latent_features.shape[0])
 
         # latent_features.shape[0] is the batch_size
 

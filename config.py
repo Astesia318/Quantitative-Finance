@@ -13,8 +13,10 @@ RESEARCH_END_DATE = '20260313'
 
 MODEL_NAME='factorvae'
 # --- 训练相关 ---
-QLIB_DIR="./qlib_data/my_custom_cn_data"
+# QLIB_DIR="./qlib_data/my_custom_cn_data"
 #QLIB_DIR="./qlib-main/qlib_data/cn_data"
+QLIB_DIR="./qlib_bin"
+
 WEIGHT_PATH=f"{MODEL_NAME}_model_weights.pth"
 YAML_PATH = f'./model_code/{MODEL_NAME}/{MODEL_NAME}_config.yaml'
 RESULTS_DIR = './results/'

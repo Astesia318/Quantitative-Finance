@@ -8,28 +8,24 @@ from torch.distributions import Normal
 
 class FactorDecoder(nn.Module):
     def __init__(
-        self, latent_size, factor_size, stock_size, hidden_size=64
+        self, num_latent, num_factor, hidden_size
     ):
         """Generate Stock return y hat from factors ang latent features.
 
         Args:
-            latent_size (int)
-            factor_size (int)
-            stock_size (int)
+            num_latent (int)
+            num_factor (int)
             alpha_h_size (int): The size of the hidden layer in alpha layer. Defaults to 64.
             hidden_size (int or list): Defaults to 64.
         """
         super(FactorDecoder, self).__init__()
         self.alpha_layer = AlphaLayer(
-            latent_size=latent_size,
-            hidden_size=hidden_size,
-            stock_size=stock_size,
+            num_latent=num_latent,
+            hidden_size=hidden_size
         )
         self.beta_layer = BetaLayer(
-            latent_size=latent_size,
-            stock_size=stock_size,
-            factor_size=factor_size,
-            hidden_size=hidden_size
+            num_latent=num_latent,
+            num_factor=num_factor
         )
 
     def forward(self, factors, latent_features):
@@ -49,14 +45,14 @@ class FactorDecoder(nn.Module):
 
 
 class AlphaLayer(nn.Module):
-    def __init__(self, latent_size, hidden_size, stock_size):
+    def __init__(self, num_latent, hidden_size):
         super(AlphaLayer, self).__init__()
         # 注: stock_size 在这里其实用不到，保留是为了接口兼容
         
         # 1. 严格对应公式: h_alpha^(i) = LeakyReLU(w_alpha * e^(i) + b_alpha)
         # 这里只有一层 nn.Linear，对应 w_alpha 和 b_alpha
         self.hidden_layer = nn.Sequential(
-            nn.Linear(latent_size, hidden_size),
+            nn.Linear(num_latent, hidden_size),
             nn.LeakyReLU()
         )
         
@@ -72,7 +68,7 @@ class AlphaLayer(nn.Module):
         )
 
     def forward(self, latent_features):
-        # latent_features: (batch_size, stock_size, latent_size)
+        # latent_features: (batch_size, stock_size, num_latent)
         h_alpha = self.hidden_layer(latent_features)
         
         mu_alpha = self.mu_alpha_layer(h_alpha)
@@ -82,16 +78,15 @@ class AlphaLayer(nn.Module):
 
 
 class BetaLayer(nn.Module):
-    def __init__(self, latent_size, stock_size, factor_size, hidden_size=64):
+    def __init__(self, num_latent, num_factor):
         super(BetaLayer, self).__init__()
 
-        self.factor_size = factor_size
-        self.stock_size = stock_size
+        self.num_factor = num_factor
 
-        self.beta_layer = nn.Linear(latent_size,factor_size)
+        self.beta_layer = nn.Linear(num_latent,num_factor)
 
     def forward(self, latent_features):
-        # (bs, stock_size, latent_size) -> (bs, stock_size, factor_size)
+        # (bs, stock_size, num_latent) -> (bs, stock_size, num_factor)
         beta = self.beta_layer(latent_features)
 
         return beta

@@ -17,7 +17,31 @@ import torch
 
 from qlib.data.dataset import TSDatasetH
 warnings.filterwarnings("ignore")
+import sys
+import logging
+import datetime
+import json
 
+class DualLogger(object):
+    """
+    双向日志记录器：将控制台输出同时实时写入到 TXT 文件中
+    """
+    def __init__(self, filename):
+        self.terminal = sys.stdout
+        self.log_file = open(filename, "w", encoding="utf-8")
+
+    def write(self, message):
+        self.terminal.write(message)
+        self.log_file.write(message)
+        self.log_file.flush() # 确保实时刷新写入硬盘，防止程序意外中断时丢失日志
+
+    def flush(self):
+        self.terminal.flush()
+        self.log_file.flush()
+
+    def close(self):
+        self.log_file.close()
+        
 class DeepGridStrategy:
     def __init__(self):
         print("-> [Strategy] 正在初始化 Qlib 引擎...")
@@ -53,12 +77,12 @@ class DeepGridStrategy:
 
         print("-> [Strategy] 正在将动态参数注入配置...")
         handler_kwargs = dataset_config["kwargs"]["handler"]["kwargs"]
-        handler_kwargs["instruments"] = "all"
+        # handler_kwargs["instruments"] = "all"
         
         print("-> [Strategy] 正在实例化 Dataset 和 Model...")
         dataset = init_instance_by_config(dataset_config)
         self.model = init_instance_by_config(model_config)
-
+        
         if is_training_day:
             print("-> [Strategy] 【周末任务】今天是周六，正在利用最新数据重新训练模型...")
             self.model.fit(dataset, save_path=self.weight_path)

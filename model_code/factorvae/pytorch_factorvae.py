@@ -17,67 +17,84 @@ from .factorVAE.factor_VAE import FactorVAE
 class FactorVAEModel(Model):
     def __init__(
         self,
-        d_feat=20,
-        time_span=20,
-        stock_size=300,       
-        latent_size=64,
-        factor_size=16,
-        gru_input_size=20,    
-        hidden_size=64,
+        # 1. 替换为全新的规范参数名
+        num_feature=158,
+        seq_len=20,
+        num_latent=158,
+        num_factor=48,
+        num_portfolio=48,
+        hidden_size=48,
+        
         gamma=1.0,            
         n_epochs=200,
         lr=0.001,
         early_stop=20,
-        batch_size=16,        # 【新增】Batch Size：代表一次性并行处理的交易日天数
+        batch_size=256,        
         optimizer="adam",
-        GPU=0,
+        GPU=6,
         seed=None,
         **kwargs,
     ):
         self.logger = get_module_logger("FactorVAE")
         self.logger.info("Initializing Batched FactorVAE Wrapper...")
-
-        self.d_feat = d_feat
-        self.time_span = time_span
-        self.stock_size = stock_size
-        self.gamma = gamma
-        self.n_epochs = n_epochs
-        self.lr = lr
-        self.early_stop = early_stop
+        
+        # 2. 将类属性对齐
+        self.num_feature = num_feature
+        self.seq_len = seq_len
+        self.num_latent = num_latent
+        self.num_factor = num_factor
+        self.num_portfolio = num_portfolio
+        self.hidden_size = hidden_size
         self.batch_size = batch_size
+        
+        self.early_stop = early_stop
+        self.n_epochs = n_epochs
+        self.gamma = gamma
+        self.lr = lr
         self.device = torch.device(f"cuda:{GPU}" if torch.cuda.is_available() and GPU >= 0 else "cpu")
-        self.seed = seed
+        self.seed=seed
+
 
         if self.seed is not None:
             np.random.seed(self.seed)
             torch.manual_seed(self.seed)
 
+        # 3. 实例化底层 FactorVAE 时，传入规范后的参数
         self.model = FactorVAE(
-            characteristic_size=d_feat,
-            stock_size=stock_size,
-            latent_size=latent_size,
-            factor_size=factor_size,
-            time_span=time_span,
-            gru_input_size=gru_input_size,
-            hidden_size=hidden_size,
+            num_feature=self.num_feature,
+            num_latent=self.num_latent,
+            num_factor=self.num_factor,
+            num_portfolio=self.num_portfolio,
+            hidden_size=self.hidden_size,
+            seq_len=self.seq_len
         ).to(self.device)
 
         if optimizer.lower() == "adam":
             self.train_optimizer = optim.Adam(self.model.parameters(), lr=self.lr)
         else:
             self.train_optimizer = optim.SGD(self.model.parameters(), lr=self.lr)
-
+        self.model_config = {
+            "num_feature": num_feature,
+            "seq_len": seq_len,
+            "num_latent": num_latent,
+            "num_factor": num_factor,
+            "num_portfolio": num_portfolio,
+            "hidden_size": hidden_size,
+            "gamma": gamma,            
+            "n_epochs": n_epochs,
+            "lr": lr,
+            "early_stop": early_stop,
+            "batch_size": batch_size,        
+            "optimizer": optimizer,
+        }
+        self.log_filename = f"{self.__class__.__name__}_train_log.txt"
         self.fitted = False
 
     def _extract_batch_data(self, sampler, batch_dates, idx):
         """
-        批量数据提取器：一次性打包多个交易日的截面数据，并生成 Mask
-        返回: 
-            x_tensor -> [batch_size, time_span, stock_size, d_feat]
-            y_tensor -> [batch_size, stock_size]
-            mask_tensor -> [batch_size, stock_size]
+        动态批量数据提取器：按当前批次的最大股票数(max_N)进行动态补齐，摒弃 fixed stock_size。
         """
-        batch_x, batch_y, batch_mask = [], [], []
+        batch_x_list, batch_y_list = [], []
         N_todays = [] 
 
         for date in batch_dates:
@@ -88,41 +105,37 @@ class FactorVAEModel(Model):
             day_data = np.stack([sampler[i] for i in pos_indices])
             x_val = day_data[:, :, :-1]
             y_val = day_data[:, -1, -1]
+            
+            batch_x_list.append(x_val)
+            batch_y_list.append(y_val)
+            N_todays.append(x_val.shape[0])
+
+        if not batch_x_list:
+            return None, None, []
+
+        # 获取当前批次最大的股票数量，用作动态 Padding 的基准
+        max_N = max(N_todays)
+        
+        batch_x, batch_y = [], []
+        for x_val, y_val in zip(batch_x_list, batch_y_list):
             N_today = x_val.shape[0]
-            N_todays.append(N_today)
-
-            # 【新增】：初始化当天的 Mask，全设为 1.0 (真股票)
-            day_mask = np.ones(self.stock_size)
-
-            # 对齐当前交易日的股票数到固定大小 (stock_size)
-            if N_today < self.stock_size:
-                pad_len = self.stock_size - N_today
-                pad_x = np.zeros((pad_len, self.time_span, self.d_feat))
+            
+            # 如果当天的股票数少于 max_N，则补齐 0
+            if N_today < max_N:
+                pad_len = max_N - N_today
+                pad_x = np.zeros((pad_len, self.seq_len, self.num_feature))
                 x_val = np.concatenate([x_val, pad_x], axis=0)
                 
                 pad_y = np.zeros(pad_len)
                 y_val = np.concatenate([y_val, pad_y], axis=0)
                 
-                # 【新增】：将 Padding 进去的假股票位置的 Mask 设为 0.0
-                day_mask[N_today:] = 0.0
-                
-            elif N_today > self.stock_size:
-                x_val = x_val[:self.stock_size]
-                y_val = y_val[:self.stock_size]
-                # 截断时，所有留下的都是真股票，day_mask 保持全 1 即可
-
             batch_x.append(x_val)
             batch_y.append(y_val)
-            batch_mask.append(day_mask) # 收集 Mask
-
-        if not batch_x:
-            return None, None, None, []
 
         batch_x = np.stack(batch_x) 
         batch_y = np.stack(batch_y) 
-        batch_mask = np.stack(batch_mask) # 形状: [B, stock_size]
 
-        # 轴调换，迎合原生代码 assert 需求：变为 [B, time_span, stock_size, d_feat]
+        # 轴调换：[B, seq_len, max_N, num_feature]
         batch_x = np.transpose(batch_x, (0, 2, 1, 3))
         
         batch_x = np.nan_to_num(batch_x, nan=0.0)
@@ -130,10 +143,8 @@ class FactorVAEModel(Model):
 
         x_tensor = torch.from_numpy(batch_x).float().to(self.device)
         y_tensor = torch.from_numpy(batch_y).float().to(self.device)
-        # 【新增】：将 Mask 转为 Tensor 放进 GPU
-        mask_tensor = torch.from_numpy(batch_mask).float().to(self.device)
 
-        return x_tensor, y_tensor, mask_tensor, N_todays
+        return x_tensor, y_tensor, N_todays
 
     def train_epoch(self, sampler):
         self.model.train()
@@ -147,17 +158,17 @@ class FactorVAEModel(Model):
         for i in range(0, len(dates), self.batch_size):
             batch_dates = dates[i : i + self.batch_size]
             current_b_size = len(batch_dates)
-            # 【修改】：接收解包出来的 mask_tensor
-            x_tensor, y_tensor, mask_tensor, _ = self._extract_batch_data(sampler, batch_dates, idx)
+            
+            # 彻底去掉 Mask
+            x_tensor, y_tensor, _ = self._extract_batch_data(sampler, batch_dates, idx)
             if x_tensor is None:
                 continue
 
-            # 【修改】：将 mask 传递给原生的 run_model 函数
+            # 去掉传给底层模型的 mask 参数
             loss = self.model.run_model(
                 characteristics=x_tensor, 
                 future_returns=y_tensor, 
-                gamma=self.gamma,
-                mask=mask_tensor  
+                gamma=self.gamma
             )
 
             self.train_optimizer.zero_grad()
@@ -182,21 +193,19 @@ class FactorVAEModel(Model):
             for i in range(0, len(dates), self.batch_size):
                 batch_dates = dates[i : i + self.batch_size]
                 current_b_size = len(batch_dates)
-                # 【修改】：接收解包出来的 mask_tensor
-                x_tensor, y_tensor, mask_tensor, _ = self._extract_batch_data(sampler, batch_dates, idx)
+                
+                x_tensor, y_tensor, _ = self._extract_batch_data(sampler, batch_dates, idx)
                 if x_tensor is None:
                     continue
                     
-                # 【修改】：将 mask 传递给原生的 run_model 函数
                 loss = self.model.run_model(
                     characteristics=x_tensor, 
                     future_returns=y_tensor, 
-                    gamma=self.gamma,
-                    mask=mask_tensor
+                    gamma=self.gamma
                 )
                 
                 total_loss += loss.item() * current_b_size
-            total_samples += current_b_size
+                total_samples += current_b_size
                 
         return total_loss / total_samples
 
@@ -219,14 +228,21 @@ class FactorVAEModel(Model):
         self.logger.info("Training Batched FactorVAE...")
         self.fitted = True
         best_param = copy.deepcopy(self.model.state_dict())
-
+        with open(self.log_filename, "a", encoding="utf-8") as f:
+            f.write(f"========== {self.__class__.__name__} 训练配置 ==========\n")
+            for key, value in self.model_config.items():
+                f.write(f"{key}: {value}\n")
+            f.write("===================================================\n\n")
+            f.write("========== 训练过程 ==========\n")
+            
         for step in range(self.n_epochs):
             train_loss = self.train_epoch(sampler_train)
             
             if not sampler_valid.empty:
                 val_loss = self.test_epoch(sampler_valid)
                 self.logger.info(f"Epoch {step}: train_loss {train_loss:.4f}, valid_loss {val_loss:.4f}")
-                
+                with open(self.log_filename, "a", encoding="utf-8") as f:
+                    f.write(f"Epoch {step}: train_loss {train_loss:.4f}, valid_loss {val_loss:.4f}\n")
                 if val_loss < best_loss:
                     best_loss = val_loss
                     stop_steps = 0
@@ -239,7 +255,9 @@ class FactorVAEModel(Model):
                         break
             else:
                 self.logger.info(f"Epoch {step}: train_loss {train_loss:.4f}")
-
+                
+        with open(self.log_filename, "a", encoding="utf-8") as f:
+            f.write(f"Best Loss: {best_loss:.6f} @ Epoch {best_epoch}\n")
         self.logger.info(f"Best Loss: {best_loss:.6f} @ Epoch {best_epoch}")
         self.model.load_state_dict(best_param)
         torch.save(best_param, save_path)
@@ -256,7 +274,6 @@ class FactorVAEModel(Model):
         
         self.model.eval()
         
-        # 使用三个列表分别收集采样值、均值(预期收益)、标准差(风险)
         preds_sample = []
         preds_mu = []
         preds_sigma = []
@@ -269,22 +286,20 @@ class FactorVAEModel(Model):
             for i in range(0, len(dates), self.batch_size):
                 batch_dates = dates[i : i + self.batch_size]
                 
-                x_tensor, _, _, N_todays = self._extract_batch_data(sampler_test, batch_dates, idx)
+                x_tensor, _, N_todays = self._extract_batch_data(sampler_test, batch_dates, idx)
                 if x_tensor is None:
                     continue
                 
-                # 获取全量三个参数
                 pred_returns, mu_dec, sigma_dec = self.model.prediction(characteristics=x_tensor)
                 
                 for b_idx, date in enumerate(batch_dates):
-                    # 剥离单天数据
                     p_ret = pred_returns[b_idx].squeeze().cpu().numpy()
                     p_mu = mu_dec[b_idx].squeeze().cpu().numpy()
                     p_sig = sigma_dec[b_idx].squeeze().cpu().numpy()
                     
-                    actual_N = min(N_todays[b_idx], self.stock_size)
+                    # 【重要修正】：直接使用当天的真实股票数进行截断，彻底淘汰 stock_size 限制
+                    actual_N = N_todays[b_idx] 
                     
-                    # 切除 Padding，只保留真实的股票数据
                     preds_sample.append(p_ret[:actual_N])
                     preds_mu.append(p_mu[:actual_N])
                     preds_sigma.append(p_sig[:actual_N])
@@ -293,16 +308,14 @@ class FactorVAEModel(Model):
                     for idx_pos in pos_indices[:actual_N]:
                         indices.append(idx[idx_pos])
 
-        # 扁平化拼接
         flat_sample = np.concatenate(preds_sample)
         flat_mu = np.concatenate(preds_mu)
         flat_sigma = np.concatenate(preds_sigma)
         
         multi_idx = pd.MultiIndex.from_tuples(indices, names=["datetime", "instrument"])
         
-        # 组装成多列 DataFrame 形式返回
         return pd.DataFrame({
-            "pred_sample": flat_sample,  # 带有随机性的单次采样预测
-            "pred_mu": flat_mu,          # 确定性的预期收益均值 (最核心指标)
-            "pred_sigma": flat_sigma     # 预测的不确定性风险 (方差/标准差)
+            "pred_sample": flat_sample,  
+            "pred_mu": flat_mu,          
+            "pred_sigma": flat_sigma     
         }, index=multi_idx)

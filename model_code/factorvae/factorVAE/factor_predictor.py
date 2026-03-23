@@ -6,45 +6,45 @@ from .basic_net import MLP
 
 
 class FactorPredictor(nn.Module):
-    def __init__(self, latent_size, factor_size,hidden_size):
+    def __init__(self, num_latent, num_factor,hidden_size):
         """
-        :param latent_size: 对应公式中的特征维度 H
-        :param factor_size: 对应公式中的独立头数 K (即因子数量)
+        :param num_latent: 对应公式中的特征维度 H
+        :param num_factor: 对应公式中的独立头数 K (即因子数量)
         """
         super(FactorPredictor, self).__init__()
 
-        self.latent_size = latent_size
-        self.factor_size = factor_size  # 即论文中的 K
+        self.num_latent = num_latent
+        self.num_factor = num_factor  # 即论文中的 K
         self.hidden_size = hidden_size
         # 1. 对应公式中的全局查询向量 q ∈ R^H
         # 因为有 K 个独立头，所以我们定义 K 个独立的 q
-        self.q = nn.Parameter(torch.randn(factor_size, latent_size))
+        self.q = nn.Parameter(torch.randn(num_factor, num_latent))
 
         # 2. 对应公式中的 w_key 和 w_value
         # 为了高效计算，用一个 Linear 一次性计算 K 个头的 Key 和 Value
-        self.W_key = nn.Linear(latent_size, factor_size * latent_size, bias=False)
-        self.W_val = nn.Linear(latent_size, factor_size * latent_size, bias=False)
+        self.W_key = nn.Linear(num_latent, num_factor * num_latent, bias=False)
+        self.W_val = nn.Linear(num_latent, num_factor * num_latent, bias=False)
 
         # 3. 对应公式中的 distribution_network π_prior
-        # 注意：输入维度不再是 stock_size * latent_size，而是 factor_size * latent_size
+        # 注意：输入维度不再是 stock_size * num_latent，而是 num_factor * num_latent
         self.distribution_network_mu = MLP(
-            input_size=factor_size * latent_size,
-            output_size=factor_size,
+            input_size=num_factor * num_latent,
+            output_size=num_factor,
             hidden_size=self.hidden_size,
             out_activation=None
         )
 
         self.distribution_network_sigma = MLP(
-            input_size=factor_size * latent_size,
-            output_size=factor_size,
+            input_size=num_factor * num_latent,
+            output_size=num_factor,
             hidden_size=64,
             out_activation=nn.Softplus()
         )
 
     def forward(self, latent_features):
-        # latent_features: (batch_size, N, latent_size)  这里 N 是动态的当天股票数量
+        # latent_features: (batch_size, N, num_latent)  这里 N 是动态的当天股票数量
         bs, N, H = latent_features.shape
-        K = self.factor_size
+        K = self.num_factor
 
         # --- 公式: k^(i) = w_key * e^(i), v^(i) = w_value * e^(i) ---
         # 形状转换: (bs, N, K * H) -> (bs, N, K, H)
@@ -78,7 +78,7 @@ class FactorPredictor(nn.Module):
         h_multi = h_att.view(bs, -1)  # 结果形状: (bs, K * H)
 
         # --- 公式: [μ_prior, σ_prior] = π_prior(h_multi) ---
-        mu_prior = self.distribution_network_mu(h_multi).unsqueeze(-1)       # (bs, factor_size, 1)
-        sigma_prior = self.distribution_network_sigma(h_multi).unsqueeze(-1) # (bs, factor_size, 1)
+        mu_prior = self.distribution_network_mu(h_multi).unsqueeze(-1)       # (bs, num_factor, 1)
+        sigma_prior = self.distribution_network_sigma(h_multi).unsqueeze(-1) # (bs, num_factor, 1)
 
         return mu_prior, sigma_prior

@@ -15,7 +15,7 @@ df['datetime'] = pd.to_datetime(df['datetime'])
 # ==========================================
 # 2. 挑选股票和时间段
 # ==========================================
-target_stock = 'SH601216'  # 替换为你想要观察的股票，如 'SH600150'
+target_stock = 'SZ200037'  # 替换为你想要观察的股票，如 'SH600150'
 
 if target_stock not in df['instrument'].values:
     target_stock = df['instrument'].iloc[0]
