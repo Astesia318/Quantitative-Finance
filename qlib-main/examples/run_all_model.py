@@ -19,7 +19,7 @@ from pathlib import Path
 from operator import xor
 from pprint import pprint
 
-import qtest
+import qlib
 from qlib.workflow import R
 from qlib.tests.data import GetData
 
@@ -209,7 +209,7 @@ class ModelRunner:
     def _init_qlib(self, exp_folder_name):
         # init qlib
         GetData().qlib_data(exists_skip=True)
-        qtest.init(
+        qlib.init(
             exp_manager={
                 "class": "MLflowExpManager",
                 "module_path": "qlib.workflow.expm",

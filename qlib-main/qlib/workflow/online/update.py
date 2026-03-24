@@ -8,7 +8,7 @@ from abc import ABCMeta, abstractmethod
 from typing import Optional
 
 import pandas as pd
-from qtest import get_module_logger
+from qlib import get_module_logger
 from qlib.data import D
 from qlib.data.dataset import Dataset, DatasetH, TSDatasetH
 from qlib.data.dataset.handler import DataHandlerLP

@@ -174,6 +174,7 @@ class DeepGridStrategy:
             print("\n-> [Workflow] 2. 开始在全量历史数据上训练模型 (Model Fit)...")
             device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
             model.model.load_state_dict(torch.load(self.weight_path, map_location=device))
+            # model.model.load_state_dict(torch.load("./results/VAE-Revision2_factor_48_hdn_48_port_128_seed_42.pt", map_location=device))
             model.fitted=True
             #model.fit(dataset)
             

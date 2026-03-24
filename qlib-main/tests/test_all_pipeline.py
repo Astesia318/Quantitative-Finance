@@ -7,7 +7,7 @@ import unittest
 import pytest
 from pathlib import Path
 
-import qtest
+import qlib
 from qlib.config import C
 from qlib.utils import init_instance_by_config, flatten_dict
 from qlib.workflow import R

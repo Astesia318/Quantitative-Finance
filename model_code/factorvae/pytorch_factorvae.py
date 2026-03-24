@@ -20,7 +20,6 @@ class FactorVAEModel(Model):
         # 1. 替换为全新的规范参数名
         num_feature=158,
         seq_len=20,
-        num_latent=158,
         num_factor=48,
         num_portfolio=48,
         hidden_size=48,
@@ -41,7 +40,6 @@ class FactorVAEModel(Model):
         # 2. 将类属性对齐
         self.num_feature = num_feature
         self.seq_len = seq_len
-        self.num_latent = num_latent
         self.num_factor = num_factor
         self.num_portfolio = num_portfolio
         self.hidden_size = hidden_size
@@ -62,7 +60,6 @@ class FactorVAEModel(Model):
         # 3. 实例化底层 FactorVAE 时，传入规范后的参数
         self.model = FactorVAE(
             num_feature=self.num_feature,
-            num_latent=self.num_latent,
             num_factor=self.num_factor,
             num_portfolio=self.num_portfolio,
             hidden_size=self.hidden_size,
@@ -70,13 +67,12 @@ class FactorVAEModel(Model):
         ).to(self.device)
 
         if optimizer.lower() == "adam":
-            self.train_optimizer = optim.Adam(self.model.parameters(), lr=self.lr)
+            self.train_optimizer = optim.Adam(self.model.parameters(), lr=self.lr, weight_decay=1e-4)
         else:
             self.train_optimizer = optim.SGD(self.model.parameters(), lr=self.lr)
         self.model_config = {
             "num_feature": num_feature,
             "seq_len": seq_len,
-            "num_latent": num_latent,
             "num_factor": num_factor,
             "num_portfolio": num_portfolio,
             "hidden_size": hidden_size,

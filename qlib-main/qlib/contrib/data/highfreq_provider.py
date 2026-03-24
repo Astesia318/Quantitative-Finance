@@ -3,8 +3,8 @@ import time
 import datetime
 from typing import Optional
 
-import qtest
-from qtest import get_module_logger
+import qlib
+from qlib import get_module_logger
 from qlib.data import D
 from qlib.config import REG_CN
 from qlib.utils import init_instance_by_config
@@ -104,7 +104,7 @@ class HighFreqProvider:
     def _init_qlib(self, qlib_conf):
         """initialize qlib"""
 
-        qtest.init(
+        qlib.init(
             region=REG_CN,
             auto_mount=False,
             custom_ops=[DayLast, FFillNan, BFillNan, Date, Select, IsNull, IsInf, Cut],

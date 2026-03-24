@@ -2,7 +2,7 @@
 #  Licensed under the MIT License.
 
 
-import qtest
+import qlib
 from qlib.constant import REG_CN
 
 from qlib.utils import init_instance_by_config
@@ -14,7 +14,7 @@ if __name__ == "__main__":
     provider_uri = "~/.qlib/qlib_data/cn_data"  # target_dir
     GetData().qlib_data(target_dir=provider_uri, region=REG_CN, exists_skip=True)
 
-    qtest.init(provider_uri=provider_uri, region=REG_CN)
+    qlib.init(provider_uri=provider_uri, region=REG_CN)
 
     ###################################
     # train model

@@ -24,7 +24,7 @@ import pymongo
 from bson.binary import Binary
 from bson.objectid import ObjectId
 from pymongo.errors import InvalidDocument
-from qtest import auto_init, get_module_logger
+from qlib import auto_init, get_module_logger
 from tqdm.cli import tqdm
 
 from .utils import get_mongodb

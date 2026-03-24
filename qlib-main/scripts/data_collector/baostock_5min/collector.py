@@ -13,7 +13,7 @@ from pathlib import Path
 from loguru import logger
 from typing import Iterable, List
 
-import qtest
+import qlib
 from qlib.data import D
 
 CUR_DIR = Path(__file__).resolve().parent
@@ -165,7 +165,7 @@ class BaostockNormalizeHS3005min(BaseNormalize):
             symbol field name, default is symbol
         """
         bs.login()
-        qtest.init(provider_uri=qlib_data_1d_dir)
+        qlib.init(provider_uri=qlib_data_1d_dir)
         self.all_1d_data = D.features(D.instruments("all"), ["$paused", "$volume", "$factor", "$close"], freq="day")
         super(BaostockNormalizeHS3005min, self).__init__(date_field_name, symbol_field_name)
 

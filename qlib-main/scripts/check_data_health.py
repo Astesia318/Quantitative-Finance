@@ -6,7 +6,7 @@ import pandas as pd
 from loguru import logger
 from tqdm import tqdm
 
-import qtest
+import qlib
 from qlib.data import D
 
 
@@ -46,7 +46,7 @@ class DataHealthChecker:
                 self.data[filename] = df
 
         elif qlib_dir:
-            qtest.init(provider_uri=qlib_dir)
+            qlib.init(provider_uri=qlib_dir)
             self.load_qlib_data()
 
     def load_qlib_data(self):

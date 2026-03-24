@@ -10,7 +10,7 @@ Based on the ability of TaskManager, `worker` method offer a simple way for mult
 from pprint import pprint
 
 import fire
-import qtest
+import qlib
 from qlib.constant import REG_CN
 from qlib.workflow import R
 from qlib.workflow.task.gen import RollingGen, task_generator
@@ -41,7 +41,7 @@ class RollingTaskExample:
             "task_url": task_url,
             "task_db_name": task_db_name,
         }
-        qtest.init(provider_uri=provider_uri, region=region, mongo=mongo_conf)
+        qlib.init(provider_uri=provider_uri, region=region, mongo=mongo_conf)
         self.experiment_name = experiment_name
         if task_pool is None:
             self.trainer = TrainerR(experiment_name=self.experiment_name)

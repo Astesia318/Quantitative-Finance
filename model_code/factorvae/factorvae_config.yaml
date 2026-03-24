@@ -82,16 +82,15 @@ task:
             # --- 重构后的模型超参数 ---
             num_feature: 158       # 对应 Alpha158
             seq_len: 20            # 时间序列长度
-            num_latent: 158        # 隐特征维度
             num_factor: 48         # 独立因子数
-            num_portfolio: 48      # 投资组合数
+            num_portfolio: 128      # 投资组合数
             hidden_size: 48        # 隐藏层网络维度
-            gamma: 1.0
+            gamma: 0.1
             # --- 训练参数保持不变 ---
             n_epochs: 200
             lr: 1e-3
             early_stop: 15
-            batch_size: 256
+            batch_size: 1024
             GPU: 6
     dataset:
         class: TSDatasetH

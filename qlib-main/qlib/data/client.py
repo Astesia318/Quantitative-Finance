@@ -8,7 +8,7 @@ import json
 
 import socketio
 
-import qtest
+import qlib
 
 from ..log import get_module_logger
 
@@ -60,7 +60,7 @@ class Client:
         msg_queue: Queue
             The queue to pass the message after callback.
         """
-        head_info = {"version": qtest.__version__}
+        head_info = {"version": qlib.__version__}
 
         def request_callback(*args):
             """callback_wrapper

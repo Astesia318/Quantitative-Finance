@@ -3,7 +3,7 @@
 
 import sys
 import unittest
-import qtest
+import qlib
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent))
@@ -17,7 +17,7 @@ from qlib.data import D
 class TestDataLoader(unittest.TestCase):
 
     def test_nested_data_loader(self):
-        qtest.init(kernels=1)
+        qlib.init(kernels=1)
         nd = NestedDataLoader(
             dataloader_l=[
                 {

@@ -8,7 +8,7 @@ from typing import List, Optional, Union
 import fire
 import pandas as pd
 
-from qtest import auto_init
+from qlib import auto_init
 from qlib.log import get_module_logger
 from qlib.model.ens.ensemble import RollingEnsemble
 from qlib.model.trainer import TrainerR

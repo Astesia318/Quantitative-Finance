@@ -2,83 +2,93 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from .basic_net import MLP
+class AttentionLayer(nn.Module):
+    def __init__(self, hidden_size):
+        super(AttentionLayer, self).__init__()
+        
+        # Query 向量 (H,)
+        self.query = nn.Parameter(torch.randn(hidden_size))
+        self.key_layer = nn.Linear(hidden_size, hidden_size)
+        self.value_layer = nn.Linear(hidden_size, hidden_size)
+        self.dropout = nn.Dropout(0.1)
+    
+    def forward(self, stock_latent):
+        # stock_latent shape: (bs, N, H) 
+        # bs 是 batch_size，N 是股票数量，H 是 hidden_size
+        bs, N, H = stock_latent.shape
+
+        self.key = self.key_layer(stock_latent)    # (bs, N, H)
+        self.value = self.value_layer(stock_latent) # (bs, N, H)
+        
+        # calculate attention weights (兼容 batch 维度的点积)
+        # key: (bs, N, H) 与 query: (H,) 做点积 -> 结果 (bs, N)
+        attention_weights = torch.matmul(self.key, self.query) 
+        
+        # scaling (缩放因子)
+        attention_weights = attention_weights / torch.sqrt(torch.tensor(H, dtype=torch.float32) + 1e-6)
+        
+        attention_weights = self.dropout(attention_weights)
+        attention_weights = F.relu(attention_weights) # max(0, x)
+        
+        # softmax 必须在股票维度 N (dim=1) 上进行
+        attention_weights = F.softmax(attention_weights, dim=1) # (bs, N)
+        
+        # calculate context vector (加权求和)
+        if torch.isnan(attention_weights).any() or torch.isinf(attention_weights).any():
+            return torch.zeros(bs, H, device=stock_latent.device)
+        else:
+            # attention_weights: (bs, N) -> unsqueeze -> (bs, 1, N)
+            # value: (bs, N, H)
+            # bmm 矩阵相乘 -> (bs, 1, H) -> squeeze -> (bs, H)
+            context_vector = torch.bmm(attention_weights.unsqueeze(1), self.value).squeeze(1) 
+            return context_vector 
 
 
 class FactorPredictor(nn.Module):
-    def __init__(self, num_latent, num_factor,hidden_size):
-        """
-        :param num_latent: 对应公式中的特征维度 H
-        :param num_factor: 对应公式中的独立头数 K (即因子数量)
-        """
+    def __init__(self, hidden_size, num_factor):
         super(FactorPredictor, self).__init__()
-
-        self.num_latent = num_latent
-        self.num_factor = num_factor  # 即论文中的 K
+        
         self.hidden_size = hidden_size
-        # 1. 对应公式中的全局查询向量 q ∈ R^H
-        # 因为有 K 个独立头，所以我们定义 K 个独立的 q
-        self.q = nn.Parameter(torch.randn(num_factor, num_latent))
-
-        # 2. 对应公式中的 w_key 和 w_value
-        # 为了高效计算，用一个 Linear 一次性计算 K 个头的 Key 和 Value
-        self.W_key = nn.Linear(num_latent, num_factor * num_latent, bias=False)
-        self.W_val = nn.Linear(num_latent, num_factor * num_latent, bias=False)
-
-        # 3. 对应公式中的 distribution_network π_prior
-        # 注意：输入维度不再是 stock_size * num_latent，而是 num_factor * num_latent
-        self.distribution_network_mu = MLP(
-            input_size=num_factor * num_latent,
-            output_size=num_factor,
-            hidden_size=self.hidden_size,
-            out_activation=None
-        )
-
-        self.distribution_network_sigma = MLP(
-            input_size=num_factor * num_latent,
-            output_size=num_factor,
-            hidden_size=64,
-            out_activation=nn.Softplus()
-        )
-
-    def forward(self, latent_features):
-        # latent_features: (batch_size, N, num_latent)  这里 N 是动态的当天股票数量
-        bs, N, H = latent_features.shape
-        K = self.num_factor
-
-        # --- 公式: k^(i) = w_key * e^(i), v^(i) = w_value * e^(i) ---
-        # 形状转换: (bs, N, K * H) -> (bs, N, K, H)
-        K_mat = self.W_key(latent_features).view(bs, N, K, H)
-        V_mat = self.W_val(latent_features).view(bs, N, K, H)
-
-        # --- 公式: a_att 的分子部分 (计算 Cosine 相似度) ---
-        # 1. 对 q 和 k 进行 L2 范数归一化 (对应公式中的 ||q||_2 和 ||k^(i)||_2)
-        q_norm = F.normalize(self.q, p=2, dim=-1)         # (K, H)
-        k_norm = F.normalize(K_mat, p=2, dim=-1)          # (bs, N, K, H)
+        self.num_factor = num_factor
         
-        # 2. 计算点积 (等价于计算归一化后的 Cosine 相似度: q * k^T / (||q||*||k||))
-        # 沿 H 维度相乘并求和
-        cos_sim = torch.sum(k_norm * q_norm.view(1, 1, K, H), dim=-1)  # (bs, N, K)
-
-        # --- 公式: a_att = max(0, cos_sim) / sum(max(0, cos_sim)) ---
-        # 1. 应用 max(0, x)，即 ReLU
-        scores = F.relu(cos_sim)  # (bs, N, K)
+        # 使用 ModuleList 生成多个独立的 AttentionLayer
+        self.attention_layers = nn.ModuleList([
+            AttentionLayer(self.hidden_size) for _ in range(num_factor)
+        ])
         
-        # 2. 沿股票维度 N (dim=1) 归一化
-        # 加 1e-8 是工程 Trick，防止某一天所有股票的相似度均为 0 导致除以 0 报错
-        attn_weights = scores / (torch.sum(scores, dim=1, keepdim=True) + 1e-8)  # (bs, N, K)
+        # 输出层映射
+        self.linear = nn.Linear(hidden_size, hidden_size)
+        self.leakyrelu = nn.LeakyReLU()
+        
+        # 计算 mu 和 sigma
+        self.mu_layer = nn.Linear(hidden_size, 1)
+        self.sigma_layer = nn.Linear(hidden_size, 1)
+        self.softplus = nn.Softplus()
 
-        # --- 公式: h_att = \sum_{i=1}^N a_att^(i) * v^(i) ---
-        # attn_weights 扩展为 (bs, N, K, 1)，以便与 V_mat (bs, N, K, H) 广播相乘
-        # 然后在股票维度 N (dim=1) 上求和，彻底抹平股票数量维度的影响！
-        h_att = torch.sum(attn_weights.unsqueeze(-1) * V_mat, dim=1)  # 结果形状: (bs, K, H)
+    def forward(self, stock_latent):
+        # stock_latent: (bs, N, H)
+        
+        h_multi_list = []
+        for i in range(self.num_factor):
+            # 将 latent 输入到每个独立的头中，返回 context_vector: (bs, H)
+            attention_layer_out = self.attention_layers[i](stock_latent)
+            h_multi_list.append(attention_layer_out)
+            
+        # 沿着 factor 维度 (dim=1) 堆叠，形状变为: (bs, num_factor, H)
+        h_multi = torch.stack(h_multi_list, dim=1)
 
-        # --- 公式: h_multi = Concat([φ_att1, ..., φ_attK]) ---
-        # 将 K 个头的特征展平拼接在一起
-        h_multi = h_att.view(bs, -1)  # 结果形状: (bs, K * H)
-
-        # --- 公式: [μ_prior, σ_prior] = π_prior(h_multi) ---
-        mu_prior = self.distribution_network_mu(h_multi).unsqueeze(-1)       # (bs, num_factor, 1)
-        sigma_prior = self.distribution_network_sigma(h_multi).unsqueeze(-1) # (bs, num_factor, 1)
-
-        return mu_prior, sigma_prior
+        # 映射层网络操作
+        # (bs, num_factor, H) -> Linear -> (bs, num_factor, H)
+        h_multi = self.linear(h_multi)
+        h_multi = self.leakyrelu(h_multi)
+        
+        # 获取预测值
+        # (bs, num_factor, H) -> Linear -> (bs, num_factor, 1)
+        pred_mu = self.mu_layer(h_multi)
+        pred_sigma = self.sigma_layer(h_multi)
+        pred_sigma = self.softplus(pred_sigma)
+        
+        # 原版模型期望的形状通常是不带最后一个维度 1 的
+        # 所以最终形状需要转成 (bs, num_factor, 1) 或者保持不变以兼容主框架
+        # 因为在 VAE 预测器输出通常要求 shape 为 (bs, num_factor, 1)
+        return pred_mu, pred_sigma

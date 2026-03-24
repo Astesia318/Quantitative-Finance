@@ -1,6 +1,6 @@
 import argparse
 
-import qtest
+import qlib
 from ruamel.yaml import YAML
 from qlib.utils import init_instance_by_config
 
@@ -18,7 +18,7 @@ def main(seed, config_file="configs/config_alstm.yaml"):
     )
 
     # initialize workflow
-    qtest.init(
+    qlib.init(
         provider_uri=config["qlib_init"]["provider_uri"],
         region=config["qlib_init"]["region"],
     )

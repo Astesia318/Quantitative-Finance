@@ -6,7 +6,7 @@ from typing import Union
 
 import fire
 
-from qtest import auto_init
+from qlib import auto_init
 from qlib.contrib.rolling.base import Rolling
 from qlib.tests.data import GetData
 

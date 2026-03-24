@@ -4,7 +4,7 @@ import unittest
 import pandas as pd
 import numpy as np
 from datetime import datetime
-from qtest import init
+from qlib import init
 from qlib.config import C
 from qlib.log import TimeInspector
 from qlib.constant import REG_CN, REG_US, REG_TW

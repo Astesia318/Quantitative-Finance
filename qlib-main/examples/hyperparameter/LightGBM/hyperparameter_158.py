@@ -1,4 +1,4 @@
-import qtest
+import qlib
 import optuna
 from qlib.constant import REG_CN
 from qlib.utils import init_instance_by_config
@@ -37,7 +37,7 @@ def objective(trial):
 if __name__ == "__main__":
     provider_uri = "~/.qlib/qlib_data/cn_data"
     GetData().qlib_data(target_dir=provider_uri, region=REG_CN, exists_skip=True)
-    qtest.init(provider_uri=provider_uri, region="cn")
+    qlib.init(provider_uri=provider_uri, region="cn")
 
     dataset = init_instance_by_config(CSI300_DATASET_CONFIG)
 

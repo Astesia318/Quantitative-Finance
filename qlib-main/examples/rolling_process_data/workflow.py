@@ -1,7 +1,7 @@
 #  Copyright (c) Microsoft Corporation.
 #  Licensed under the MIT License.
 
-import qtest
+import qlib
 import fire
 
 from datetime import datetime
@@ -22,7 +22,7 @@ class RollingDataWorkflow:
         """initialize qlib"""
         provider_uri = "~/.qlib/qlib_data/cn_data"  # target_dir
         GetData().qlib_data(target_dir=provider_uri, region=REG_CN, exists_skip=True)
-        qtest.init(provider_uri=provider_uri, region=REG_CN)
+        qlib.init(provider_uri=provider_uri, region=REG_CN)
 
     def _dump_pre_handler(self, path):
         handler_config = {

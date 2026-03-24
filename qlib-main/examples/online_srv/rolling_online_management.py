@@ -12,7 +12,7 @@ Finally, the OnlineManager will finish second routine and update all strategies.
 
 import os
 import fire
-import qtest
+import qlib
 from qlib.model.trainer import DelayTrainerR, DelayTrainerRM, TrainerR, TrainerRM, end_task_train, task_train
 from qlib.workflow import R
 from qlib.workflow.online.strategy import RollingStrategy
@@ -42,7 +42,7 @@ class RollingOnlineExample:
             "task_url": task_url,  # your MongoDB url
             "task_db_name": task_db_name,  # database name
         }
-        qtest.init(provider_uri=provider_uri, region=region, mongo=mongo_conf)
+        qlib.init(provider_uri=provider_uri, region=region, mongo=mongo_conf)
         self.tasks = tasks
         self.add_tasks = add_tasks
         self.rolling_step = rolling_step

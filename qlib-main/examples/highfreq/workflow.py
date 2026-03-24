@@ -3,7 +3,7 @@
 
 import fire
 
-import qtest
+import qlib
 from qlib.constant import REG_CN
 from qlib.config import HIGH_FREQ_CONFIG
 
@@ -86,7 +86,7 @@ class HighfreqWorkflow:
         QLIB_INIT_CONFIG = {**HIGH_FREQ_CONFIG, **self.SPEC_CONF}
         provider_uri = QLIB_INIT_CONFIG.get("provider_uri")
         GetData().qlib_data(target_dir=provider_uri, interval="1min", region=REG_CN, exists_skip=True)
-        qtest.init(**QLIB_INIT_CONFIG)
+        qlib.init(**QLIB_INIT_CONFIG)
 
     def _prepare_calender_cache(self):
         """preload the calendar for cache"""

@@ -8,7 +8,7 @@ Qlib provides two kinds of interfaces.
 The interface of (1) is `qrun XXX.yaml`.  The interface of (2) is script like this, which nearly does the same thing as `qrun XXX.yaml`
 """
 
-import qtest
+import qlib
 from qlib.constant import REG_CN
 from qlib.utils import init_instance_by_config, flatten_dict
 from qlib.workflow import R
@@ -20,7 +20,7 @@ if __name__ == "__main__":
     # use default data
     provider_uri = "~/.qlib/qlib_data/cn_data"  # target_dir
     GetData().qlib_data(target_dir=provider_uri, region=REG_CN, exists_skip=True)
-    qtest.init(provider_uri=provider_uri, region=REG_CN)
+    qlib.init(provider_uri=provider_uri, region=REG_CN)
 
     model = init_instance_by_config(CSI300_GBDT_TASK["model"])
     dataset = init_instance_by_config(CSI300_GBDT_TASK["dataset"])

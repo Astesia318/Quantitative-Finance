@@ -12,7 +12,7 @@ from pprint import pprint
 from ruamel.yaml import YAML
 import subprocess
 
-from qtest import init
+from qlib import init
 from qlib.data.dataset.handler import DataHandlerLP
 from qlib.log import TimeInspector
 from qlib.model.trainer import task_train

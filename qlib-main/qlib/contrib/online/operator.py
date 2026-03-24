@@ -7,7 +7,7 @@
 import fire
 import pandas as pd
 import pathlib
-import qtest
+import qlib
 import logging
 
 from ...data import D
@@ -52,7 +52,7 @@ class Operator:
             pred_date: pd.Timestamp
             trade_date: pd.Timestamp
         """
-        qtest.init_from_yaml_conf(client)
+        qlib.init_from_yaml_conf(client)
         um = UserManager(user_data_path=pathlib.Path(path))
         um.load_users()
         if not date:
@@ -79,7 +79,7 @@ class Operator:
             The date that user account was added.
         """
         create_user_folder(path)
-        qtest.init_from_yaml_conf(self.client)
+        qlib.init_from_yaml_conf(self.client)
         um = UserManager(user_data_path=path)
         add_date = D.calendar(end_time=date)[-1]
         if not is_tradable_date(add_date):

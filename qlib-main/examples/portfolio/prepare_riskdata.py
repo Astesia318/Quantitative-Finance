@@ -45,8 +45,8 @@ def prepare_data(riskdata_root="./riskdata", T=240, start_time="2016-01-01"):
 
 
 if __name__ == "__main__":
-    import qtest
+    import qlib
 
-    qtest.init(provider_uri="~/.qlib/qlib_data/cn_data")
+    qlib.init(provider_uri="~/.qlib/qlib_data/cn_data")
 
     prepare_data()

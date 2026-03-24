@@ -5,7 +5,7 @@ import shutil
 import unittest
 from pathlib import Path
 
-import qtest
+import qlib
 from qlib.data import D
 from qlib.tests.data import GetData
 
@@ -22,7 +22,7 @@ class TestGetData(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         provider_uri = str(QLIB_DIR.resolve())
-        qtest.init(
+        qlib.init(
             provider_uri=provider_uri,
             expression_cache=None,
             dataset_cache=None,

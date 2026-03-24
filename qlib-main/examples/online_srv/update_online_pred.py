@@ -10,7 +10,7 @@ Next, we will finish updating online predictions.
 
 import copy
 import fire
-import qtest
+import qlib
 from qlib.constant import REG_CN
 from qlib.model.trainer import task_train
 from qlib.workflow.online.utils import OnlineToolR
@@ -28,7 +28,7 @@ class UpdatePredExample:
     def __init__(
         self, provider_uri="~/.qlib/qlib_data/cn_data", region=REG_CN, experiment_name="online_srv", task_config=task
     ):
-        qtest.init(provider_uri=provider_uri, region=region)
+        qlib.init(provider_uri=provider_uri, region=region)
         self.experiment_name = experiment_name
         self.online_tool = OnlineToolR(self.experiment_name)
         self.task_config = task_config

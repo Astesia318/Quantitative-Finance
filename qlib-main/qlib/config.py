@@ -502,13 +502,13 @@ class QlibConfig(Config):
         self._registered = True
 
     def reset_qlib_version(self):
-        import qtest  # pylint: disable=C0415
+        import qlib  # pylint: disable=C0415
 
         reset_version = self.get("qlib_reset_version", None)
         if reset_version is not None:
-            qtest.__version__ = reset_version
+            qlib.__version__ = reset_version
         else:
-            qtest.__version__ = getattr(qtest, "__version__bak")
+            qlib.__version__ = getattr(qlib, "__version__bak")
             # Due to a bug? that converting __version__ to _QlibConfig__version__bak
             # Using  __version__bak instead of __version__
 

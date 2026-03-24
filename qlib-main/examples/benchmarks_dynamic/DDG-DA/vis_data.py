@@ -36,7 +36,7 @@ sns.heatmap(data_sim.rolling(20).mean())
 
 # # Meta Model
 
-from qtest import auto_init
+from qlib import auto_init
 
 auto_init()
 from qlib.workflow import R

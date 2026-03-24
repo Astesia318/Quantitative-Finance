@@ -3,14 +3,14 @@
 
 import unittest
 
-import qtest
+import qlib
 from qlib.data import D
 from qlib.tests import TestAutoData
 from multiprocessing import Pool
 
 
 def get_features(fields):
-    qtest.init(provider_uri=TestAutoData.provider_uri, expression_cache=None, dataset_cache=None, joblib_backend="loky")
+    qlib.init(provider_uri=TestAutoData.provider_uri, expression_cache=None, dataset_cache=None, joblib_backend="loky")
     return D.features(D.instruments("csi300"), fields)
 
 

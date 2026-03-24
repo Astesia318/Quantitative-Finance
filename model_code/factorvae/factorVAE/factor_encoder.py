@@ -4,15 +4,15 @@ from .basic_net import MLP
 
 class PortfolioLayer(nn.Module):
     # 引入 num_portfolio 参数（原文通常设置为 20 或类似较小的值）
-    def __init__(self, num_latent, num_portfolio=20):
+    def __init__(self, hidden_size, num_portfolio=20):
         super(PortfolioLayer, self).__init__()
         
         self.net = nn.Linear(
-            num_latent,num_portfolio
+            hidden_size,num_portfolio
         )
 
     def forward(self, latent_features):
-        # latent_features: (batch_size, stock_size, num_latent)
+        # latent_features: (batch_size, stock_size, hidden_size)
         out = self.net(latent_features) # out shape: (batch_size, stock_size, num_portfolio)
         
         # 在 stock 维度(dim=1)上做 softmax，确保每个 portfolio 内部的股票权重和为 1
@@ -20,10 +20,10 @@ class PortfolioLayer(nn.Module):
         return weights
 
 class FactorEncoder(nn.Module):
-    def __init__(self, num_latent, num_factor, num_portfolio):
+    def __init__(self, hidden_size, num_factor, num_portfolio):
         super(FactorEncoder, self).__init__()
 
-        self.portfolio_layer = PortfolioLayer(num_latent, num_portfolio)
+        self.portfolio_layer = PortfolioLayer(hidden_size, num_portfolio)
         
         # 【修复3】：MappingLayer 的输入不再是 stock_size，而是固定维度 num_portfolio
         self.mapping_layer = MappingLayer(num_portfolio, num_factor)

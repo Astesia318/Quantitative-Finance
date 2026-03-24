@@ -13,7 +13,7 @@ from ruamel.yaml import YAML
 import subprocess
 from qlib.log import TimeInspector
 
-from qtest import init
+from qlib import init
 from qlib.data.dataset.handler import DataHandlerLP
 from qlib.utils import init_instance_by_config
 

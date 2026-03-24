@@ -1,6 +1,6 @@
 import sys
 import platform
-import qtest
+import qlib
 import fire
 import pkg_resources
 from pathlib import Path
@@ -26,7 +26,7 @@ class InfoCollector:
 
     def qlib(self):
         """collect qlib related info"""
-        print("Qlib version: {}".format(qtest.__version__))
+        print("Qlib version: {}".format(qlib.__version__))
         REQUIRED = [
             "setuptools",
             "wheel",
