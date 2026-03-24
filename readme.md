@@ -17,6 +17,14 @@ pip install fastapi uvicorn
 
 qlib项目源代码库，用于调用其中的数据处理文件dump_bin.py以及其内置模型
 
+### :star:FactorVAE/
+
+来自https://github.com/x7jeon8gi/FactorVAE项目，修改后添加了batch输入进行训练，最后回测结果良好，目前计划基于此进行策略的构建。
+
+### :star: model_code/
+
+基于qlib框架实现的代码及yaml配置放在该文件夹里
+
 ### config.py
 
 配置文件，可以修改一下路径什么的
@@ -26,6 +34,14 @@ qlib项目源代码库，用于调用其中的数据处理文件dump_bin.py以�
 > windows
 
 Windows下调用dump_bin.py的脚本文件
+
+### plot_return.py
+
+将预测出的csv的结果和真实市场数据可视化，画出折线图
+
+### check_real_volatility.py
+
+拉取真实市场数据后将其按照特定格式导出至csv文件中
 
 ### data_process.py
 
@@ -55,7 +71,7 @@ Windows下调用dump_bin.py的脚本文件
 
 启动server_api，开始监听请求
 
-### strategy_model.py
+### :star: strategy_model.py
 
 > linux
 
