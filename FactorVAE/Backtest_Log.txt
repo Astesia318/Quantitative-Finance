@@ -128,3 +128,164 @@ excess_return_with_cost    mean               0.000123
                            information_ratio  0.311202
                            max_drawdown      -0.165673
 =================================================================
+
+==================== 回测记录 2021-01-01 to 2025-12-31 ====================
+【模型配置参数 (Args)】
+  run_name: test
+  num_factor: 60
+  normalize: True
+  select_feature: False
+  batch_size: 300
+  seq_length: 20
+  hidden_size: 60
+  num_latent: 158
+  num_portfolio: 128
+  use_qlib: False
+  gpu: 2
+  ConsineAnnealingLR(T_max)
+  
+【因子选股能力 (Rank IC & Rank ICIR)】
+  RankIC  RankIC_IR
+0.016907   0.078743
+
+【实盘模拟收益指标 (Portfolio Analysis)】
+                                                  risk
+excess_return_without_cost mean               0.000295
+                           std                0.006067
+                           annualized_return  0.070244
+                           information_ratio  0.750454
+                           max_drawdown      -0.134073
+excess_return_with_cost    mean               0.000091
+                           std                0.006072
+                           annualized_return  0.021692
+                           information_ratio  0.231558
+                           max_drawdown      -0.146323
+=================================================================
+
+==================== 回测记录 2021-01-01 to 2025-12-31 ====================
+【模型配置参数 (Args)】
+  run_name: test
+  num_factor: 60
+  normalize: True
+  select_feature: False
+  batch_size: 300
+  seq_length: 20
+  hidden_size: 60
+  num_latent: 158
+  num_portfolio: 128
+  use_qlib: False
+  gpu: 2
+
+【因子选股能力 (Rank IC & Rank ICIR)】
+  RankIC  RankIC_IR
+0.017367   0.081192
+
+【实盘模拟收益指标 (Portfolio Analysis)】
+                                                  risk
+excess_return_without_cost mean               0.000320
+                           std                0.006067
+                           annualized_return  0.076163
+                           information_ratio  0.813706
+                           max_drawdown      -0.140487
+excess_return_with_cost    mean               0.000125
+                           std                0.006064
+                           annualized_return  0.029826
+                           information_ratio  0.318819
+                           max_drawdown      -0.188764
+=================================================================
+
+==================== 回测记录 2021-01-01 to 2025-12-31 ====================
+【模型配置参数 (Args)】
+  run_name: test
+  num_factor: 90
+  normalize: True
+  select_feature: False
+  batch_size: 300
+  seq_length: 20
+  hidden_size: 90
+  num_latent: 158
+  num_portfolio: 128
+  use_qlib: False
+  gpu: 2
+
+【因子选股能力 (Rank IC & Rank ICIR)】
+  RankIC  RankIC_IR
+0.043741   0.203793
+
+【实盘模拟收益指标 (Portfolio Analysis)】
+                                                  risk
+excess_return_without_cost mean               0.000315
+                           std                0.006309
+                           annualized_return  0.075032
+                           information_ratio  0.770845
+                           max_drawdown      -0.152268
+excess_return_with_cost    mean               0.000117
+                           std                0.006315
+                           annualized_return  0.027871
+                           information_ratio  0.286102
+                           max_drawdown      -0.206632
+=================================================================
+
+==================== 回测记录 2021-01-01 to 2025-12-31 ====================
+【模型配置参数 (Args)】
+  run_name: test
+  num_factor: 90
+  normalize: True
+  select_feature: False
+  batch_size: 300
+  seq_length: 20
+  hidden_size: 90
+  num_latent: 158
+  num_portfolio: 128
+  use_qlib: False
+  gpu: 2
+
+【因子选股能力 (Rank IC & Rank ICIR)】
+  RankIC  RankIC_IR
+0.043741   0.203793
+
+【实盘模拟收益指标 (Portfolio Analysis)】
+                                                  risk
+excess_return_without_cost mean               0.000315
+                           std                0.006309
+                           annualized_return  0.075032
+                           information_ratio  0.770845
+                           max_drawdown      -0.152268
+excess_return_with_cost    mean               0.000117
+                           std                0.006315
+                           annualized_return  0.027871
+                           information_ratio  0.286102
+                           max_drawdown      -0.206632
+=================================================================
+
+==================== 回测记录 2021-01-01 to 2025-12-31 ====================
+【模型配置参数 (Args)】
+  run_name: test
+  num_factor: 90
+  normalize: True
+  select_feature: False
+  batch_size: 300
+  seq_length: 20
+  hidden_size: 90
+  num_latent: 158
+  num_portfolio: 128
+  use_qlib: False
+  gpu: 2
+
+【因子选股能力 (Rank IC & Rank ICIR)】
+  RankIC  RankIC_IR
+0.033164   0.148749
+
+【实盘模拟收益指标 (Portfolio Analysis)】
+                                                  risk
+excess_return_without_cost mean               0.000295
+                           std                0.006036
+                           annualized_return  0.070257
+                           information_ratio  0.754481
+                           max_drawdown      -0.164219
+excess_return_with_cost    mean               0.000102
+                           std                0.006039
+                           annualized_return  0.024226
+                           information_ratio  0.260023
+                           max_drawdown      -0.211313
+=================================================================

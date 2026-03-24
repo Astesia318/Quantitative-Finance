@@ -44,7 +44,8 @@ def main(args:argparse.Namespace, data_args):
         T_mult=2,
         eta_min=1e-6  # 学习率最小不会低于这个值
     )
-
+    # T_max = args.epochs
+    # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=T_max)
     best_val_loss = float('inf')
 
     patience = getattr(args, 'early_stop', 30)
@@ -112,8 +113,8 @@ if __name__ == "__main__":
     
     parser.add_argument('--num_latent', type=int, default=158, help='latent size')
     parser.add_argument('--num_portfolio', type=int, default=128, help='portfolio size')
-    parser.add_argument('--num_factor', type=int, default=128, help='factor size')
-    parser.add_argument('--hidden_size', type=int, default=128, help='hidden size')
+    parser.add_argument('--num_factor', type=int, default=90, help='factor size')
+    parser.add_argument('--hidden_size', type=int, default=90, help='hidden size')
 
     parser.add_argument('--dataset', type=str, default='./FactorVAE/data/csi_data.pkl', help='dataset to use')
     parser.add_argument('--start_time', type=str, default='2009-01-01', help='start time')
@@ -123,7 +124,7 @@ if __name__ == "__main__":
     parser.add_argument('--end_time', type=str, default='2025-12-31', help='end time')
 
     parser.add_argument('--gpu', type=int, default=2, help='gpu device')
-    parser.add_argument('--seed', type=int, default=42, help='random seed')
+    parser.add_argument('--seed', type=int, default=13, help='random seed')
     parser.add_argument('--run_name', type=str, default='VAE-Revision2', help='name of the run')
     parser.add_argument('--save_dir', type=str, default='./FactorVAE/best_models', help='directory to save model')
     parser.add_argument('--num_workers', type=int, default=4, help='number of workers for dataloader')
