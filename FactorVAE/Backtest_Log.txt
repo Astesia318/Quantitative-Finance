@@ -1,0 +1,130 @@
+
+==================== 回测记录 2021-01-01 to 2025-12-31 ====================
+【模型配置参数 (Args)】
+  run_name: test
+  num_factor: 60
+  normalize: True
+  select_feature: False
+  batch_size: 300
+  seq_length: 20
+  hidden_size: 60
+  num_latent: 158
+  num_portfolio: 128
+  use_qlib: False
+  gpu: 2
+
+【因子选股能力 (Rank IC & Rank ICIR)】
+  RankIC  RankIC_IR
+0.015584   0.072775
+
+【实盘模拟收益指标 (Portfolio Analysis)】
+                                                  risk
+excess_return_without_cost mean               0.000269
+                           std                0.006273
+                           annualized_return  0.063967
+                           information_ratio  0.660977
+                           max_drawdown      -0.159013
+excess_return_with_cost    mean               0.000077
+                           std                0.006274
+                           annualized_return  0.018394
+                           information_ratio  0.190054
+                           max_drawdown      -0.209460
+=================================================================
+
+==================== 回测记录 2021-01-01 to 2025-12-31 ====================
+【模型配置参数 (Args)】
+  run_name: test
+  num_factor: 90
+  normalize: True
+  select_feature: False
+  batch_size: 300
+  seq_length: 20
+  hidden_size: 90
+  num_latent: 158
+  num_portfolio: 64
+  use_qlib: False
+  gpu: 2
+
+【因子选股能力 (Rank IC & Rank ICIR)】
+  RankIC  RankIC_IR
+0.026045   0.119588
+
+【实盘模拟收益指标 (Portfolio Analysis)】
+                                                  risk
+excess_return_without_cost mean               0.000343
+                           std                0.006060
+                           annualized_return  0.081643
+                           information_ratio  0.873272
+                           max_drawdown      -0.120086
+excess_return_with_cost    mean               0.000147
+                           std                0.006065
+                           annualized_return  0.034952
+                           information_ratio  0.373544
+                           max_drawdown      -0.144730
+=================================================================
+
+
+
+==================== 回测记录 2021-01-01 to 2025-12-31 ====================
+【模型配置参数 (Args)】
+  run_name: test
+  num_factor: 128
+  normalize: True
+  select_feature: False
+  batch_size: 300
+  seq_length: 20
+  hidden_size: 128
+  num_latent: 158
+  num_portfolio: 128
+  use_qlib: False
+  gpu: 2
+
+【因子选股能力 (Rank IC & Rank ICIR)】
+  RankIC  RankIC_IR
+0.016452   0.075039
+
+【实盘模拟收益指标 (Portfolio Analysis)】
+                                                  risk
+excess_return_without_cost mean               0.000344
+                           std                0.006062
+                           annualized_return  0.081782
+                           information_ratio  0.874495
+                           max_drawdown      -0.123170
+excess_return_with_cost    mean               0.000141
+                           std                0.006066
+                           annualized_return  0.033647
+                           information_ratio  0.359556
+                           max_drawdown      -0.158635
+=================================================================
+
+==================== 回测记录 2021-01-01 to 2025-12-31 ====================
+【模型配置参数 (Args)】
+  run_name: test
+  num_factor: 128
+  normalize: True
+  select_feature: False
+  batch_size: 300
+  seq_length: 20
+  hidden_size: 128
+  num_latent: 158
+  num_portfolio: 128
+  use_qlib: False
+  gpu: 2
+
+【因子选股能力 (Rank IC & Rank ICIR)】
+  RankIC  RankIC_IR
+0.020454   0.091286
+
+【实盘模拟收益指标 (Portfolio Analysis)】
+                                                  risk
+excess_return_without_cost mean               0.000324
+                           std                0.006118
+                           annualized_return  0.077172
+                           information_ratio  0.817642
+                           max_drawdown      -0.130239
+excess_return_with_cost    mean               0.000123
+                           std                0.006121
+                           annualized_return  0.029389
+                           information_ratio  0.311202
+                           max_drawdown      -0.165673
+=================================================================
