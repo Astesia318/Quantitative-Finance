@@ -1,0 +1,267 @@
+========== VAE 训练配置 ==========
+Namespace(lr=0.001, epochs=100, batch_size=512, seq_len=20, normalize=True, num_latent=158, num_portfolio=128, num_factor=60, hidden_size=60, dataset='./FactorVAE/data/csi_data.pkl', start_time='2009-01-01', fit_end_time='2016-12-31', val_start_time='2017-01-01', val_end_time='2019-12-31', end_time='2023-12-31', gpu=2, seed=42, run_name='VAE-Revision2', save_dir='./FactorVAE/best_models', num_workers=4, wandb=False, device=device(type='cuda', index=2))
+===================================================
+
+========== 训练过程 ==========
+Epoch 1: train_loss 1.6564, valid_loss 1.2137
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 2: train_loss 0.9473, valid_loss 1.1736
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 3: train_loss 0.8407, valid_loss 1.0467
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 4: train_loss 0.8198, valid_loss 1.0404
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 5: train_loss 0.7938, valid_loss 1.0767
+Epoch 6: train_loss 0.7853, valid_loss 1.0363
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 7: train_loss 0.7741, valid_loss 1.0008
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 8: train_loss 0.7701, valid_loss 0.9912
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 9: train_loss 0.7663, valid_loss 0.9987
+Epoch 10: train_loss 0.7661, valid_loss 1.0064
+Epoch 11: train_loss 0.7637, valid_loss 1.0025
+Epoch 12: train_loss 0.7587, valid_loss 0.9947
+Epoch 13: train_loss 0.7566, valid_loss 0.9881
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 14: train_loss 0.7555, valid_loss 0.9846
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 15: train_loss 0.7544, valid_loss 0.9839
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 16: train_loss 0.7528, valid_loss 0.9839
+Epoch 17: train_loss 0.7519, valid_loss 0.9838
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 18: train_loss 0.7540, valid_loss 0.9831
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 19: train_loss 0.7504, valid_loss 0.9822
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 20: train_loss 0.7502, valid_loss 0.9810
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 21: train_loss 0.7498, valid_loss 0.9804
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 22: train_loss 0.7493, valid_loss 0.9798
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 23: train_loss 0.7517, valid_loss 0.9791
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 24: train_loss 0.7484, valid_loss 0.9785
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 25: train_loss 0.7482, valid_loss 0.9779
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 26: train_loss 0.7478, valid_loss 0.9777
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 27: train_loss 0.7501, valid_loss 0.9775
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 28: train_loss 0.7477, valid_loss 0.9773
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 29: train_loss 0.7466, valid_loss 0.9771
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 30: train_loss 0.7472, valid_loss 0.9770
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 31: train_loss 0.7496, valid_loss 0.9769
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 32: train_loss 0.7492, valid_loss 0.9767
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 33: train_loss 0.7467, valid_loss 0.9766
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 34: train_loss 0.7468, valid_loss 0.9765
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 35: train_loss 0.7464, valid_loss 0.9764
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 36: train_loss 0.7492, valid_loss 0.9763
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 37: train_loss 0.7467, valid_loss 0.9762
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 38: train_loss 0.7462, valid_loss 0.9762
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 39: train_loss 0.7470, valid_loss 0.9761
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 40: train_loss 0.7495, valid_loss 0.9761
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 41: train_loss 0.7467, valid_loss 0.9760
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 42: train_loss 0.7464, valid_loss 0.9760
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 43: train_loss 0.7463, valid_loss 0.9760
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 44: train_loss 0.7463, valid_loss 0.9759
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 45: train_loss 0.7466, valid_loss 0.9759
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 46: train_loss 0.7466, valid_loss 0.9759
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 47: train_loss 0.7466, valid_loss 0.9759
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 48: train_loss 0.7467, valid_loss 0.9759
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 49: train_loss 0.7490, valid_loss 0.9759
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 50: train_loss 0.7464, valid_loss 0.9759
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 51: train_loss 0.7467, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 52: train_loss 0.7460, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 53: train_loss 0.7462, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 54: train_loss 0.7461, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 55: train_loss 0.7466, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 56: train_loss 0.7461, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 57: train_loss 0.7461, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 58: train_loss 0.7462, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 59: train_loss 0.7461, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 60: train_loss 0.7463, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 61: train_loss 0.7461, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 62: train_loss 0.7462, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 63: train_loss 0.7460, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 64: train_loss 0.7465, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 65: train_loss 0.7458, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 66: train_loss 0.7461, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 67: train_loss 0.7460, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 68: train_loss 0.7460, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 69: train_loss 0.7484, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 70: train_loss 0.7462, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 71: train_loss 0.7461, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 72: train_loss 0.7457, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 73: train_loss 0.7466, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 74: train_loss 0.7465, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 75: train_loss 0.7465, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 76: train_loss 0.7465, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 77: train_loss 0.7466, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 78: train_loss 0.7462, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 79: train_loss 0.7462, valid_loss 0.9758
+Epoch 80: train_loss 0.7462, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 81: train_loss 0.7463, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 82: train_loss 0.7463, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 83: train_loss 0.7458, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 84: train_loss 0.7462, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 85: train_loss 0.7465, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 86: train_loss 0.7487, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 87: train_loss 0.7465, valid_loss 0.9758
+Epoch 88: train_loss 0.7458, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 89: train_loss 0.7463, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 90: train_loss 0.7458, valid_loss 0.9758
+  --> Best model updated! Saved to ./FactorVAE/best_models/VAE-factor60_hdn60_M128.pt
+Epoch 91: train_loss 0.7454, valid_loss 0.9758
+Epoch 92: train_loss 0.7463, valid_loss 0.9758
+Epoch 93: train_loss 0.7483, valid_loss 0.9758
+Epoch 94: train_loss 0.7458, valid_loss 0.9758
+Epoch 95: train_loss 0.7469, valid_loss 0.9758
+Epoch 96: train_loss 0.7460, valid_loss 0.9758
+Epoch 97: train_loss 0.7463, valid_loss 0.9758
+Epoch 98: train_loss 0.7461, valid_loss 0.9758
+Epoch 99: train_loss 0.7457, valid_loss 0.9758
+Epoch 100: train_loss 0.7462, valid_loss 0.9758
+
+========== 训练结束 ==========
+最佳 Epoch: 90
+最佳 Val Loss: 0.975781
+
+========== VAE 训练配置 ==========
+Namespace(lr=0.001, epochs=200, batch_size=512, seq_len=20, normalize=True, num_latent=158, num_portfolio=128, num_factor=60, hidden_size=60, dataset='./FactorVAE/data/csi_data.pkl', start_time='2009-01-01', fit_end_time='2016-12-31', val_start_time='2017-01-01', val_end_time='2019-12-31', end_time='2023-12-31', gpu=2, seed=42, run_name='VAE-Revision2', save_dir='./FactorVAE/best_models', num_workers=4, wandb=False, device=device(type='cuda', index=2))
+===================================================
+
+========== 训练过程 ==========
+Epoch 1: train_loss 1.6564, valid_loss 1.2137
+Epoch 2: train_loss 0.9463, valid_loss 1.1740
+Epoch 3: train_loss 0.8378, valid_loss 1.0472
+Epoch 4: train_loss 0.8213, valid_loss 1.0271
+Epoch 5: train_loss 0.7913, valid_loss 1.0621
+Epoch 6: train_loss 0.7848, valid_loss 1.0436
+Epoch 7: train_loss 0.7766, valid_loss 1.0174
+Epoch 8: train_loss 0.7724, valid_loss 1.0059
+Epoch 9: train_loss 0.7704, valid_loss 1.0028
+Epoch 10: train_loss 0.7722, valid_loss 1.0024
+Epoch 11: train_loss 0.7698, valid_loss 1.0104
+Epoch 12: train_loss 0.7649, valid_loss 0.9937
+Epoch 13: train_loss 0.7574, valid_loss 0.9834
+Epoch 14: train_loss 0.7528, valid_loss 0.9825
+Epoch 15: train_loss 0.7492, valid_loss 0.9736
+Epoch 16: train_loss 0.7448, valid_loss 0.9639
+Epoch 17: train_loss 0.7411, valid_loss 0.9665
+Epoch 18: train_loss 0.7406, valid_loss 0.9658
+Epoch 19: train_loss 0.7350, valid_loss 0.9603
+Epoch 20: train_loss 0.7328, valid_loss 0.9573
+Epoch 21: train_loss 0.7308, valid_loss 0.9569
+Epoch 22: train_loss 0.7288, valid_loss 0.9558
+Epoch 23: train_loss 0.7300, valid_loss 0.9534
+Epoch 24: train_loss 0.7259, valid_loss 0.9516
+Epoch 25: train_loss 0.7252, valid_loss 0.9517
+Epoch 26: train_loss 0.7242, valid_loss 0.9517
+Epoch 27: train_loss 0.7262, valid_loss 0.9513
+Epoch 28: train_loss 0.7238, valid_loss 0.9512
+Epoch 29: train_loss 0.7226, valid_loss 0.9512
+Epoch 30: train_loss 0.7234, valid_loss 0.9512
+Epoch 31: train_loss 0.7246, valid_loss 0.9490
+Epoch 32: train_loss 0.7206, valid_loss 0.9449
+Epoch 33: train_loss 0.7150, valid_loss 0.9443
+Epoch 34: train_loss 0.7117, valid_loss 0.9450
+Epoch 35: train_loss 0.7079, valid_loss 0.9381
+Epoch 36: train_loss 0.7073, valid_loss 0.9401
+Epoch 37: train_loss 0.7014, valid_loss 0.9404
+Epoch 38: train_loss 0.6976, valid_loss 0.9369
+Epoch 39: train_loss 0.6948, valid_loss 0.9343
+Epoch 40: train_loss 0.6940, valid_loss 0.9342
+Epoch 41: train_loss 0.6884, valid_loss 0.9371
+Epoch 42: train_loss 0.6851, valid_loss 0.9333
+Epoch 43: train_loss 0.6822, valid_loss 0.9295
+Epoch 44: train_loss 0.6798, valid_loss 0.9305
+Epoch 45: train_loss 0.6775, valid_loss 0.9368
+Epoch 46: train_loss 0.6752, valid_loss 0.9335
+Epoch 47: train_loss 0.6730, valid_loss 0.9309
+Epoch 48: train_loss 0.6710, valid_loss 0.9395
+Epoch 49: train_loss 0.6712, valid_loss 0.9298
+Epoch 50: train_loss 0.6673, valid_loss 0.9373
+Epoch 51: train_loss 0.6662, valid_loss 0.9347
+Epoch 52: train_loss 0.6643, valid_loss 0.9407
+Epoch 53: train_loss 0.6630, valid_loss 0.9365
+Epoch 54: train_loss 0.6620, valid_loss 0.9408
+Epoch 55: train_loss 0.6613, valid_loss 0.9385
+Epoch 56: train_loss 0.6598, valid_loss 0.9422
+Epoch 57: train_loss 0.6588, valid_loss 0.9398
+Epoch 58: train_loss 0.6585, valid_loss 0.9442
+Epoch 59: train_loss 0.6577, valid_loss 0.9439
+Epoch 60: train_loss 0.6575, valid_loss 0.9417
+Epoch 61: train_loss 0.6569, valid_loss 0.9419
+Epoch 62: train_loss 0.6565, valid_loss 0.9476
+Epoch 63: train_loss 0.6560, valid_loss 0.9434
+
+========== 早停触发 (Early stop) 停于 Epoch 63 ==========
+
+========== 训练结束 ==========
+最佳 Epoch: 43
+最佳 Val Loss: 0.929453
+

@@ -12,7 +12,7 @@ _test_end: &test_end 2026-03-13
 # ==========================================================
 
 qlib_init:
-    provider_uri: "~/.qlib/qlib_data/cn_data"
+    provider_uri: "./qlib_bin"
     region: cn
 market: &market csi300
 benchmark: &benchmark SH000300

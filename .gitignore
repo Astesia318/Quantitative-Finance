@@ -5,7 +5,8 @@ __pycache__
 qlib_source_csvs*/
 qlib_data*/
 qlib_bin/
-FactorVAE/
+FactorVAE/data
+FactorVAE/scores
 mlrun/
 test.py
 qtest.py

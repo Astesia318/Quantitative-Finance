@@ -1240,3 +1240,234 @@ Epoch 73: train_loss 0.0507, valid_loss 1.1951
 Epoch 74: train_loss 0.1013, valid_loss 1.1940
 Epoch 75: train_loss 0.0479, valid_loss 1.2208
 Best Loss: 1.177509 @ Epoch 60
+========== FactorVAEModel 训练配置 ==========
+num_feature: 158
+seq_len: 20
+num_factor: 48
+num_portfolio: 128
+hidden_size: 48
+gamma: 0.1
+n_epochs: 200
+lr: 0.001
+early_stop: 15
+batch_size: 1024
+optimizer: adam
+===================================================
+
+========== 训练过程 ==========
+Epoch 0: train_loss 1.2539, valid_loss 1.3993
+Epoch 1: train_loss 1.2039, valid_loss 1.3929
+Epoch 2: train_loss 1.1831, valid_loss 1.3826
+Epoch 3: train_loss 1.1642, valid_loss 1.3722
+Epoch 4: train_loss 1.1463, valid_loss 1.3660
+Epoch 5: train_loss 1.1270, valid_loss 1.3589
+Epoch 6: train_loss 1.1189, valid_loss 1.3506
+Epoch 7: train_loss 1.1054, valid_loss 1.3443
+Epoch 8: train_loss 1.0874, valid_loss 1.3426
+Epoch 9: train_loss 1.0796, valid_loss 1.3412
+Epoch 10: train_loss 1.0666, valid_loss 1.3370
+Epoch 11: train_loss 1.0519, valid_loss 1.3319
+Epoch 12: train_loss 1.0298, valid_loss 1.3256
+Epoch 13: train_loss 1.0175, valid_loss 1.3197
+Epoch 14: train_loss 0.9885, valid_loss 1.3145
+Epoch 15: train_loss 0.9620, valid_loss 1.3098
+Epoch 16: train_loss 0.9376, valid_loss 1.3035
+Epoch 17: train_loss 0.8900, valid_loss 1.2956
+Epoch 18: train_loss 0.8369, valid_loss 1.2857
+Epoch 19: train_loss 0.7762, valid_loss 1.2732
+Epoch 20: train_loss 0.6744, valid_loss 1.2585
+Epoch 21: train_loss 0.5610, valid_loss 1.2459
+Epoch 22: train_loss 0.4818, valid_loss 1.2403
+Epoch 23: train_loss 0.4367, valid_loss 1.2395
+Epoch 24: train_loss 0.4183, valid_loss 1.2300
+Epoch 25: train_loss 0.4028, valid_loss 1.2181
+Epoch 26: train_loss 0.3251, valid_loss 1.2222
+Epoch 27: train_loss 0.3291, valid_loss 1.2114
+Epoch 28: train_loss 0.3125, valid_loss 1.2089
+Epoch 29: train_loss 0.2805, valid_loss 1.2091
+Epoch 30: train_loss 0.2798, valid_loss 1.2015
+Epoch 31: train_loss 0.2238, valid_loss 1.2033
+Epoch 32: train_loss 0.2273, valid_loss 1.1984
+Epoch 33: train_loss 0.1990, valid_loss 1.1974
+Epoch 34: train_loss 0.2112, valid_loss 1.1957
+Epoch 35: train_loss 0.1975, valid_loss 1.1875
+Epoch 36: train_loss 0.1329, valid_loss 1.1874
+Epoch 37: train_loss 0.1618, valid_loss 1.1830
+Epoch 38: train_loss 0.1289, valid_loss 1.1851
+Epoch 39: train_loss 0.1243, valid_loss 1.1816
+Epoch 40: train_loss 0.1252, valid_loss 1.1840
+Epoch 41: train_loss 0.0815, valid_loss 1.1885
+Epoch 42: train_loss 0.1508, valid_loss 1.1818
+Epoch 43: train_loss 0.1059, valid_loss 1.1855
+Epoch 44: train_loss 0.1278, valid_loss 1.1800
+Epoch 45: train_loss 0.0996, valid_loss 1.1848
+Epoch 46: train_loss 0.0786, valid_loss 1.1812
+Epoch 47: train_loss 0.0731, valid_loss 1.1799
+Epoch 48: train_loss 0.0825, valid_loss 1.1877
+Epoch 49: train_loss 0.1012, valid_loss 1.2023
+Epoch 50: train_loss 0.2832, valid_loss 1.2121
+Epoch 51: train_loss 0.3105, valid_loss 1.2060
+Epoch 52: train_loss 0.1946, valid_loss 1.1886
+Epoch 53: train_loss 0.1442, valid_loss 1.2006
+Epoch 54: train_loss 0.1822, valid_loss 1.1910
+Epoch 55: train_loss 0.1011, valid_loss 1.1864
+Epoch 56: train_loss 0.0944, valid_loss 1.1823
+Epoch 57: train_loss 0.0268, valid_loss 1.1812
+Epoch 58: train_loss 0.0351, valid_loss 1.1813
+Epoch 59: train_loss 0.0096, valid_loss 1.1809
+Epoch 60: train_loss 0.0459, valid_loss 1.1821
+Epoch 61: train_loss 0.0059, valid_loss 1.1790
+Epoch 62: train_loss -0.0418, valid_loss 1.1932
+Epoch 63: train_loss 0.1149, valid_loss 1.1918
+Epoch 64: train_loss 0.0724, valid_loss 1.1795
+Epoch 65: train_loss 0.0207, valid_loss 1.1897
+Epoch 66: train_loss 0.0799, valid_loss 1.1862
+Epoch 67: train_loss 0.0522, valid_loss 1.1835
+Epoch 68: train_loss 0.0318, valid_loss 1.1917
+Epoch 69: train_loss 0.1221, valid_loss 1.1750
+Epoch 70: train_loss 0.0562, valid_loss 1.2077
+Epoch 71: train_loss 0.2886, valid_loss 1.2179
+Epoch 72: train_loss 0.2941, valid_loss 1.2011
+Epoch 73: train_loss 0.1982, valid_loss 1.1890
+Epoch 74: train_loss 0.0859, valid_loss 1.2057
+Epoch 75: train_loss 0.2160, valid_loss 1.2100
+Epoch 76: train_loss 0.1695, valid_loss 1.1884
+Epoch 77: train_loss 0.0216, valid_loss 1.1900
+Epoch 78: train_loss 0.1012, valid_loss 1.1876
+Epoch 79: train_loss 0.0183, valid_loss 1.1802
+Epoch 80: train_loss -0.0357, valid_loss 1.1841
+Epoch 81: train_loss -0.0450, valid_loss 1.1779
+Epoch 82: train_loss -0.0822, valid_loss 1.1919
+Epoch 83: train_loss -0.0573, valid_loss 1.1871
+Epoch 84: train_loss -0.0508, valid_loss 1.1728
+Epoch 85: train_loss -0.0837, valid_loss 1.1752
+Epoch 86: train_loss -0.0828, valid_loss 1.1833
+Epoch 87: train_loss -0.0689, valid_loss 1.1647
+Epoch 88: train_loss -0.0367, valid_loss 1.1861
+Epoch 89: train_loss 0.0339, valid_loss 1.1925
+Epoch 90: train_loss -0.0409, valid_loss 1.1861
+Epoch 91: train_loss -0.0664, valid_loss 1.1856
+Epoch 92: train_loss -0.0769, valid_loss 1.1804
+Epoch 93: train_loss -0.0746, valid_loss 1.1693
+Epoch 94: train_loss -0.0469, valid_loss 1.1916
+Epoch 95: train_loss -0.0046, valid_loss 1.1922
+Epoch 96: train_loss -0.0489, valid_loss 1.1849
+Epoch 97: train_loss -0.0732, valid_loss 1.1692
+Epoch 98: train_loss -0.1082, valid_loss 1.1799
+Epoch 99: train_loss -0.1130, valid_loss 1.1894
+Epoch 100: train_loss -0.0444, valid_loss 1.1683
+Epoch 101: train_loss -0.0396, valid_loss 1.2089
+Epoch 102: train_loss 0.2458, valid_loss 1.2375
+Best Loss: 1.164702 @ Epoch 87
+========== FactorVAEModel 训练配置 ==========
+num_feature: 158
+seq_len: 20
+num_factor: 48
+num_portfolio: 128
+hidden_size: 48
+gamma: 0.1
+n_epochs: 200
+lr: 0.001
+early_stop: 15
+batch_size: 1024
+optimizer: adam
+===================================================
+
+========== 训练过程 ==========
+Epoch 0: train_loss 1.2542, valid_loss 1.3949
+Epoch 1: train_loss 1.2141, valid_loss 1.3888
+Epoch 2: train_loss 1.2025, valid_loss 1.3819
+Epoch 3: train_loss 1.1876, valid_loss 1.3759
+Epoch 4: train_loss 1.1705, valid_loss 1.3702
+Epoch 5: train_loss 1.1576, valid_loss 1.3628
+Epoch 6: train_loss 1.1486, valid_loss 1.3565
+Epoch 7: train_loss 1.1307, valid_loss 1.3505
+Epoch 8: train_loss 1.1219, valid_loss 1.3456
+Epoch 9: train_loss 1.1082, valid_loss 1.3424
+Epoch 10: train_loss 1.0895, valid_loss 1.3396
+Epoch 11: train_loss 1.0746, valid_loss 1.3359
+Epoch 12: train_loss 1.0639, valid_loss 1.3314
+Epoch 13: train_loss 1.0381, valid_loss 1.3262
+Epoch 14: train_loss 1.0195, valid_loss 1.3195
+Epoch 15: train_loss 0.9874, valid_loss 1.3123
+Epoch 16: train_loss 0.9374, valid_loss 1.3047
+Epoch 17: train_loss 0.8801, valid_loss 1.2964
+Epoch 18: train_loss 0.8118, valid_loss 1.2850
+Epoch 19: train_loss 0.6938, valid_loss 1.2743
+Epoch 20: train_loss 0.6020, valid_loss 1.2755
+Epoch 21: train_loss 0.5770, valid_loss 1.2558
+Epoch 22: train_loss 0.4748, valid_loss 1.2492
+Epoch 23: train_loss 0.4547, valid_loss 1.2505
+Epoch 24: train_loss 0.5070, valid_loss 1.2452
+Epoch 25: train_loss 0.4488, valid_loss 1.2487
+Epoch 26: train_loss 0.4663, valid_loss 1.2395
+Epoch 27: train_loss 0.4318, valid_loss 1.2409
+Epoch 28: train_loss 0.4284, valid_loss 1.2297
+Epoch 29: train_loss 0.3768, valid_loss 1.2377
+Epoch 30: train_loss 0.4144, valid_loss 1.2233
+Epoch 31: train_loss 0.3378, valid_loss 1.2315
+Epoch 32: train_loss 0.3685, valid_loss 1.2202
+Epoch 33: train_loss 0.2842, valid_loss 1.2204
+Epoch 34: train_loss 0.2593, valid_loss 1.2135
+Epoch 35: train_loss 0.2414, valid_loss 1.2129
+Epoch 36: train_loss 0.2273, valid_loss 1.2121
+Epoch 37: train_loss 0.2264, valid_loss 1.2098
+Epoch 38: train_loss 0.2185, valid_loss 1.2141
+Epoch 39: train_loss 0.1740, valid_loss 1.2157
+Epoch 40: train_loss 0.2539, valid_loss 1.2106
+Epoch 41: train_loss 0.2355, valid_loss 1.2085
+Epoch 42: train_loss 0.2087, valid_loss 1.2024
+Epoch 43: train_loss 0.2035, valid_loss 1.1993
+Epoch 44: train_loss 0.2060, valid_loss 1.2096
+Epoch 45: train_loss 0.2167, valid_loss 1.1997
+Epoch 46: train_loss 0.2088, valid_loss 1.2221
+Epoch 47: train_loss 0.2923, valid_loss 1.2141
+Epoch 48: train_loss 0.1942, valid_loss 1.2121
+Epoch 49: train_loss 0.2082, valid_loss 1.2028
+Epoch 50: train_loss 0.1486, valid_loss 1.2062
+Epoch 51: train_loss 0.1532, valid_loss 1.2060
+Epoch 52: train_loss 0.1504, valid_loss 1.1989
+Epoch 53: train_loss 0.1183, valid_loss 1.1958
+Epoch 54: train_loss 0.1141, valid_loss 1.2004
+Epoch 55: train_loss 0.1221, valid_loss 1.2135
+Epoch 56: train_loss 0.2600, valid_loss 1.2122
+Epoch 57: train_loss 0.2212, valid_loss 1.2043
+Epoch 58: train_loss 0.1605, valid_loss 1.2068
+Epoch 59: train_loss 0.1700, valid_loss 1.2005
+Epoch 60: train_loss 0.1255, valid_loss 1.2038
+Epoch 61: train_loss 0.1057, valid_loss 1.2144
+Epoch 62: train_loss 0.2872, valid_loss 1.2228
+Epoch 63: train_loss 0.4258, valid_loss 1.2200
+Epoch 64: train_loss 0.3654, valid_loss 1.2079
+Epoch 65: train_loss 0.2508, valid_loss 1.2029
+Epoch 66: train_loss 0.1712, valid_loss 1.2036
+Epoch 67: train_loss 0.1544, valid_loss 1.1953
+Epoch 68: train_loss 0.0859, valid_loss 1.1927
+Epoch 69: train_loss 0.0747, valid_loss 1.1858
+Epoch 70: train_loss 0.0428, valid_loss 1.1912
+Epoch 71: train_loss 0.0729, valid_loss 1.1928
+Epoch 72: train_loss 0.0152, valid_loss 1.2260
+Epoch 73: train_loss 0.2930, valid_loss 1.2387
+Epoch 74: train_loss 0.3269, valid_loss 1.2209
+Epoch 75: train_loss 0.2147, valid_loss 1.2069
+Epoch 76: train_loss 0.1162, valid_loss 1.2078
+Epoch 77: train_loss 0.1471, valid_loss 1.2012
+Epoch 78: train_loss 0.0940, valid_loss 1.2062
+Epoch 79: train_loss 0.0470, valid_loss 1.2022
+Epoch 80: train_loss 0.0893, valid_loss 1.1849
+Epoch 81: train_loss 0.0466, valid_loss 1.2042
+Epoch 82: train_loss 0.1559, valid_loss 1.1960
+Epoch 83: train_loss 0.0643, valid_loss 1.2030
+Epoch 84: train_loss 0.0401, valid_loss 1.2074
+Epoch 85: train_loss 0.0703, valid_loss 1.2038
+Epoch 86: train_loss -0.0031, valid_loss 1.2141
+Epoch 87: train_loss 0.0796, valid_loss 1.2081
+Epoch 88: train_loss 0.0028, valid_loss 1.2079
+Epoch 89: train_loss 0.0745, valid_loss 1.2013
+Epoch 90: train_loss 0.0756, valid_loss 1.1872
+Epoch 91: train_loss 0.0670, valid_loss 1.2271
+Epoch 92: train_loss 0.1390, valid_loss 1.2064
+Epoch 93: train_loss 0.0268, valid_loss 1.2073
+Epoch 94: train_loss 0.0276, valid_loss 1.2193
+Epoch 95: train_loss 0.0787, valid_loss 1.2059
+Best Loss: 1.184860 @ Epoch 80
