@@ -40,14 +40,14 @@ def main(args:argparse.Namespace, data_args):
     optimizer = optim.Adam(factorVAE.parameters(), lr=args.lr)
     scheduler = optim.lr_scheduler.CosineAnnealingWarmRestarts(
         optimizer, 
-        T_0=10, 
-        T_mult=2, 
+        T_0=10,
+        T_mult=2,
         eta_min=1e-6  # 学习率最小不会低于这个值
     )
 
     best_val_loss = float('inf')
 
-    patience = getattr(args, 'early_stop', 20)
+    patience = getattr(args, 'early_stop', 30)
     log_filename="./FactorVAE/VAElog.txt"
     os.makedirs(os.path.dirname(log_filename), exist_ok=True)
 
@@ -112,21 +112,22 @@ if __name__ == "__main__":
     
     parser.add_argument('--num_latent', type=int, default=158, help='latent size')
     parser.add_argument('--num_portfolio', type=int, default=128, help='portfolio size')
-    parser.add_argument('--num_factor', type=int, default=60, help='factor size')
-    parser.add_argument('--hidden_size', type=int, default=60, help='hidden size')
+    parser.add_argument('--num_factor', type=int, default=128, help='factor size')
+    parser.add_argument('--hidden_size', type=int, default=128, help='hidden size')
 
     parser.add_argument('--dataset', type=str, default='./FactorVAE/data/csi_data.pkl', help='dataset to use')
     parser.add_argument('--start_time', type=str, default='2009-01-01', help='start time')
     parser.add_argument('--fit_end_time', type=str, default='2016-12-31', help='fit end time')
     parser.add_argument('--val_start_time', type=str, default='2017-01-01', help='validation start time')
-    parser.add_argument('--val_end_time', type=str, default='2019-12-31', help='validation end time')
-    parser.add_argument('--end_time', type=str, default='2023-12-31', help='end time')
+    parser.add_argument('--val_end_time', type=str, default='2020-12-31', help='validation end time')
+    parser.add_argument('--end_time', type=str, default='2025-12-31', help='end time')
 
     parser.add_argument('--gpu', type=int, default=2, help='gpu device')
     parser.add_argument('--seed', type=int, default=42, help='random seed')
     parser.add_argument('--run_name', type=str, default='VAE-Revision2', help='name of the run')
     parser.add_argument('--save_dir', type=str, default='./FactorVAE/best_models', help='directory to save model')
     parser.add_argument('--num_workers', type=int, default=4, help='number of workers for dataloader')
+    parser.add_argument('--early_stop',type=int,default=30,help='early stop epochs')
     parser.add_argument('--wandb', action='store_true', help='use wandb')
     
     args = parser.parse_args()
