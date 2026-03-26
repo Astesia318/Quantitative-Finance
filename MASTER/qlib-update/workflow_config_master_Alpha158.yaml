@@ -1,5 +1,5 @@
 qlib_init:
-    provider_uri: ~\qlib_data\cn_data
+    provider_uri: /data/lyc/quant/qlib_bin
     region: cn
 market: &market csi800
 benchmark: &benchmark sh000906
@@ -64,6 +64,7 @@ task:
             market: *market
             benchmark: *benchmark
             save_prefix: *market
+            GPU: 2
     dataset:
         class: MASTERTSDatasetH
         module_path: qlib.contrib.data.dataset

@@ -7,12 +7,16 @@ qlib_data*/
 qlib_bin/
 FactorVAE/data
 FactorVAE/scores
-mlrun/
+
+mlruns/
 test.py
 qtest.py
 
+*.pdf
+*.zip
 *.log
 *.pid
 *.pth
 *.csv
 *.pt
+*.pkl
