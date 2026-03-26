@@ -1,5 +1,5 @@
 qlib_init:
-    provider_uri: ~\qlib_data\cn_data
+    provider_uri: /data/lyc/quant/qlib_bin
     region: cn
 market: &market csi800
 benchmark: &benchmark sh000906
@@ -43,8 +43,8 @@ port_analysis_config: &port_analysis_config
         module_path: qlib.contrib.strategy
         kwargs:
             signal: <PRED>
-            topk: 30
-            n_drop: 30
+            topk: 100
+            n_drop: 5
     backtest:
         start_time: 2020-07-01
         end_time: 2022-12-31
@@ -64,6 +64,14 @@ task:
             market: *market
             benchmark: *benchmark
             save_prefix: *market
+            GPU: 2
+            load_model_path: "/data/lyc/quant/MASTER/model/csi800master_0.pkl" 
+            out_pred_path: "/data/lyc/quant/MASTER/model/master_predictions.csv"
+    # model:
+    #     class: FileModel
+    #     module_path: qlib.contrib.model.dummy_model
+    #     kwargs:
+    #         pred_path: /data/lyc/quant/MASTER/model/csi800_original_0.pkl
     dataset:
         class: MASTERTSDatasetH
         module_path: qlib.contrib.data.dataset
