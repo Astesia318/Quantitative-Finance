@@ -1,0 +1,197 @@
+/data/miniconda3/envs/quant/lib/python3.10/site-packages/mlflow/utils/autologging_utils/versioning.py:6: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_filename
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+['./qlib/examples/benchmarks_dynamic/incremental/main.py', 'run_all', '--forecast_model', 'Transformer', '-num_head', '8', '--tau', '10', '--lr_da', '0.01', '--market', 'csi300', '--data_dir', 'crowd_data', '--rank_label', 'False', '--begin_valid_epoch', '0']
+[3034531:MainThread](2026-03-26 20:57:49,999) INFO - qlib.Initialization - [config.py:416] - default_conf: client.
+[3034531:MainThread](2026-03-26 20:57:50,002) INFO - qlib.Initialization - [__init__.py:74] - qlib successfully initialized based on client settings.
+[3034531:MainThread](2026-03-26 20:57:50,002) INFO - qlib.Initialization - [__init__.py:76] - data_path={'__DEFAULT_FREQ': PosixPath('/data/lyc/quant/qlib_bin')}
+Remove CSRankNorm
+{'class': 'Alpha360', 'module_path': 'qlib.contrib.data.handler', 'kwargs': {'start_time': datetime.date(2008, 1, 1), 'end_time': datetime.date(2020, 8, 1), 'fit_start_time': datetime.date(2008, 1, 1), 'fit_end_time': datetime.date(2014, 12, 31), 'instruments': 'csi300', 'infer_processors': [{'class': 'RobustZScoreNorm', 'kwargs': {'fields_group': 'feature', 'clip_outlier': True}}, {'class': 'Fillna', 'kwargs': {'fields_group': 'feature'}}], 'learn_processors': [{'class': 'DropnaLabel'}, {'class': 'CSZScoreNorm', 'kwargs': {'fields_group': 'label'}}], 'label': ['Ref($close, -2) / Ref($close, -1) - 1']}}
+{'model': {'class': 'TransformerModel', 'module_path': 'qlib.contrib.model.pytorch_transformer', 'kwargs': {'d_feat': 6, 'seed': None, 'dim_feedforward': 32, 'reg': 0}}, 'dataset': {'class': 'DatasetH', 'module_path': 'qlib.data.dataset', 'kwargs': {'handler': 'file:///data/lyc/quant/qlib/examples/benchmarks/crowd_data_csi300_rankFalse_alpha360_handler_horizon1.pkl', 'segments': {'train': [datetime.date(2008, 1, 1), datetime.date(2014, 12, 31)], 'valid': [datetime.date(2015, 1, 1), datetime.date(2016, 12, 31)], 'test': [datetime.date(2017, 1, 1), datetime.date(2020, 8, 1)]}}}, 'record': ['qlib.workflow.record_temp.SignalRecord']}
+[3034531:MainThread](2026-03-26 20:57:50,768) INFO - qlib.MetaDatasetInc - [dataset.py:152] - Example task for training meta model: {'model': {'class': 'TransformerModel', 'module_path': 'qlib.contrib.model.pytorch_transformer', 'kwargs': {'d_feat': 6, 'seed': None, 'dim_feedforward': 32, 'reg': 0}}, 'dataset': {'class': 'DatasetH', 'module_path': 'qlib.data.dataset', 'kwargs': {'handler': 'file:///data/lyc/quant/qlib/examples/benchmarks/crowd_data_csi300_rankFalse_alpha360_handler_horizon1.pkl', 'segments': {'train': (Timestamp('2008-01-02 00:00:00'), Timestamp('2008-01-29 00:00:00')), 'test': (Timestamp('2008-01-31 00:00:00'), Timestamp('2008-03-05 00:00:00'))}}}, 'record': ['qlib.workflow.record_temp.SignalRecord']}
+creating meta tasks:   0%|          | 0/108 [00:00<?, ?it/s]creating meta tasks:  64%|██████▍   | 69/108 [00:00<00:00, 683.05it/s]creating meta tasks: 100%|██████████| 108/108 [00:00<00:00, 689.43it/s]
+[3034531:MainThread](2026-03-26 20:57:50,998) INFO - qlib.MetaDatasetInc - [dataset.py:152] - Example task for training meta model: {'model': {'class': 'TransformerModel', 'module_path': 'qlib.contrib.model.pytorch_transformer', 'kwargs': {'d_feat': 6, 'seed': None, 'dim_feedforward': 32, 'reg': 0}}, 'dataset': {'class': 'DatasetH', 'module_path': 'qlib.data.dataset', 'kwargs': {'handler': 'file:///data/lyc/quant/qlib/examples/benchmarks/crowd_data_csi300_rankFalse_alpha360_handler_horizon1.pkl', 'segments': {'train': (Timestamp('2015-01-05 00:00:00'), Timestamp('2015-01-30 00:00:00')), 'test': (Timestamp('2015-02-03 00:00:00'), Timestamp('2015-03-09 00:00:00'))}}}, 'record': ['qlib.workflow.record_temp.SignalRecord']}
+creating meta tasks:   0%|          | 0/67 [00:00<?, ?it/s]creating meta tasks: 100%|██████████| 67/67 [00:00<00:00, 696.43it/s]
+Traceback (most recent call last):
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 471, in run_all
+    assert self.reload_tag is not None
+AssertionError
+No valid experiment to reload. Restart offline training...
+[3034531:MainThread](2026-03-26 20:57:51,722) INFO - qlib.TransformerModel - [pytorch_transformer.py:66] - Naive Transformer:
+batch_size : 2048
+dim : 32
+/data/miniconda3/envs/quant/lib/python3.10/site-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+epoch:   0%|          | 0/100 [00:00<?, ?it/s]0.06121904729810486
+best ic: 0.06121904729810486
+epoch:   1%|          | 1/100 [00:08<13:26,  8.15s/it]0.06098021442397175
+epoch:   2%|▏         | 2/100 [00:15<12:22,  7.57s/it]0.05744147495722215
+epoch:   3%|▎         | 3/100 [00:22<11:53,  7.35s/it]0.06235241656035331
+best ic: 0.06235241656035331
+epoch:   4%|▍         | 4/100 [00:29<11:42,  7.32s/it]0.05916321758424362
+epoch:   5%|▌         | 5/100 [00:36<11:30,  7.27s/it]0.06809089166952087
+best ic: 0.06809089166952087
+epoch:   6%|▌         | 6/100 [00:43<11:18,  7.22s/it]0.056705677879075454
+epoch:   7%|▋         | 7/100 [00:51<11:11,  7.22s/it]0.0693983018850554
+best ic: 0.0693983018850554
+epoch:   8%|▊         | 8/100 [00:58<11:03,  7.21s/it]0.07238906159131171
+best ic: 0.07238906159131171
+epoch:   9%|▉         | 9/100 [01:05<10:58,  7.23s/it]0.06789198336347319
+epoch:  10%|█         | 10/100 [01:11<10:09,  6.77s/it]0.06835570033630946
+epoch:  11%|█         | 11/100 [01:17<09:38,  6.50s/it]0.06114597133105116
+epoch:  12%|█▏        | 12/100 [01:24<09:49,  6.70s/it]0.05940551743510068
+epoch:  13%|█▎        | 13/100 [01:31<10:02,  6.93s/it]0.07019340633304345
+epoch:  14%|█▍        | 14/100 [01:39<10:00,  6.98s/it]0.063776992458586
+epoch:  15%|█▌        | 15/100 [01:46<09:59,  7.06s/it]0.0743755743893336
+best ic: 0.0743755743893336
+epoch:  16%|█▌        | 16/100 [01:53<09:53,  7.07s/it]0.05399669933049793
+epoch:  17%|█▋        | 17/100 [02:00<09:52,  7.14s/it]0.05022467532895692
+epoch:  18%|█▊        | 18/100 [02:08<09:52,  7.22s/it]0.06288115239778909
+epoch:  19%|█▉        | 19/100 [02:15<09:39,  7.16s/it]0.06238199335941623
+epoch:  20%|██        | 20/100 [02:22<09:32,  7.16s/it]0.06715869873798687
+epoch:  21%|██        | 21/100 [02:29<09:19,  7.08s/it]0.055927923500133
+epoch:  22%|██▏       | 22/100 [02:36<09:20,  7.18s/it]0.06954805167053559
+epoch:  23%|██▎       | 23/100 [02:43<09:18,  7.25s/it]0.06235804251237238
+epoch:  23%|██▎       | 23/100 [02:51<09:33,  7.44s/it]
+Save checkpoint in Exp: csi300_Transformer_alpha360_horizon1_step20_rankFalse_2026-03-26_20:57:51_checkpoint
+[3034531:MainThread](2026-03-26 21:00:44,025) WARNING - qlib.workflow - [expm.py:230] - No valid experiment found. Create a new experiment with name csi300_Transformer_alpha360_horizon1_step20_rankFalse_2026-03-26_20:57:51_checkpoint.
+[3034531:MainThread](2026-03-26 21:00:44,033) INFO - qlib.workflow - [exp.py:258] - Experiment 14 starts running ...
+[3034531:MainThread](2026-03-26 21:00:44,105) INFO - qlib.workflow - [recorder.py:341] - Recorder e254aaa21abd42c6b0a15052b778a596 starts running under Experiment 14 ...
+[3034531:MainThread](2026-03-26 21:00:44,164) INFO - qlib.timer - [log.py:127] - Time cost: 0.000s | waiting `async_log` Done
+Test segment: 2017-01-03 00:00:00 2020-07-31 00:00:00
+[3034531:MainThread](2026-03-26 21:00:44,171) WARNING - qlib.workflow - [expm.py:230] - No valid experiment found. Create a new experiment with name csi300_Transformer_alpha360_horizon1_step20_rankFalse_2026-03-26_20:57:51_online.
+[3034531:MainThread](2026-03-26 21:00:44,178) INFO - qlib.workflow - [exp.py:258] - Experiment 15 starts running ...
+[3034531:MainThread](2026-03-26 21:00:44,185) INFO - qlib.workflow - [recorder.py:341] - Recorder fb3e77cc80be460e8472112aff51a9ff starts running under Experiment 15 ...
+online:   0%|          | 0/67 [00:00<?, ?it/s]online:   4%|▍         | 3/67 [00:00<00:02, 22.58it/s]online:   9%|▉         | 6/67 [00:00<00:02, 23.72it/s]online:  13%|█▎        | 9/67 [00:00<00:02, 23.30it/s]online:  18%|█▊        | 12/67 [00:00<00:02, 24.23it/s]online:  22%|██▏       | 15/67 [00:00<00:02, 25.42it/s]online:  27%|██▋       | 18/67 [00:00<00:02, 21.29it/s]online:  31%|███▏      | 21/67 [00:00<00:02, 20.98it/s]online:  36%|███▌      | 24/67 [00:01<00:01, 22.47it/s]online:  40%|████      | 27/67 [00:01<00:01, 23.90it/s]online:  45%|████▍     | 30/67 [00:01<00:01, 25.01it/s]online:  49%|████▉     | 33/67 [00:01<00:01, 25.91it/s]online:  54%|█████▎    | 36/67 [00:01<00:01, 26.59it/s]online:  58%|█████▊    | 39/67 [00:01<00:01, 27.15it/s]online:  63%|██████▎   | 42/67 [00:01<00:00, 27.52it/s]online:  67%|██████▋   | 45/67 [00:01<00:00, 27.98it/s]online:  72%|███████▏  | 48/67 [00:01<00:00, 28.14it/s]online:  76%|███████▌  | 51/67 [00:02<00:00, 28.05it/s]online:  81%|████████  | 54/67 [00:02<00:00, 28.00it/s]online:  85%|████████▌ | 57/67 [00:02<00:00, 28.08it/s]online:  90%|████████▉ | 60/67 [00:02<00:00, 28.14it/s]online:  94%|█████████▍| 63/67 [00:02<00:00, 28.29it/s]online:  99%|█████████▊| 66/67 [00:02<00:00, 28.27it/s]online: 100%|██████████| 67/67 [00:02<00:00, 26.00it/s]
+lr_model: 0.001 lr_ma: 0.001 lr_da: 0.01
+[3034531:MainThread](2026-03-26 21:00:47,670) INFO - qlib.timer - [log.py:127] - Time cost: 0.000s | waiting `async_log` Done
+mse: 0.9752981 mae 0.70619714
+{'IC': 0.03965125969631595,
+ 'ICIR': 0.1689880222699119,
+ 'Rank IC': 0.040426124594894364,
+ 'Rank ICIR': 0.1999961635460732}
+[3034531:MainThread](2026-03-26 21:00:48,294) INFO - qlib.backtest caller - [__init__.py:93] - Create new exchange
+[3034531:MainThread](2026-03-26 21:00:55,102) WARNING - qlib.online operator - [exchange.py:219] - $close field data contains nan.
+[3034531:MainThread](2026-03-26 21:00:55,103) WARNING - qlib.online operator - [exchange.py:219] - $close field data contains nan.
+[3034531:MainThread](2026-03-26 21:00:55,630) WARNING - qlib.BaseExecutor - [executor.py:121] - `common_infra` is not set for <qlib.backtest.executor.SimulatorExecutor object at 0x7f88f434dba0>
+backtest loop:   0%|          | 0/872 [00:00<?, ?it/s]/data/lyc/quant/qlib/qlib/utils/index_data.py:481: RuntimeWarning: Mean of empty slice
+  return np.nanmean(self.data)
+backtest loop:   1%|          | 9/872 [00:00<00:09, 86.92it/s]backtest loop:   2%|▏         | 19/872 [00:00<00:10, 84.34it/s]backtest loop:   3%|▎         | 29/872 [00:00<00:09, 89.04it/s]backtest loop:   4%|▍         | 39/872 [00:00<00:09, 90.89it/s]backtest loop:   6%|▌         | 49/872 [00:00<00:09, 91.40it/s]backtest loop:   7%|▋         | 59/872 [00:00<00:08, 92.28it/s]backtest loop:   8%|▊         | 69/872 [00:00<00:08, 90.15it/s]backtest loop:   9%|▉         | 79/872 [00:00<00:08, 92.70it/s]backtest loop:  10%|█         | 89/872 [00:00<00:08, 94.32it/s]backtest loop:  11%|█▏        | 99/872 [00:01<00:08, 90.86it/s]backtest loop:  12%|█▎        | 109/872 [00:01<00:08, 91.01it/s]backtest loop:  14%|█▎        | 119/872 [00:01<00:08, 91.27it/s]backtest loop:  15%|█▍        | 129/872 [00:01<00:08, 92.03it/s]backtest loop:  16%|█▌        | 139/872 [00:01<00:07, 92.06it/s]backtest loop:  17%|█▋        | 149/872 [00:01<00:07, 93.93it/s]backtest loop:  18%|█▊        | 159/872 [00:01<00:07, 94.85it/s]backtest loop:  19%|█▉        | 169/872 [00:01<00:07, 95.25it/s]backtest loop:  21%|██        | 179/872 [00:01<00:07, 95.56it/s]backtest loop:  22%|██▏       | 190/872 [00:02<00:06, 97.86it/s]backtest loop:  23%|██▎       | 200/872 [00:02<00:06, 98.04it/s]backtest loop:  24%|██▍       | 210/872 [00:02<00:06, 98.28it/s]backtest loop:  25%|██▌       | 221/872 [00:02<00:06, 99.20it/s]backtest loop:  27%|██▋       | 232/872 [00:02<00:06, 101.07it/s]backtest loop:  28%|██▊       | 243/872 [00:02<00:06, 101.35it/s]backtest loop:  29%|██▉       | 254/872 [00:02<00:06, 97.16it/s] backtest loop:  30%|███       | 264/872 [00:02<00:06, 97.30it/s]backtest loop:  32%|███▏      | 275/872 [00:02<00:06, 98.99it/s]backtest loop:  33%|███▎      | 285/872 [00:03<00:06, 94.84it/s]backtest loop:  34%|███▍      | 295/872 [00:03<00:06, 95.85it/s]backtest loop:  35%|███▍      | 305/872 [00:03<00:05, 96.92it/s]backtest loop:  36%|███▌      | 315/872 [00:03<00:05, 97.36it/s]backtest loop:  37%|███▋      | 325/872 [00:03<00:05, 93.42it/s]backtest loop:  38%|███▊      | 335/872 [00:03<00:05, 93.81it/s]backtest loop:  40%|███▉      | 345/872 [00:03<00:05, 95.09it/s]backtest loop:  41%|████      | 355/872 [00:03<00:05, 96.45it/s]backtest loop:  42%|████▏     | 365/872 [00:03<00:05, 94.35it/s]backtest loop:  43%|████▎     | 375/872 [00:03<00:05, 95.10it/s]backtest loop:  44%|████▍     | 385/872 [00:04<00:05, 95.96it/s]backtest loop:  45%|████▌     | 395/872 [00:04<00:04, 96.87it/s]backtest loop:  46%|████▋     | 405/872 [00:04<00:04, 97.22it/s]backtest loop:  48%|████▊     | 415/872 [00:04<00:04, 97.59it/s]backtest loop:  49%|████▊     | 425/872 [00:04<00:04, 98.19it/s]backtest loop:  50%|████▉     | 435/872 [00:04<00:04, 98.14it/s]backtest loop:  51%|█████     | 445/872 [00:04<00:04, 98.36it/s]backtest loop:  52%|█████▏    | 456/872 [00:04<00:04, 99.70it/s]backtest loop:  53%|█████▎    | 466/872 [00:04<00:04, 99.75it/s]backtest loop:  55%|█████▍    | 476/872 [00:04<00:03, 99.16it/s]backtest loop:  56%|█████▌    | 486/872 [00:05<00:03, 99.38it/s]backtest loop:  57%|█████▋    | 496/872 [00:05<00:03, 94.29it/s]backtest loop:  58%|█████▊    | 506/872 [00:05<00:03, 93.76it/s]backtest loop:  59%|█████▉    | 516/872 [00:05<00:03, 93.03it/s]backtest loop:  60%|██████    | 526/872 [00:05<00:03, 94.23it/s]backtest loop:  61%|██████▏   | 536/872 [00:05<00:03, 95.32it/s]backtest loop:  63%|██████▎   | 546/872 [00:05<00:03, 95.12it/s]backtest loop:  64%|██████▍   | 556/872 [00:05<00:03, 93.83it/s]backtest loop:  65%|██████▍   | 566/872 [00:05<00:03, 90.71it/s]backtest loop:  66%|██████▌   | 576/872 [00:06<00:03, 92.42it/s]backtest loop:  67%|██████▋   | 586/872 [00:06<00:03, 94.16it/s]backtest loop:  68%|██████▊   | 596/872 [00:06<00:02, 94.70it/s]backtest loop:  69%|██████▉   | 606/872 [00:06<00:02, 94.33it/s]backtest loop:  71%|███████   | 616/872 [00:06<00:02, 95.82it/s]backtest loop:  72%|███████▏  | 626/872 [00:06<00:02, 96.78it/s]backtest loop:  73%|███████▎  | 636/872 [00:06<00:02, 97.22it/s]backtest loop:  74%|███████▍  | 646/872 [00:06<00:02, 96.22it/s]backtest loop:  75%|███████▌  | 656/872 [00:06<00:02, 96.55it/s]backtest loop:  76%|███████▋  | 666/872 [00:06<00:02, 97.25it/s]backtest loop:  78%|███████▊  | 676/872 [00:07<00:02, 93.45it/s]backtest loop:  79%|███████▊  | 686/872 [00:07<00:01, 94.08it/s]backtest loop:  80%|███████▉  | 696/872 [00:07<00:01, 93.95it/s]backtest loop:  81%|████████  | 706/872 [00:07<00:01, 95.53it/s]backtest loop:  82%|████████▏ | 716/872 [00:07<00:01, 95.72it/s]backtest loop:  83%|████████▎ | 726/872 [00:07<00:01, 95.85it/s]backtest loop:  84%|████████▍ | 736/872 [00:07<00:01, 91.45it/s]backtest loop:  86%|████████▌ | 746/872 [00:07<00:01, 91.96it/s]backtest loop:  87%|████████▋ | 756/872 [00:07<00:01, 91.72it/s]backtest loop:  88%|████████▊ | 767/872 [00:08<00:01, 91.56it/s]backtest loop:  89%|████████▉ | 777/872 [00:08<00:01, 93.67it/s]backtest loop:  90%|█████████ | 787/872 [00:08<00:00, 94.66it/s]backtest loop:  91%|█████████▏| 797/872 [00:08<00:00, 95.76it/s]backtest loop:  93%|█████████▎| 808/872 [00:08<00:00, 98.10it/s]backtest loop:  94%|█████████▍| 818/872 [00:08<00:00, 94.13it/s]backtest loop:  95%|█████████▌| 829/872 [00:08<00:00, 97.05it/s]backtest loop:  96%|█████████▌| 839/872 [00:08<00:00, 97.17it/s]backtest loop:  97%|█████████▋| 849/872 [00:08<00:00, 97.76it/s]backtest loop:  99%|█████████▊| 860/872 [00:09<00:00, 100.90it/s]backtest loop: 100%|█████████▉| 871/872 [00:09<00:00, 98.52it/s] backtest loop: 100%|██████████| 872/872 [00:09<00:00, 95.38it/s]
+[3034531:MainThread](2026-03-26 21:01:04,827) INFO - qlib.workflow - [record_temp.py:515] - Portfolio analysis record 'port_analysis_1day.pkl' has been saved as the artifact of the Experiment 15
+'The following are analysis results of benchmark return(1day).'
+                       risk
+mean               0.000495
+std                0.012300
+annualized_return  0.117864
+information_ratio  0.621155
+max_drawdown      -0.370479
+'The following are analysis results of the excess return without cost(1day).'
+                       risk
+mean              -0.000224
+std                0.004369
+annualized_return -0.053294
+information_ratio -0.790643
+max_drawdown      -0.242637
+'The following are analysis results of the excess return with cost(1day).'
+                       risk
+mean              -0.000410
+std                0.004369
+annualized_return -0.097667
+information_ratio -1.448946
+max_drawdown      -0.388839
+[3034531:MainThread](2026-03-26 21:01:04,838) INFO - qlib.workflow - [record_temp.py:540] - Indicator analysis record 'indicator_analysis_1day.pkl' has been saved as the artifact of the Experiment 15
+'The following are analysis results of indicators(1day).'
+     value
+ffr    1.0
+pa     0.0
+pos    0.0
+Your evaluation results can be found in the experiment named `csi300_Transformer_alpha360_horizon1_step20_rankFalse_2026-03-26_20:57:51_online`.
+{'1day.excess_return_with_cost.annualized_return': [-0.09766678458316688],
+ '1day.excess_return_with_cost.information_ratio': [-1.4489459929570443],
+ 'IC': [0.03965125969631595],
+ 'ICIR': [0.1689880222699119],
+ 'Rank IC': [0.040426124594894364],
+ 'Rank ICIR': [0.1999961635460732],
+ 'mae': [0.7061971426010132],
+ 'mse': [0.9752981066703796]}
+Traceback (most recent call last):
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 471, in run_all
+    assert self.reload_tag is not None
+AssertionError
+No valid experiment to reload. Restart offline training...
+[3034531:MainThread](2026-03-26 21:01:05,491) INFO - qlib.TransformerModel - [pytorch_transformer.py:66] - Naive Transformer:
+batch_size : 2048
+dim : 32
+/data/miniconda3/envs/quant/lib/python3.10/site-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+epoch:   0%|          | 0/100 [00:00<?, ?it/s]0.059733897752267354
+best ic: 0.059733897752267354
+epoch:   1%|          | 1/100 [00:07<13:11,  8.00s/it]0.056751897375032036
+epoch:   2%|▏         | 2/100 [00:16<13:09,  8.05s/it]0.052115360035171095
+epoch:   3%|▎         | 3/100 [00:24<13:07,  8.12s/it]0.057331513008004736
+epoch:   4%|▍         | 4/100 [00:32<12:53,  8.06s/it]0.06212340267856041
+best ic: 0.06212340267856041
+epoch:   5%|▌         | 5/100 [00:40<12:44,  8.04s/it]0.062292943489098404
+best ic: 0.062292943489098404
+epoch:   6%|▌         | 6/100 [00:48<12:41,  8.10s/it]0.06563426177012738
+best ic: 0.06563426177012738
+epoch:   7%|▋         | 7/100 [00:56<12:30,  8.07s/it]0.06888654092913712
+best ic: 0.06888654092913712
+epoch:   8%|▊         | 8/100 [01:04<12:19,  8.03s/it]0.06332614813068622
+epoch:   9%|▉         | 9/100 [01:11<11:47,  7.78s/it]0.0698726058671711
+best ic: 0.0698726058671711
+epoch:  10%|█         | 10/100 [01:19<11:29,  7.66s/it]0.0705112196250944
+best ic: 0.0705112196250944
+epoch:  11%|█         | 11/100 [01:26<11:11,  7.54s/it]0.06021519555003159
+epoch:  12%|█▏        | 12/100 [01:34<11:07,  7.58s/it]0.07304545152270751
+best ic: 0.07304545152270751
+epoch:  13%|█▎        | 13/100 [01:41<10:49,  7.47s/it]epoch:  13%|█▎        | 13/100 [01:46<11:55,  8.22s/it]
+[3034531:MainThread](2026-03-26 21:02:52,397) ERROR - qlib.workflow - [utils.py:41] - An exception has been raised[KeyboardInterrupt: ].
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 510, in <module>
+    fire.Fire(Incremental)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 482, in run_all
+    mm = self.offline_training(seed=43 + i)
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 350, in offline_training
+    mm.fit(self.meta_dataset_offline)
+  File "/data/lyc/quant/qlib/qlib/contrib/meta/incremental/model.py", line 106, in fit
+    pred_y, ic = self.run_epoch(phase, task_list)
+  File "/data/lyc/quant/qlib/qlib/contrib/meta/incremental/model.py", line 142, in run_epoch
+    pred = self.run_task(meta_input, phase)
+  File "/data/lyc/quant/qlib/qlib/contrib/meta/incremental/model.py", line 264, in run_task
+    y_hat, _ = self.framework(X, model=fmodel, transform=self.adapt_x)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/lyc/quant/qlib/qlib/contrib/meta/incremental/net.py", line 163, in forward
+    return super().forward(X, model), X
+  File "/data/lyc/quant/qlib/qlib/contrib/meta/incremental/net.py", line 140, in forward
+    y_hat = model(X)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/higher/patch.py", line 460, in _patched_forward
+    output = self.boxed_forward(*args, **kwargs)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/higher/patch.py", line 387, in patched_forward
+    return true_forward(self, *args, **kwargs)
+  File "/data/lyc/quant/qlib/qlib/contrib/model/pytorch_transformer.py", line 312, in forward
+    output = self.decoder_layer(output.transpose(1, 0)[:, -1, :])  # [512, 1]
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/higher/patch.py", line 387, in patched_forward
+    return true_forward(self, *args, **kwargs)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+KeyboardInterrupt: 

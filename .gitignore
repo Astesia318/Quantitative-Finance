@@ -14,7 +14,7 @@ qtest.py
 
 *.pdf
 *.zip
-*.log
+# *.log
 *.pid
 *.pth
 *.csv
