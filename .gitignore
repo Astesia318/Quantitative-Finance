@@ -1,7 +1,7 @@
 __pycache__
 .vscode/
 
-#qlib-main/
+qlib-main/
 qlib_source_csvs*/
 qlib_data*/
 qlib_bin/
