@@ -35,10 +35,10 @@ elif universe == 'csi800':
 
 n_epoch = 40
 lr = 1e-5
-GPU = 2
+GPU = 0
 train_stop_loss_thred = 0.95
 
-batch_size=128
+batch_size=256
 
 ic = []
 icir = []

@@ -181,20 +181,41 @@ class SequenceModel():
         return float(np.mean(losses))
 
     def fit(self, dl_train, dl_valid=None):
+        import os
+        # 确保保存路径存在
+        os.makedirs("log/", exist_ok=True)
+        # 定义日志文件路径
+        log_path = f"log/{self.save_prefix}_{self.seed}_log1.txt"
+        
+        # 写入训练开始标记
+        with open(log_path, "a", encoding="utf-8") as f:
+            f.write(f"\n========== Start Training (Seed: {self.seed}) ==========\n")
+
         train_loader = self._init_data_loader(dl_train, shuffle=True, drop_last=True)
         for step in range(self.n_epochs):
             train_loss = self.train_epoch(train_loader)
             self.fitted = step
+            best_loss=10000            
             if dl_valid:
+                # 验证阶段，调用 predict 不写入测试日志
                 predictions, metrics = self.predict(dl_valid)
-                print("Epoch %d, train_loss %.6f, valid ic %.4f, icir %.3f, rankic %.4f, rankicir %.3f." % (step, train_loss, metrics['IC'],  metrics['ICIR'],  metrics['RIC'],  metrics['RICIR']))
-            else: print("Epoch %d, train_loss %.6f" % (step, train_loss))
+                log_str = "Epoch %d, train_loss %.6f, valid ic %.4f, icir %.3f, rankic %.4f, rankicir %.3f." % (
+                    step, train_loss, metrics['IC'],  metrics['ICIR'],  metrics['RIC'],  metrics['RICIR'])
+            else: 
+                log_str = "Epoch %d, train_loss %.6f" % (step, train_loss)
             
-            if train_loss <= self.train_stop_loss_thred:
+            # 同时打印在控制台和写入文件
+            print(log_str)
+            with open(log_path, "a", encoding="utf-8") as f:
+                f.write(log_str + "\n")
+            
+            # 模型保存机制
+            if train_loss <= best_loss:
+                best_loss=train_loss
                 best_param = copy.deepcopy(self.model.state_dict())
-                torch.save(best_param, f'{self.save_path}/{self.save_prefix}_{self.seed}.pkl')
-                break
-
+                save_file = f'{self.save_path}/{self.save_prefix}_{self.seed}.pkl'
+                torch.save(best_param, save_file)
+    
     def predict(self, dl_test):
         test_loader = self._init_data_loader(dl_test, shuffle=False, drop_last=False)
         preds = []
