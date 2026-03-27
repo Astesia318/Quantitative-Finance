@@ -1,1 +1,62 @@
-python: can't open file '/data/lyc/quant/main.py': [Errno 2] No such file or directory
+/data/miniconda3/envs/quant/lib/python3.10/site-packages/mlflow/utils/autologging_utils/versioning.py:6: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_filename
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+['./qlib/examples/benchmarks_dynamic/incremental/main.py', 'run_all', '--data_dir', '111', '--forecast_model', 'Transformer', '-num_head', '8', '--tau', '20', '--lr_da', '0.001', '--market', 'csi500', '--rank_label', 'False', '--begin_valid_epoch', '1', '--alpha', '158']
+[4127168:MainThread](2026-03-27 12:49:28,855) INFO - qlib.Initialization - [config.py:416] - default_conf: client.
+[4127168:MainThread](2026-03-27 12:49:28,858) INFO - qlib.Initialization - [__init__.py:74] - qlib successfully initialized based on client settings.
+[4127168:MainThread](2026-03-27 12:49:28,859) INFO - qlib.Initialization - [__init__.py:76] - data_path={'__DEFAULT_FREQ': PosixPath('/data/lyc/quant/qlib_bin')}
+Remove CSRankNorm
+{'class': 'Alpha158', 'module_path': 'qlib.contrib.data.handler', 'kwargs': {'start_time': datetime.date(2008, 1, 1), 'end_time': datetime.date(2020, 8, 1), 'fit_start_time': datetime.date(2008, 1, 1), 'fit_end_time': datetime.date(2014, 12, 31), 'instruments': 'csi500', 'infer_processors': [{'class': 'FilterCol', 'kwargs': {'fields_group': 'feature', 'col_list': ['RESI5', 'WVMA5', 'RSQR5', 'KLEN', 'RSQR10', 'CORR5', 'CORD5', 'CORR10', 'ROC60', 'RESI10', 'VSTD5', 'RSQR60', 'CORR60', 'WVMA60', 'STD5', 'RSQR20', 'CORD60', 'CORD10', 'CORR20', 'KLOW']}}, {'class': 'RobustZScoreNorm', 'kwargs': {'fields_group': 'feature', 'clip_outlier': True}}, {'class': 'Fillna', 'kwargs': {'fields_group': 'feature'}}], 'learn_processors': [{'class': 'DropnaLabel'}, {'class': 'CSZScoreNorm', 'kwargs': {'fields_group': 'label'}}], 'label': ['Ref($close, -2) / Ref($close, -1) - 1']}}
+{'model': {'class': 'TransformerModel', 'module_path': 'qlib.contrib.model.pytorch_transformer_ts', 'kwargs': {'d_feat': 20, 'dropout': 0.3, 'seed': None, 'n_jobs': 20, 'dim_feedforward': 32, 'reg': 0}}, 'dataset': {'class': 'TSDatasetH', 'module_path': 'qlib.data.dataset', 'kwargs': {'handler': 'file:///data/lyc/quant/qlib/examples/benchmarks/111_csi500_rankFalse_alpha158_handler_horizon1.pkl', 'segments': {'train': [datetime.date(2008, 1, 1), datetime.date(2014, 12, 31)], 'valid': [datetime.date(2015, 1, 1), datetime.date(2016, 12, 31)], 'test': [datetime.date(2017, 1, 1), datetime.date(2020, 8, 1)]}, 'step_len': 20}}, 'record': ['qlib.workflow.record_temp.SignalRecord']}
+[4127168:MainThread](2026-03-27 12:49:31,170) INFO - qlib.MetaDatasetInc - [dataset.py:152] - Example task for training meta model: {'model': {'class': 'TransformerModel', 'module_path': 'qlib.contrib.model.pytorch_transformer_ts', 'kwargs': {'d_feat': 20, 'dropout': 0.3, 'seed': None, 'n_jobs': 20, 'dim_feedforward': 32, 'reg': 0}}, 'dataset': {'class': 'TSDatasetH', 'module_path': 'qlib.data.dataset', 'kwargs': {'handler': 'file:///data/lyc/quant/qlib/examples/benchmarks/111_csi500_rankFalse_alpha158_handler_horizon1.pkl', 'segments': {'train': (Timestamp('2008-01-02 00:00:00'), Timestamp('2008-01-29 00:00:00')), 'test': (Timestamp('2008-01-31 00:00:00'), Timestamp('2008-03-05 00:00:00'))}, 'step_len': 20}}, 'record': ['qlib.workflow.record_temp.SignalRecord']}
+creating meta tasks:   0%|          | 0/108 [00:00<?, ?it/s]creating meta tasks:   3%|▎         | 3/108 [00:00<00:04, 23.91it/s]creating meta tasks:   6%|▌         | 6/108 [00:00<00:04, 23.93it/s]creating meta tasks:   8%|▊         | 9/108 [00:00<00:04, 23.44it/s]creating meta tasks:  11%|█         | 12/108 [00:00<00:04, 23.94it/s]creating meta tasks:  14%|█▍        | 15/108 [00:00<00:03, 23.98it/s]creating meta tasks:  17%|█▋        | 18/108 [00:00<00:03, 24.32it/s]creating meta tasks:  19%|█▉        | 21/108 [00:00<00:03, 24.60it/s]creating meta tasks:  22%|██▏       | 24/108 [00:00<00:03, 25.29it/s]creating meta tasks:  25%|██▌       | 27/108 [00:01<00:03, 25.14it/s]creating meta tasks:  28%|██▊       | 30/108 [00:01<00:02, 26.22it/s]creating meta tasks:  31%|███       | 33/108 [00:01<00:02, 27.12it/s]creating meta tasks:  33%|███▎      | 36/108 [00:01<00:02, 27.12it/s]creating meta tasks:  36%|███▌      | 39/108 [00:01<00:02, 27.22it/s]creating meta tasks:  39%|███▉      | 42/108 [00:01<00:02, 27.28it/s]creating meta tasks:  42%|████▏     | 45/108 [00:01<00:02, 26.96it/s]creating meta tasks:  44%|████▍     | 48/108 [00:01<00:02, 26.95it/s]creating meta tasks:  47%|████▋     | 51/108 [00:01<00:02, 27.51it/s]creating meta tasks:  51%|█████     | 55/108 [00:02<00:01, 27.53it/s]creating meta tasks:  55%|█████▍    | 59/108 [00:02<00:01, 28.56it/s]creating meta tasks:  58%|█████▊    | 63/108 [00:02<00:01, 30.09it/s]creating meta tasks:  62%|██████▏   | 67/108 [00:02<00:01, 31.83it/s]creating meta tasks:  66%|██████▌   | 71/108 [00:02<00:01, 33.36it/s]creating meta tasks:  69%|██████▉   | 75/108 [00:02<00:00, 34.14it/s]creating meta tasks:  73%|███████▎  | 79/108 [00:02<00:00, 35.43it/s]creating meta tasks:  78%|███████▊  | 84/108 [00:02<00:00, 37.53it/s]creating meta tasks:  82%|████████▏ | 89/108 [00:03<00:00, 38.90it/s]creating meta tasks:  87%|████████▋ | 94/108 [00:03<00:00, 40.75it/s]creating meta tasks:  92%|█████████▏| 99/108 [00:03<00:00, 40.13it/s]creating meta tasks:  96%|█████████▋| 104/108 [00:03<00:00, 38.84it/s]creating meta tasks: 100%|██████████| 108/108 [00:03<00:00, 38.30it/s]creating meta tasks: 100%|██████████| 108/108 [00:03<00:00, 30.74it/s]
+[4127168:MainThread](2026-03-27 12:49:34,989) INFO - qlib.MetaDatasetInc - [dataset.py:152] - Example task for training meta model: {'model': {'class': 'TransformerModel', 'module_path': 'qlib.contrib.model.pytorch_transformer_ts', 'kwargs': {'d_feat': 20, 'dropout': 0.3, 'seed': None, 'n_jobs': 20, 'dim_feedforward': 32, 'reg': 0}}, 'dataset': {'class': 'TSDatasetH', 'module_path': 'qlib.data.dataset', 'kwargs': {'handler': 'file:///data/lyc/quant/qlib/examples/benchmarks/111_csi500_rankFalse_alpha158_handler_horizon1.pkl', 'segments': {'train': (Timestamp('2015-01-05 00:00:00'), Timestamp('2015-01-30 00:00:00')), 'test': (Timestamp('2015-02-03 00:00:00'), Timestamp('2015-03-09 00:00:00'))}, 'step_len': 20}}, 'record': ['qlib.workflow.record_temp.SignalRecord']}
+creating meta tasks:   0%|          | 0/67 [00:00<?, ?it/s]creating meta tasks:   6%|▌         | 4/67 [00:00<00:01, 37.48it/s]creating meta tasks:  13%|█▎        | 9/67 [00:00<00:01, 39.80it/s]creating meta tasks:  19%|█▉        | 13/67 [00:00<00:01, 36.91it/s]creating meta tasks:  27%|██▋       | 18/67 [00:00<00:01, 38.46it/s]creating meta tasks:  33%|███▎      | 22/67 [00:00<00:01, 38.27it/s]creating meta tasks:  39%|███▉      | 26/67 [00:00<00:01, 38.62it/s]creating meta tasks:  46%|████▋     | 31/67 [00:00<00:00, 39.68it/s]creating meta tasks:  54%|█████▎    | 36/67 [00:00<00:00, 40.68it/s]creating meta tasks:  61%|██████    | 41/67 [00:01<00:00, 41.15it/s]creating meta tasks:  69%|██████▊   | 46/67 [00:01<00:00, 41.32it/s]creating meta tasks:  76%|███████▌  | 51/67 [00:01<00:00, 41.56it/s]creating meta tasks:  84%|████████▎ | 56/67 [00:01<00:00, 42.61it/s]creating meta tasks:  91%|█████████ | 61/67 [00:01<00:00, 43.92it/s]creating meta tasks: 100%|██████████| 67/67 [00:01<00:00, 46.29it/s]creating meta tasks: 100%|██████████| 67/67 [00:01<00:00, 41.76it/s]
+Traceback (most recent call last):
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 485, in run_all
+    assert self.reload_tag is not None
+AssertionError
+No valid experiment to reload. Restart offline training...
+[4127168:MainThread](2026-03-27 12:49:37,195) INFO - qlib.TransformerModel - [pytorch_transformer_ts.py:61] - Naive Transformer:
+batch_size : 8192
+device : cuda:0
+/data/miniconda3/envs/quant/lib/python3.10/site-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+epoch:   0%|          | 0/100 [00:00<?, ?it/s]epoch:   0%|          | 0/100 [00:00<?, ?it/s]
+[4127168:MainThread](2026-03-27 12:49:38,290) ERROR - qlib.workflow - [utils.py:41] - An exception has been raised[RuntimeError: The size of tensor a (158) must match the size of tensor b (20) at non-singleton dimension 2].
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 524, in <module>
+    fire.Fire(Incremental)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 496, in run_all
+    mm = self.offline_training(seed=43 + i)
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 364, in offline_training
+    mm.fit(self.meta_dataset_offline)
+  File "/data/lyc/quant/qlib/qlib/contrib/meta/incremental/model.py", line 106, in fit
+    pred_y, ic = self.run_epoch(phase, task_list)
+  File "/data/lyc/quant/qlib/qlib/contrib/meta/incremental/model.py", line 142, in run_epoch
+    pred = self.run_task(meta_input, phase)
+  File "/data/lyc/quant/qlib/qlib/contrib/meta/incremental/model.py", line 264, in run_task
+    y_hat, _ = self.framework(X, model=fmodel, transform=self.adapt_x)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/lyc/quant/qlib/qlib/contrib/meta/incremental/net.py", line 162, in forward
+    X = self.teacher_x(X)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/lyc/quant/qlib/qlib/contrib/meta/incremental/net.py", line 87, in forward
+    [torch.cosine_similarity(x, self.P[i], dim=-1).unsqueeze(-1) for i in range(self.num_head)], -1,
+  File "/data/lyc/quant/qlib/qlib/contrib/meta/incremental/net.py", line 87, in <listcomp>
+    [torch.cosine_similarity(x, self.P[i], dim=-1).unsqueeze(-1) for i in range(self.num_head)], -1,
+RuntimeError: The size of tensor a (158) must match the size of tensor b (20) at non-singleton dimension 2

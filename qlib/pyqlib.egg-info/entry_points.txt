@@ -1,0 +1,2 @@
+[console_scripts]
+qrun = qlib.workflow.cli:run

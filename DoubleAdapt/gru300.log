@@ -579,3 +579,110 @@ Time cost: 176.7130145072937	22.37394380569458
  'mae': [0.706635344028473, 0.00016074204826789376],
  'mse': [0.9746257185935974, 0.0005265007317880237]}
 [2941844:MainThread](2026-03-26 20:13:36,140) INFO - qlib.timer - [log.py:127] - Time cost: 0.026s | waiting `async_log` Done
+/data/miniconda3/envs/quant/lib/python3.10/site-packages/mlflow/utils/autologging_utils/versioning.py:6: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_filename
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+['./qlib/examples/benchmarks_dynamic/incremental/main.py', 'run_all', '--forecast_model', 'GRU', '-num_head', '8', '--tau', '10', '--lr_da', '0.01', '--market', 'csi300', '--data_dir', 'crowd_data', '--rank_label', 'False', '--begin_valid_epoch', '30']
+[3959690:MainThread](2026-03-27 11:10:57,240) INFO - qlib.Initialization - [config.py:416] - default_conf: client.
+[3959690:MainThread](2026-03-27 11:10:57,242) INFO - qlib.Initialization - [__init__.py:74] - qlib successfully initialized based on client settings.
+[3959690:MainThread](2026-03-27 11:10:57,242) INFO - qlib.Initialization - [__init__.py:76] - data_path={'__DEFAULT_FREQ': PosixPath('/data/lyc/quant/qlib_bin')}
+Remove CSRankNorm
+{'class': 'Alpha158', 'module_path': 'qlib.contrib.data.handler', 'kwargs': {'start_time': datetime.date(2008, 1, 1), 'end_time': datetime.date(2020, 8, 1), 'fit_start_time': datetime.date(2008, 1, 1), 'fit_end_time': datetime.date(2014, 12, 31), 'instruments': 'csi300', 'infer_processors': [{'class': 'FilterCol', 'kwargs': {'fields_group': 'feature', 'col_list': ['RESI5', 'WVMA5', 'RSQR5', 'KLEN', 'RSQR10', 'CORR5', 'CORD5', 'CORR10', 'ROC60', 'RESI10', 'VSTD5', 'RSQR60', 'CORR60', 'WVMA60', 'STD5', 'RSQR20', 'CORD60', 'CORD10', 'CORR20', 'KLOW']}}, {'class': 'RobustZScoreNorm', 'kwargs': {'fields_group': 'feature', 'clip_outlier': True}}, {'class': 'Fillna', 'kwargs': {'fields_group': 'feature'}}], 'learn_processors': [{'class': 'DropnaLabel'}, {'class': 'CSZScoreNorm', 'kwargs': {'fields_group': 'label'}}], 'label': ['Ref($close, -2) / Ref($close, -1) - 1']}}
+[3959690:MainThread](2026-03-27 11:11:02,462) INFO - qlib.timer - [log.py:127] - Time cost: 5.209s | Loading data Done
+[3959690:MainThread](2026-03-27 11:11:02,554) INFO - qlib.timer - [log.py:127] - Time cost: 0.006s | FilterCol Done
+/data/lyc/quant/qlib/qlib/data/dataset/processor.py:308: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[self.cols] = X
+[3959690:MainThread](2026-03-27 11:11:02,700) INFO - qlib.timer - [log.py:127] - Time cost: 0.146s | RobustZScoreNorm Done
+[3959690:MainThread](2026-03-27 11:11:02,713) INFO - qlib.timer - [log.py:127] - Time cost: 0.012s | Fillna Done
+[3959690:MainThread](2026-03-27 11:11:02,721) INFO - qlib.timer - [log.py:127] - Time cost: 0.006s | DropnaLabel Done
+[3959690:MainThread](2026-03-27 11:11:05,793) INFO - qlib.timer - [log.py:127] - Time cost: 3.071s | CSZScoreNorm Done
+[3959690:MainThread](2026-03-27 11:11:05,793) INFO - qlib.timer - [log.py:127] - Time cost: 3.330s | fit & process data Done
+[3959690:MainThread](2026-03-27 11:11:05,793) INFO - qlib.timer - [log.py:127] - Time cost: 8.542s | Init data Done
+Save handler file to /data/lyc/quant/qlib/examples/benchmarks/crowd_data_csi300_rankFalse_alpha158_handler_horizon1.pkl
+{'model': {'class': 'GRU', 'module_path': 'qlib.contrib.model.pytorch_gru_ts', 'kwargs': {'d_feat': 20, 'hidden_size': 64, 'num_layers': 2, 'dropout': 0.0, 'n_epochs': 200, 'lr': 0.001, 'early_stop': 100, 'batch_size': 800, 'metric': 'loss', 'loss': 'mse', 'n_jobs': 20, 'GPU': 0}}, 'dataset': {'class': 'TSDatasetH', 'module_path': 'qlib.data.dataset', 'kwargs': {'handler': 'file:///data/lyc/quant/qlib/examples/benchmarks/crowd_data_csi300_rankFalse_alpha158_handler_horizon1.pkl', 'segments': {'train': [datetime.date(2008, 1, 1), datetime.date(2014, 12, 31)], 'valid': [datetime.date(2015, 1, 1), datetime.date(2016, 12, 31)], 'test': [datetime.date(2017, 1, 1), datetime.date(2020, 8, 1)]}, 'step_len': 20}}, 'record': ['qlib.workflow.record_temp.SignalRecord']}
+[3959690:MainThread](2026-03-27 11:11:06,505) ERROR - qlib.workflow - [utils.py:41] - An exception has been raised[AttributeError: 'TSDataSampler' object has no attribute 'index'].
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 510, in <module>
+    fire.Fire(Incremental)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 446, in run_all
+    self.meta_dataset_offline, self.meta_dataset_online = self.dump_data()
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 224, in dump_data
+    assert ta.align_seg(t["dataset"]["kwargs"]["segments"]["train"])[0] == data.index[0][0]
+AttributeError: 'TSDataSampler' object has no attribute 'index'
+/data/miniconda3/envs/quant/lib/python3.10/site-packages/mlflow/utils/autologging_utils/versioning.py:6: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_filename
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+['./qlib/examples/benchmarks_dynamic/incremental/main.py', 'run_all', '--forecast_model', 'GRU', '-num_head', '8', '--tau', '10', '--lr_da', '0.01', '--market', 'csi300', '--data_dir', 'crowd_data', '--rank_label', 'False', '--begin_valid_epoch', '30']
+[3963270:MainThread](2026-03-27 11:12:47,216) INFO - qlib.Initialization - [config.py:416] - default_conf: client.
+[3963270:MainThread](2026-03-27 11:12:47,219) INFO - qlib.Initialization - [__init__.py:74] - qlib successfully initialized based on client settings.
+[3963270:MainThread](2026-03-27 11:12:47,219) INFO - qlib.Initialization - [__init__.py:76] - data_path={'__DEFAULT_FREQ': PosixPath('/data/lyc/quant/qlib_bin')}
+Remove CSRankNorm
+{'class': 'Alpha360', 'module_path': 'qlib.contrib.data.handler', 'kwargs': {'start_time': datetime.date(2008, 1, 1), 'end_time': datetime.date(2020, 8, 1), 'fit_start_time': datetime.date(2008, 1, 1), 'fit_end_time': datetime.date(2014, 12, 31), 'instruments': 'csi300', 'infer_processors': [{'class': 'RobustZScoreNorm', 'kwargs': {'fields_group': 'feature', 'clip_outlier': True}}, {'class': 'Fillna', 'kwargs': {'fields_group': 'feature'}}], 'learn_processors': [{'class': 'DropnaLabel'}, {'class': 'CSZScoreNorm', 'kwargs': {'fields_group': 'label'}}], 'label': ['Ref($close, -2) / Ref($close, -1) - 1']}}
+{'model': {'class': 'GRU', 'module_path': 'qlib.contrib.model.pytorch_gru', 'kwargs': {'d_feat': 6, 'hidden_size': 64, 'num_layers': 2, 'dropout': 0.0, 'n_epochs': 200, 'lr': 0.001, 'early_stop': 100, 'batch_size': 800, 'metric': 'loss', 'loss': 'mse', 'GPU': 0}}, 'dataset': {'class': 'DatasetH', 'module_path': 'qlib.data.dataset', 'kwargs': {'handler': 'file:///data/lyc/quant/qlib/examples/benchmarks/crowd_data_csi300_rankFalse_alpha360_handler_horizon1.pkl', 'segments': {'train': [datetime.date(2008, 1, 1), datetime.date(2014, 12, 31)], 'valid': [datetime.date(2015, 1, 1), datetime.date(2016, 12, 31)], 'test': [datetime.date(2017, 1, 1), datetime.date(2020, 8, 1)]}}}, 'record': ['qlib.workflow.record_temp.SignalRecord']}
+[3963270:MainThread](2026-03-27 11:12:47,987) INFO - qlib.MetaDatasetInc - [dataset.py:152] - Example task for training meta model: {'model': {'class': 'GRU', 'module_path': 'qlib.contrib.model.pytorch_gru', 'kwargs': {'d_feat': 6, 'hidden_size': 64, 'num_layers': 2, 'dropout': 0.0, 'n_epochs': 200, 'lr': 0.001, 'early_stop': 100, 'batch_size': 800, 'metric': 'loss', 'loss': 'mse', 'GPU': 0}}, 'dataset': {'class': 'DatasetH', 'module_path': 'qlib.data.dataset', 'kwargs': {'handler': 'file:///data/lyc/quant/qlib/examples/benchmarks/crowd_data_csi300_rankFalse_alpha360_handler_horizon1.pkl', 'segments': {'train': (Timestamp('2008-01-02 00:00:00'), Timestamp('2008-01-29 00:00:00')), 'test': (Timestamp('2008-01-31 00:00:00'), Timestamp('2008-03-05 00:00:00'))}}}, 'record': ['qlib.workflow.record_temp.SignalRecord']}
+creating meta tasks:   0%|          | 0/108 [00:00<?, ?it/s]creating meta tasks:  65%|██████▍   | 70/108 [00:00<00:00, 695.99it/s]creating meta tasks: 100%|██████████| 108/108 [00:00<00:00, 699.19it/s]
+[3963270:MainThread](2026-03-27 11:12:48,237) INFO - qlib.MetaDatasetInc - [dataset.py:152] - Example task for training meta model: {'model': {'class': 'GRU', 'module_path': 'qlib.contrib.model.pytorch_gru', 'kwargs': {'d_feat': 6, 'hidden_size': 64, 'num_layers': 2, 'dropout': 0.0, 'n_epochs': 200, 'lr': 0.001, 'early_stop': 100, 'batch_size': 800, 'metric': 'loss', 'loss': 'mse', 'GPU': 0}}, 'dataset': {'class': 'DatasetH', 'module_path': 'qlib.data.dataset', 'kwargs': {'handler': 'file:///data/lyc/quant/qlib/examples/benchmarks/crowd_data_csi300_rankFalse_alpha360_handler_horizon1.pkl', 'segments': {'train': (Timestamp('2015-01-05 00:00:00'), Timestamp('2015-01-30 00:00:00')), 'test': (Timestamp('2015-02-03 00:00:00'), Timestamp('2015-03-09 00:00:00'))}}}, 'record': ['qlib.workflow.record_temp.SignalRecord']}
+creating meta tasks:   0%|          | 0/67 [00:00<?, ?it/s]creating meta tasks: 100%|██████████| 67/67 [00:00<00:00, 703.03it/s]
+Traceback (most recent call last):
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 471, in run_all
+    assert self.reload_tag is not None
+AssertionError
+No valid experiment to reload. Restart offline training...
+[3963270:MainThread](2026-03-27 11:12:48,837) INFO - qlib.GRU - [pytorch_gru.py:64] - GRU pytorch version...
+[3963270:MainThread](2026-03-27 11:12:49,020) INFO - qlib.GRU - [pytorch_gru.py:81] - GRU parameters setting:
+d_feat : 6
+hidden_size : 64
+num_layers : 2
+dropout : 0.0
+n_epochs : 200
+lr : 0.001
+metric : loss
+batch_size : 800
+early_stop : 100
+optimizer : adam
+loss_type : mse
+visible_GPU : 0
+use_GPU : True
+seed : None
+[3963270:MainThread](2026-03-27 11:12:49,023) INFO - qlib.GRU - [pytorch_gru.py:124] - model:
+GRUModel(
+  (rnn): GRU(6, 64, num_layers=2, batch_first=True)
+  (fc_out): Linear(in_features=64, out_features=1, bias=True)
+)
+[3963270:MainThread](2026-03-27 11:12:49,023) INFO - qlib.GRU - [pytorch_gru.py:125] - model size: 0.0370 MB
+epoch:   0%|          | 0/100 [00:00<?, ?it/s]epoch:   0%|          | 0/100 [00:02<?, ?it/s]
+[3963270:MainThread](2026-03-27 11:12:53,204) ERROR - qlib.workflow - [utils.py:41] - An exception has been raised[KeyboardInterrupt: ].
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 510, in <module>
+    fire.Fire(Incremental)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+  File "/data/miniconda3/envs/quant/lib/python3.10/site-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 482, in run_all
+    mm = self.offline_training(seed=43 + i)
+  File "/data/lyc/quant/./qlib/examples/benchmarks_dynamic/incremental/main.py", line 350, in offline_training
+    mm.fit(self.meta_dataset_offline)
+  File "/data/lyc/quant/qlib/qlib/contrib/meta/incremental/model.py", line 106, in fit
+    pred_y, ic = self.run_epoch(phase, task_list)
+  File "/data/lyc/quant/qlib/qlib/contrib/meta/incremental/model.py", line 142, in run_epoch
+    pred = self.run_task(meta_input, phase)
+  File "/data/lyc/quant/qlib/qlib/contrib/meta/incremental/model.py", line 318, in run_task
+    loss_y = (loss_old.item() - loss.item()) / self.sigma * loss_y + loss_y * self.reg
+KeyboardInterrupt: 

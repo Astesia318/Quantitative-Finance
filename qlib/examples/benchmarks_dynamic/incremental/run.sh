@@ -1,0 +1,11 @@
+if [ ! -d "./logs" ]; then
+     mkdir ./logs
+fi
+CUDA_VISIBLE_DEVICES=6 python -u ./qlib/examples/benchmarks_dynamic/incremental/main.py run_all --forecast_model GRU         -num_head 8 --tau 10 --lr_da 0.01  --market csi300 --data_dir crowd_data --rank_label False --begin_valid_epoch 30 > /data/lyc/quant/DoubleAdapt/gru300.log 2>&1
+CUDA_VISIBLE_DEVICES=6 python -u ./qlib/examples/benchmarks_dynamic/incremental/main.py run_all --forecast_model LSTM        -num_head 8 --tau 10 --lr_da 0.01  --market csi300 --data_dir crowd_data --rank_label False --begin_valid_epoch 30 > /data/lyc/quant/DoubleAdapt/lstm300.log 2>&1
+CUDA_VISIBLE_DEVICES=6 python -u ./qlib/examples/benchmarks_dynamic/incremental/main.py run_all --forecast_model ALSTM       -num_head 8 --tau 10 --lr_da 0.01  --market csi300 --data_dir crowd_data --rank_label False --begin_valid_epoch 30 > /data/lyc/quant/DoubleAdapt/alstm300.log 2>&1
+CUDA_VISIBLE_DEVICES=6 python -u ./qlib/examples/benchmarks_dynamic/incremental/main.py run_all --forecast_model Transformer -num_head 8 --tau 10 --lr_da 0.01  --market csi300 --data_dir crowd_data --rank_label False --begin_valid_epoch 30 > /data/lyc/quant/DoubleAdapt/tfm300.log 2>&1
+CUDA_VISIBLE_DEVICES=6 python -u ./qlib/examples/benchmarks_dynamic/incremental/main.py run_all --forecast_model GRU         -num_head 8 --tau 10 --lr_da 0.01  --market csi500 --data_dir crowd_data --rank_label False --begin_valid_epoch 30 > /data/lyc/quant/DoubleAdapt/gru500.log 2>&1
+CUDA_VISIBLE_DEVICES=6 python -u ./qlib/examples/benchmarks_dynamic/incremental/main.py run_all --forecast_model LSTM        -num_head 8 --tau 10 --lr_da 0.01  --market csi500 --data_dir crowd_data --rank_label False --begin_valid_epoch 20 > /data/lyc/quant/DoubleAdapt/lstm500.log 2>&1
+CUDA_VISIBLE_DEVICES=6 python -u ./qlib/examples/benchmarks_dynamic/incremental/main.py run_all --forecast_model ALSTM       -num_head 8 --tau 10 --lr_da 0.01  --market csi500 --data_dir crowd_data --rank_label False --begin_valid_epoch 30 > /data/lyc/quant/DoubleAdapt/alstm500.log 2>&1
+CUDA_VISIBLE_DEVICES=6 python -u ./qlib/examples/benchmarks_dynamic/incremental/main.py run_all --forecast_model Transformer -num_head 8 --tau 10 --lr_da 0.001 --market csi500 --data_dir crowd_data --rank_label False --begin_valid_epoch 20 > /data/lyc/quant/DoubleAdapt/tfm500.log 2>&1
