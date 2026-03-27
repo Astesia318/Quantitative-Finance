@@ -22,7 +22,7 @@ data_handler_config: &data_handler_config
         - class: CSRankNorm
           kwargs:
               fields_group: label
-    label: ["Ref($close, -5) / Ref($close, -1) - 1"] 
+    label: ["Ref($close, -2) / Ref($close, -1) - 1"] 
 market_data_handler_config: &market_data_handler_config
     start_time: 2008-01-01
     end_time: 2020-08-01
@@ -43,8 +43,8 @@ port_analysis_config: &port_analysis_config
         module_path: qlib.contrib.strategy
         kwargs:
             signal: <PRED>
-            topk: 30
-            n_drop: 30
+            topk: 50
+            n_drop: 5
     backtest:
         start_time: 2017-01-01
         end_time: 2020-08-01
@@ -58,9 +58,12 @@ task:
         module_path: qlib.contrib.model.pytorch_master_ts
         kwargs:
             seed: 0
+            d_feat: 158
             n_epochs: 40
             lr: 0.000008
             train_stop_loss_thred: 0.95
+            gate_input_start_index: 158 
+            gate_input_end_index: 221
             market: *market
             benchmark: *benchmark
             save_prefix: *market

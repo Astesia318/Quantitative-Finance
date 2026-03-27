@@ -193,7 +193,7 @@ class Incremental:
             alpha=self.alpha,
             rank_label=self.rank_label,
             lr=lr,
-            early_stop=20,
+            early_stop=50,
             init_data=False,
             h_path=h_path,
             test_start=test_start,
@@ -217,11 +217,11 @@ class Incremental:
         )
         ds = init_instance_by_config(t["dataset"], accept_types=Dataset)
         data = ds.prepare("train", col_set=["feature", "label"], data_key=DataHandlerLP.DK_L)
-        if t["dataset"]["class"] == "TSDatasetH":
+        if t["dataset"]["class"] == "TSDatasetH" or t["dataset"]["class"] == "MASTERTSDatasetH":
             data.config(fillna_type="ffill+bfill")  # process nan brought by dataloader
 
         ta = TimeAdjuster(future=True, end_time=segments['test'][1])
-        data = ds.prepare("train", col_set=["feature", "label"], data_key=DataHandlerLP.DK_L)
+        # data = ds.prepare("train", col_set=["feature", "label"], data_key=DataHandlerLP.DK_L)
         
         # ======兼容 DatasetH 和 TSDatasetH ======
         if hasattr(data, 'index'):
@@ -241,6 +241,8 @@ class Incremental:
         rolling_task = deepcopy_basic_type(self.basic_task)
         if "pt_model_kwargs" in rolling_task["model"]["kwargs"] and self.alpha == 158:
             self.factor_num = rolling_task["model"]["kwargs"]["pt_model_kwargs"]["input_dim"]
+        elif "gate_input_end_index" in rolling_task["model"]["kwargs"]:
+            self.factor_num = rolling_task["model"]["kwargs"]["gate_input_end_index"]
         elif "d_feat" in rolling_task["model"]["kwargs"]:
             self.factor_num = rolling_task["model"]["kwargs"]["d_feat"]
         else:
@@ -397,7 +399,7 @@ class Incremental:
             ds = init_instance_by_config(self.basic_task["dataset"], accept_types=Dataset)
             label_all = ds.prepare(segments="test", col_set="label", data_key=DataHandlerLP.DK_R)
             if isinstance(label_all, TSDataSampler):
-                label_all = pd.DataFrame({"label": label_all.data_arr[:-1][:, 0]}, index=label_all.data_index)
+                label_all = pd.DataFrame({"label": label_all.data_arr[:-1][:, -1]}, index=label_all.data_index)
                 label_all = label_all.loc[test_begin:test_end]
             mlp158 = self.forecast_model == "MLP" and self.alpha == 158
             if not mlp158:
@@ -414,7 +416,9 @@ class Incremental:
                 pred_y_all = pred_y_all.loc[test_begin:test_end]
                 label_all = label_all.loc[pred_y_all.index]
             else:
-                pred_y_all = pred_y_all.loc[label_all.index]
+                common_index = pred_y_all.index.intersection(label_all.index)
+                pred_y_all = pred_y_all.loc[common_index]
+                label_all = label_all.loc[common_index]
             R.save_objects(**{"pred.pkl": pred_y_all[["pred"]], "label.pkl": label_all})
             # pred_y_all['label'] = label_all
             # K = 50

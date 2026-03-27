@@ -469,7 +469,12 @@ class MASTERTSDatasetH(TSDatasetH):
             marketData = self.get_market_information(ext_slice)
             cols = pd.MultiIndex.from_tuples([("feature", feature) for feature in marketData.columns])
             marketData = pd.DataFrame(marketData.values, columns = cols, index = marketData.index)
-            data = data.iloc[:,:-1].join(marketData).join(data.iloc[:,-1])
+
+            date_index = data.index.get_level_values('datetime')
+            marketData_daily = marketData.groupby(level='datetime').first()
+            aligned_market_data = marketData_daily.reindex(date_index)
+            aligned_market_data.index = data.index
+            data = pd.concat([data.iloc[:, :-1], aligned_market_data, data.iloc[:, -1:]], axis=1)
         #################################################################################
         flt_kwargs = copy.deepcopy(kwargs)
         if flt_col is not None:

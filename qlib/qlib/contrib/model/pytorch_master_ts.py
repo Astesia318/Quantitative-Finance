@@ -207,6 +207,12 @@ class MASTER(nn.Module):
 
 
     def forward(self, x):
+        if x.dim() == 2:
+            # 这里的 8 是你的时间窗口长度 (seq_len)
+            # -1 自动推导为特征数 (221)
+            # 如果你的模型类初始化时保存了 seq_len 属性，最好用 self.seq_len 代替硬编码的 8
+            gate_input_end_index = getattr(self, 'gate_input_end_index', 221)
+            x = x.reshape(x.shape[0], -1, gate_input_end_index)
         src = x[:, :, :self.gate_input_start_index] # N, T, D
         gate_input = x[:, -1, self.gate_input_start_index:self.gate_input_end_index]
         src = src * torch.unsqueeze(self.feature_gate(gate_input), dim=1)
