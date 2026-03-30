@@ -21,6 +21,6 @@ fi
 if $only_backtest; then
     nohup python -u main.py --only_backtest > ./backtest/${universe}.log 2>&1 &
 else
-    nohup python -u main.py > ./logs/${universe}.log 2>&1 &
+    nohup python -u main.py > ./logs/${universe}_qlib_ori.log 2>&1 &
 fi
 echo $!

@@ -34,7 +34,7 @@ def parse_args():
 if __name__ == "__main__":
     args = parse_args()
     # use default data
-    provider_uri = "~/.qlib/qlib_data/cn_data"  # target_dir
+    provider_uri = "/data/lyc/quant/qlib_bin"  # target_dir
     GetData().qlib_data(target_dir=provider_uri, region=REG_CN, exists_skip=True)
     qlib.init(provider_uri=provider_uri, region=REG_CN)
     with open("./workflow_config_master_Alpha158.yaml", 'r') as f:

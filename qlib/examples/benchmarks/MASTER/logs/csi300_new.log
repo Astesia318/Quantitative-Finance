@@ -1,0 +1,328 @@
+/data/miniconda3/envs/quant/lib/python3.10/site-packages/mlflow/utils/autologging_utils/versioning.py:6: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_filename
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+2026-03-30 16:30:46.418 | WARNING  | qlib.tests.data:qlib_data:175 - Data already exists: /data/lyc/quant/qlib_bin, the data download will be skipped
+	If downloading is required: `exists_skip=False` or `change target_dir`
+[2110274:MainThread](2026-03-30 16:30:46,419) INFO - qlib.Initialization - [config.py:416] - default_conf: client.
+[2110274:MainThread](2026-03-30 16:30:46,422) INFO - qlib.Initialization - [__init__.py:74] - qlib successfully initialized based on client settings.
+[2110274:MainThread](2026-03-30 16:30:46,423) INFO - qlib.Initialization - [__init__.py:76] - data_path={'__DEFAULT_FREQ': PosixPath('/data/lyc/quant/qlib_bin')}
+[2110274:MainThread](2026-03-30 16:30:53,122) INFO - qlib.timer - [log.py:127] - Time cost: 4.866s | Loading data Done
+[2110274:MainThread](2026-03-30 16:30:56,254) INFO - qlib.timer - [log.py:127] - Time cost: 3.069s | RobustZScoreNorm Done
+[2110274:MainThread](2026-03-30 16:30:56,455) INFO - qlib.timer - [log.py:127] - Time cost: 0.199s | Fillna Done
+[2110274:MainThread](2026-03-30 16:30:56,455) INFO - qlib.timer - [log.py:127] - Time cost: 3.333s | fit & process data Done
+[2110274:MainThread](2026-03-30 16:30:56,456) INFO - qlib.timer - [log.py:127] - Time cost: 8.201s | Init data Done
+------------------------
+seed: 0
+Epoch 0, train_loss 1.076219, val_loss 1.001598 | IC 0.0492, ICIR 0.2302, RankIC 0.0474, RankICIR 0.2257
+Epoch 1, train_loss 1.022167, val_loss 0.995633 | IC 0.0713, ICIR 0.3083, RankIC 0.0680, RankICIR 0.3005
+Epoch 2, train_loss 1.008454, val_loss 0.993675 | IC 0.0768, ICIR 0.3343, RankIC 0.0727, RankICIR 0.3209
+Epoch 3, train_loss 1.001063, val_loss 0.990294 | IC 0.0926, ICIR 0.3855, RankIC 0.0876, RankICIR 0.3763
+Epoch 4, train_loss 0.995290, val_loss 0.989710 | IC 0.0937, ICIR 0.3992, RankIC 0.0897, RankICIR 0.3929
+Epoch 5, train_loss 0.992768, val_loss 0.990204 | IC 0.0961, ICIR 0.4114, RankIC 0.0917, RankICIR 0.4014
+Epoch 6, train_loss 0.991063, val_loss 0.987983 | IC 0.0993, ICIR 0.4141, RankIC 0.0928, RankICIR 0.3961
+Epoch 7, train_loss 0.988911, val_loss 0.989157 | IC 0.0980, ICIR 0.4189, RankIC 0.0904, RankICIR 0.3937
+Epoch 8, train_loss 0.988139, val_loss 0.988705 | IC 0.0999, ICIR 0.4181, RankIC 0.0928, RankICIR 0.3972
+Epoch 9, train_loss 0.986789, val_loss 0.990157 | IC 0.0889, ICIR 0.4040, RankIC 0.0851, RankICIR 0.3891
+Epoch 10, train_loss 0.984793, val_loss 0.989334 | IC 0.0967, ICIR 0.4101, RankIC 0.0902, RankICIR 0.3905
+Epoch 11, train_loss 0.984750, val_loss 0.989381 | IC 0.0964, ICIR 0.4131, RankIC 0.0892, RankICIR 0.3921
+Epoch 12, train_loss 0.983157, val_loss 0.989512 | IC 0.0980, ICIR 0.4232, RankIC 0.0901, RankICIR 0.4006
+Epoch 13, train_loss 0.982611, val_loss 0.989429 | IC 0.0961, ICIR 0.4333, RankIC 0.0892, RankICIR 0.4063
+Epoch 14, train_loss 0.981777, val_loss 0.988863 | IC 0.0952, ICIR 0.4221, RankIC 0.0878, RankICIR 0.3955
+Epoch 15, train_loss 0.980027, val_loss 0.989265 | IC 0.0959, ICIR 0.4293, RankIC 0.0877, RankICIR 0.3989
+Epoch 16, train_loss 0.980310, val_loss 0.989687 | IC 0.0961, ICIR 0.4271, RankIC 0.0890, RankICIR 0.3995
+Epoch 17, train_loss 0.978585, val_loss 0.987864 | IC 0.1023, ICIR 0.4373, RankIC 0.0937, RankICIR 0.4106
+Epoch 18, train_loss 0.977380, val_loss 0.988133 | IC 0.1010, ICIR 0.4380, RankIC 0.0938, RankICIR 0.4139
+Epoch 19, train_loss 0.976077, val_loss 0.990716 | IC 0.0978, ICIR 0.4169, RankIC 0.0901, RankICIR 0.3914
+Epoch 20, train_loss 0.976759, val_loss 0.990191 | IC 0.0968, ICIR 0.4194, RankIC 0.0882, RankICIR 0.3887
+Epoch 21, train_loss 0.975396, val_loss 0.989957 | IC 0.0983, ICIR 0.4305, RankIC 0.0907, RankICIR 0.4051
+Epoch 22, train_loss 0.975579, val_loss 0.990058 | IC 0.0989, ICIR 0.4284, RankIC 0.0909, RankICIR 0.4018
+Epoch 23, train_loss 0.973598, val_loss 0.991141 | IC 0.0955, ICIR 0.4301, RankIC 0.0889, RankICIR 0.4051
+Epoch 24, train_loss 0.972677, val_loss 0.990428 | IC 0.0966, ICIR 0.4345, RankIC 0.0901, RankICIR 0.4104
+Epoch 25, train_loss 0.972204, val_loss 0.990653 | IC 0.0961, ICIR 0.4399, RankIC 0.0901, RankICIR 0.4156
+Epoch 26, train_loss 0.971449, val_loss 0.991697 | IC 0.0939, ICIR 0.4228, RankIC 0.0864, RankICIR 0.3943
+Epoch 27, train_loss 0.969880, val_loss 0.993409 | IC 0.0939, ICIR 0.4220, RankIC 0.0879, RankICIR 0.3979
+Epoch 28, train_loss 0.968051, val_loss 0.993399 | IC 0.0930, ICIR 0.4221, RankIC 0.0856, RankICIR 0.3929
+Epoch 29, train_loss 0.967845, val_loss 0.995420 | IC 0.0863, ICIR 0.3971, RankIC 0.0796, RankICIR 0.3683
+Epoch 30, train_loss 0.966788, val_loss 0.993830 | IC 0.0910, ICIR 0.4169, RankIC 0.0857, RankICIR 0.3972
+Epoch 31, train_loss 0.966746, val_loss 0.994526 | IC 0.0914, ICIR 0.4119, RankIC 0.0855, RankICIR 0.3926
+Epoch 32, train_loss 0.965327, val_loss 0.996127 | IC 0.0879, ICIR 0.3988, RankIC 0.0823, RankICIR 0.3831
+Epoch 33, train_loss 0.964937, val_loss 0.994539 | IC 0.0928, ICIR 0.4213, RankIC 0.0854, RankICIR 0.3978
+Epoch 34, train_loss 0.964033, val_loss 0.994681 | IC 0.0888, ICIR 0.4077, RankIC 0.0828, RankICIR 0.3857
+Epoch 35, train_loss 0.963022, val_loss 0.998095 | IC 0.0878, ICIR 0.3949, RankIC 0.0818, RankICIR 0.3730
+Epoch 36, train_loss 0.961832, val_loss 0.996781 | IC 0.0952, ICIR 0.4176, RankIC 0.0889, RankICIR 0.4003
+Epoch 37, train_loss 0.961094, val_loss 0.994402 | IC 0.0957, ICIR 0.4315, RankIC 0.0897, RankICIR 0.4142
+Epoch 38, train_loss 0.960345, val_loss 0.998325 | IC 0.0911, ICIR 0.4057, RankIC 0.0844, RankICIR 0.3859
+Epoch 39, train_loss 0.959832, val_loss 0.996266 | IC 0.0898, ICIR 0.4135, RankIC 0.0837, RankICIR 0.3916
+[2110274:MainThread](2026-03-30 17:04:46,729) INFO - qlib.workflow - [exp.py:258] - Experiment 1 starts running ...
+[2110274:MainThread](2026-03-30 17:04:46,776) INFO - qlib.workflow - [recorder.py:341] - Recorder 481c53fec03c46deb992d2284953a2f6 starts running under Experiment 1 ...
+[2110274:MainThread](2026-03-30 17:04:50,715) INFO - qlib.workflow - [record_temp.py:198] - Signal record 'pred.pkl' has been saved as the artifact of the Experiment 1
+'The following are prediction results of the MASTERModel model.'
+                              0
+datetime   instrument          
+2017-01-03 SH600000    0.005058
+           SH600005   -0.075428
+           SH600008    0.063914
+           SH600009    0.184727
+           SH600010    0.034007
+{'IC': 0.03965725107501504,
+ 'ICIR': 0.1687474963260272,
+ 'Rank IC': 0.05949570826832666,
+ 'Rank ICIR': 0.28105422251443474}
+[2110274:MainThread](2026-03-30 17:04:51,485) INFO - qlib.backtest caller - [__init__.py:93] - Create new exchange
+[2110274:MainThread](2026-03-30 17:04:57,071) WARNING - qlib.online operator - [exchange.py:219] - $close field data contains nan.
+[2110274:MainThread](2026-03-30 17:04:57,072) WARNING - qlib.online operator - [exchange.py:219] - $close field data contains nan.
+[2110274:MainThread](2026-03-30 17:04:57,518) WARNING - qlib.BaseExecutor - [executor.py:121] - `common_infra` is not set for <qlib.backtest.executor.SimulatorExecutor object at 0x7f4b4a564ca0>
+backtest loop:   0%|          | 0/871 [00:00<?, ?it/s]/data/lyc/quant/qlib/qlib/utils/index_data.py:481: RuntimeWarning: Mean of empty slice
+  return np.nanmean(self.data)
+backtest loop:   1%|▏         | 11/871 [00:00<00:08, 103.52it/s]backtest loop:   3%|▎         | 22/871 [00:00<00:08, 99.48it/s] backtest loop:   4%|▍         | 34/871 [00:00<00:08, 100.39it/s]backtest loop:   5%|▌         | 45/871 [00:00<00:07, 103.43it/s]backtest loop:   7%|▋         | 57/871 [00:00<00:07, 106.70it/s]backtest loop:   8%|▊         | 68/871 [00:00<00:08, 97.84it/s] backtest loop:   9%|▉         | 79/871 [00:00<00:07, 101.22it/s]backtest loop:  10%|█         | 91/871 [00:00<00:07, 102.03it/s]backtest loop:  12%|█▏        | 104/871 [00:01<00:07, 104.78it/s]backtest loop:  13%|█▎        | 116/871 [00:01<00:06, 108.69it/s]backtest loop:  15%|█▍        | 128/871 [00:01<00:06, 110.69it/s]backtest loop:  16%|█▌        | 140/871 [00:01<00:06, 107.95it/s]backtest loop:  18%|█▊        | 153/871 [00:01<00:06, 112.60it/s]backtest loop:  19%|█▉        | 165/871 [00:01<00:06, 110.60it/s]backtest loop:  20%|██        | 177/871 [00:01<00:06, 109.05it/s]backtest loop:  22%|██▏       | 189/871 [00:01<00:06, 106.59it/s]backtest loop:  23%|██▎       | 201/871 [00:01<00:06, 110.07it/s]backtest loop:  24%|██▍       | 213/871 [00:01<00:05, 112.70it/s]backtest loop:  26%|██▌       | 225/871 [00:02<00:05, 109.65it/s]backtest loop:  27%|██▋       | 237/871 [00:02<00:05, 108.61it/s]backtest loop:  28%|██▊       | 248/871 [00:02<00:05, 106.00it/s]backtest loop:  30%|██▉       | 260/871 [00:02<00:05, 109.74it/s]backtest loop:  31%|███       | 272/871 [00:02<00:05, 112.21it/s]backtest loop:  33%|███▎      | 284/871 [00:02<00:05, 106.76it/s]backtest loop:  34%|███▍      | 297/871 [00:02<00:05, 112.99it/s]backtest loop:  35%|███▌      | 309/871 [00:02<00:05, 111.74it/s]backtest loop:  37%|███▋      | 321/871 [00:02<00:05, 108.68it/s]backtest loop:  38%|███▊      | 333/871 [00:03<00:04, 111.35it/s]backtest loop:  40%|███▉      | 345/871 [00:03<00:04, 108.94it/s]backtest loop:  41%|████      | 357/871 [00:03<00:04, 111.90it/s]backtest loop:  42%|████▏     | 369/871 [00:03<00:04, 110.10it/s]backtest loop:  44%|████▎     | 381/871 [00:03<00:04, 108.95it/s]backtest loop:  45%|████▌     | 393/871 [00:03<00:04, 106.67it/s]backtest loop:  46%|████▋     | 405/871 [00:03<00:04, 109.22it/s]backtest loop:  48%|████▊     | 417/871 [00:03<00:04, 112.17it/s]backtest loop:  49%|████▉     | 429/871 [00:03<00:04, 110.40it/s]backtest loop:  51%|█████     | 441/871 [00:04<00:03, 111.51it/s]backtest loop:  52%|█████▏    | 453/871 [00:04<00:03, 110.07it/s]backtest loop:  53%|█████▎    | 465/871 [00:04<00:03, 112.70it/s]backtest loop:  55%|█████▍    | 477/871 [00:04<00:03, 107.68it/s]backtest loop:  56%|█████▌    | 488/871 [00:04<00:03, 107.03it/s]backtest loop:  57%|█████▋    | 500/871 [00:04<00:03, 105.91it/s]backtest loop:  59%|█████▊    | 511/871 [00:04<00:03, 105.15it/s]backtest loop:  60%|█████▉    | 522/871 [00:04<00:03, 104.23it/s]backtest loop:  61%|██████▏   | 534/871 [00:04<00:03, 107.27it/s]backtest loop:  63%|██████▎   | 545/871 [00:05<00:03, 103.85it/s]backtest loop:  64%|██████▍   | 557/871 [00:05<00:02, 106.57it/s]backtest loop:  65%|██████▌   | 568/871 [00:05<00:02, 103.05it/s]backtest loop:  66%|██████▋   | 579/871 [00:05<00:02, 101.41it/s]backtest loop:  68%|██████▊   | 590/871 [00:05<00:02, 99.98it/s] backtest loop:  69%|██████▉   | 602/871 [00:05<00:02, 103.72it/s]backtest loop:  70%|███████   | 613/871 [00:05<00:02, 105.26it/s]backtest loop:  72%|███████▏  | 625/871 [00:05<00:02, 104.26it/s]backtest loop:  73%|███████▎  | 637/871 [00:05<00:02, 107.53it/s]backtest loop:  75%|███████▍  | 649/871 [00:06<00:02, 109.60it/s]backtest loop:  76%|███████▌  | 660/871 [00:06<00:01, 106.65it/s]backtest loop:  77%|███████▋  | 671/871 [00:06<00:01, 101.90it/s]backtest loop:  78%|███████▊  | 682/871 [00:06<00:01, 103.90it/s]backtest loop:  80%|███████▉  | 694/871 [00:06<00:01, 103.05it/s]backtest loop:  81%|████████  | 706/871 [00:06<00:01, 106.20it/s]backtest loop:  82%|████████▏ | 718/871 [00:06<00:01, 109.00it/s]backtest loop:  84%|████████▎ | 729/871 [00:06<00:01, 105.21it/s]backtest loop:  85%|████████▍ | 740/871 [00:06<00:01, 102.29it/s]backtest loop:  86%|████████▋ | 752/871 [00:07<00:01, 101.88it/s]backtest loop:  88%|████████▊ | 763/871 [00:07<00:01, 100.53it/s]backtest loop:  89%|████████▉ | 775/871 [00:07<00:00, 103.96it/s]backtest loop:  90%|█████████ | 787/871 [00:07<00:00, 103.64it/s]backtest loop:  92%|█████████▏| 799/871 [00:07<00:00, 107.09it/s]backtest loop:  93%|█████████▎| 810/871 [00:07<00:00, 104.52it/s]backtest loop:  94%|█████████▍| 822/871 [00:07<00:00, 108.02it/s]backtest loop:  96%|█████████▌| 833/871 [00:07<00:00, 103.08it/s]backtest loop:  97%|█████████▋| 845/871 [00:07<00:00, 106.49it/s]backtest loop:  98%|█████████▊| 856/871 [00:08<00:00, 102.44it/s]backtest loop: 100%|█████████▉| 868/871 [00:08<00:00, 105.77it/s]backtest loop: 100%|██████████| 871/871 [00:08<00:00, 106.60it/s]
+[2110274:MainThread](2026-03-30 17:05:05,733) INFO - qlib.workflow - [record_temp.py:515] - Portfolio analysis record 'port_analysis_1day.pkl' has been saved as the artifact of the Experiment 1
+'The following are analysis results of benchmark return(1day).'
+                       risk
+mean               0.000477
+std                0.012295
+annualized_return  0.113561
+information_ratio  0.598699
+max_drawdown      -0.370479
+'The following are analysis results of the excess return without cost(1day).'
+                       risk
+mean              -0.000313
+std                0.004373
+annualized_return -0.074425
+information_ratio -1.103227
+max_drawdown      -0.304409
+'The following are analysis results of the excess return with cost(1day).'
+                       risk
+mean              -0.000584
+std                0.004374
+annualized_return -0.139032
+information_ratio -2.060147
+max_drawdown      -0.521569
+[2110274:MainThread](2026-03-30 17:05:05,743) INFO - qlib.workflow - [record_temp.py:540] - Indicator analysis record 'indicator_analysis_1day.pkl' has been saved as the artifact of the Experiment 1
+'The following are analysis results of indicators(1day).'
+     value
+ffr    1.0
+pa     0.0
+pos    0.0
+{'IC': 0.03965725107501504, '1day.excess_return_without_cost.information_ratio': -1.1032272754994537, '1day.excess_return_with_cost.std': 0.004374496737401804, '1day.excess_return_without_cost.mean': -0.0003127081093576497, '1day.excess_return_without_cost.std': 0.004372830382149426, '1day.excess_return_without_cost.max_drawdown': -0.3044086304867009, '1day.pos': 0.0, '1day.pa': 0.0, '1day.excess_return_with_cost.information_ratio': -2.060147113653794, 'Rank IC': 0.05949570826832666, '1day.ffr': 1.0, 'Rank ICIR': 0.28105422251443474, '1day.excess_return_with_cost.mean': -0.0005841681202470912, '1day.excess_return_without_cost.annualized_return': -0.07442453002712063, '1day.excess_return_with_cost.annualized_return': -0.1390320126188077, 'ICIR': 0.1687474963260272, '1day.excess_return_with_cost.max_drawdown': -0.5215686787899787}
+{'1day.excess_return_without_cost.annualized_return': [-0.07442453002712063],
+ '1day.excess_return_without_cost.information_ratio': [-1.1032272754994537],
+ 'IC': [0.03965725107501504],
+ 'ICIR': [0.1687474963260272],
+ 'Rank IC': [0.05949570826832666],
+ 'Rank ICIR': [0.28105422251443474]}
+[2110274:MainThread](2026-03-30 17:05:06,245) INFO - qlib.timer - [log.py:127] - Time cost: 0.000s | waiting `async_log` Done
+------------------------
+seed: 1
+Epoch 0, train_loss 1.069013, val_loss 0.998234 | IC 0.0557, ICIR 0.2503, RankIC 0.0511, RankICIR 0.2339
+Epoch 1, train_loss 1.020482, val_loss 0.995070 | IC 0.0697, ICIR 0.3052, RankIC 0.0640, RankICIR 0.2824
+Epoch 2, train_loss 1.007176, val_loss 0.994716 | IC 0.0640, ICIR 0.2876, RankIC 0.0592, RankICIR 0.2706
+Epoch 3, train_loss 0.999227, val_loss 0.991582 | IC 0.0780, ICIR 0.3378, RankIC 0.0693, RankICIR 0.3078
+Epoch 4, train_loss 0.994603, val_loss 0.991642 | IC 0.0803, ICIR 0.3448, RankIC 0.0721, RankICIR 0.3188
+Epoch 5, train_loss 0.992061, val_loss 0.990290 | IC 0.0838, ICIR 0.3655, RankIC 0.0762, RankICIR 0.3425
+Epoch 6, train_loss 0.990512, val_loss 0.991791 | IC 0.0789, ICIR 0.3499, RankIC 0.0744, RankICIR 0.3338
+Epoch 7, train_loss 0.989454, val_loss 0.991067 | IC 0.0842, ICIR 0.3713, RankIC 0.0773, RankICIR 0.3483
+Epoch 8, train_loss 0.988191, val_loss 0.989896 | IC 0.0884, ICIR 0.3885, RankIC 0.0808, RankICIR 0.3648
+Epoch 9, train_loss 0.986111, val_loss 0.991190 | IC 0.0861, ICIR 0.3725, RankIC 0.0781, RankICIR 0.3456
+Epoch 10, train_loss 0.985604, val_loss 0.990126 | IC 0.0877, ICIR 0.3871, RankIC 0.0812, RankICIR 0.3646
+Epoch 11, train_loss 0.985083, val_loss 0.990276 | IC 0.0909, ICIR 0.3956, RankIC 0.0850, RankICIR 0.3807
+Epoch 12, train_loss 0.983769, val_loss 0.990928 | IC 0.0867, ICIR 0.3877, RankIC 0.0807, RankICIR 0.3680
+Epoch 13, train_loss 0.982768, val_loss 0.991964 | IC 0.0876, ICIR 0.3918, RankIC 0.0817, RankICIR 0.3730
+Epoch 14, train_loss 0.981872, val_loss 0.991865 | IC 0.0882, ICIR 0.3873, RankIC 0.0808, RankICIR 0.3627
+Epoch 15, train_loss 0.980623, val_loss 0.990317 | IC 0.0956, ICIR 0.4196, RankIC 0.0896, RankICIR 0.4034
+Epoch 16, train_loss 0.979691, val_loss 0.991200 | IC 0.0920, ICIR 0.4142, RankIC 0.0850, RankICIR 0.3890
+Epoch 17, train_loss 0.979642, val_loss 0.990883 | IC 0.0965, ICIR 0.4202, RankIC 0.0890, RankICIR 0.4006
+Epoch 18, train_loss 0.977914, val_loss 0.992408 | IC 0.0923, ICIR 0.4130, RankIC 0.0857, RankICIR 0.3952
+Epoch 19, train_loss 0.978001, val_loss 0.992836 | IC 0.0920, ICIR 0.4112, RankIC 0.0862, RankICIR 0.3958
+Epoch 20, train_loss 0.976417, val_loss 0.992190 | IC 0.0901, ICIR 0.4074, RankIC 0.0831, RankICIR 0.3816
+Epoch 21, train_loss 0.976513, val_loss 0.992157 | IC 0.0911, ICIR 0.4112, RankIC 0.0863, RankICIR 0.3992
+Epoch 22, train_loss 0.974551, val_loss 0.993373 | IC 0.0930, ICIR 0.4159, RankIC 0.0866, RankICIR 0.3965
+Epoch 23, train_loss 0.974305, val_loss 0.992812 | IC 0.0908, ICIR 0.4101, RankIC 0.0844, RankICIR 0.3908
+Epoch 24, train_loss 0.973461, val_loss 0.993884 | IC 0.0865, ICIR 0.3980, RankIC 0.0816, RankICIR 0.3884
+Epoch 25, train_loss 0.972051, val_loss 0.995346 | IC 0.0839, ICIR 0.3862, RankIC 0.0792, RankICIR 0.3726
+Epoch 26, train_loss 0.971030, val_loss 0.995500 | IC 0.0881, ICIR 0.4003, RankIC 0.0837, RankICIR 0.3904
+Epoch 27, train_loss 0.970634, val_loss 0.994879 | IC 0.0947, ICIR 0.4279, RankIC 0.0880, RankICIR 0.4080
+Epoch 28, train_loss 0.970703, val_loss 0.996501 | IC 0.0883, ICIR 0.4027, RankIC 0.0848, RankICIR 0.3989
+Epoch 29, train_loss 0.968679, val_loss 0.995621 | IC 0.0878, ICIR 0.4071, RankIC 0.0813, RankICIR 0.3824
+Epoch 30, train_loss 0.967073, val_loss 0.997114 | IC 0.0892, ICIR 0.4076, RankIC 0.0858, RankICIR 0.4045
+Epoch 31, train_loss 0.967477, val_loss 0.998616 | IC 0.0903, ICIR 0.4118, RankIC 0.0861, RankICIR 0.4076
+Epoch 32, train_loss 0.965220, val_loss 0.999334 | IC 0.0908, ICIR 0.4201, RankIC 0.0873, RankICIR 0.4196
+Epoch 33, train_loss 0.965588, val_loss 0.999040 | IC 0.0883, ICIR 0.4026, RankIC 0.0855, RankICIR 0.4071
+Epoch 34, train_loss 0.963831, val_loss 0.995835 | IC 0.0905, ICIR 0.4155, RankIC 0.0859, RankICIR 0.4137
+Epoch 35, train_loss 0.963454, val_loss 1.001593 | IC 0.0880, ICIR 0.4004, RankIC 0.0849, RankICIR 0.4012
+Epoch 36, train_loss 0.962862, val_loss 1.004530 | IC 0.0897, ICIR 0.4023, RankIC 0.0852, RankICIR 0.3984
+Epoch 37, train_loss 0.960441, val_loss 1.001257 | IC 0.0865, ICIR 0.3965, RankIC 0.0835, RankICIR 0.3977
+Epoch 38, train_loss 0.960988, val_loss 1.003312 | IC 0.0825, ICIR 0.3840, RankIC 0.0790, RankICIR 0.3791
+Epoch 39, train_loss 0.959374, val_loss 1.004361 | IC 0.0876, ICIR 0.4007, RankIC 0.0839, RankICIR 0.4014
+[2110274:MainThread](2026-03-30 17:39:13,473) INFO - qlib.workflow - [exp.py:258] - Experiment 2 starts running ...
+[2110274:MainThread](2026-03-30 17:39:13,481) INFO - qlib.workflow - [recorder.py:341] - Recorder bacc9323bc3c474da7906aa391d47c89 starts running under Experiment 2 ...
+[2110274:MainThread](2026-03-30 17:39:17,642) INFO - qlib.workflow - [record_temp.py:198] - Signal record 'pred.pkl' has been saved as the artifact of the Experiment 2
+'The following are prediction results of the MASTERModel model.'
+                              0
+datetime   instrument          
+2017-01-03 SH600000    0.062038
+           SH600005   -0.100762
+           SH600008    0.113900
+           SH600009    0.131918
+           SH600010   -0.011274
+{'IC': 0.035737136413240764,
+ 'ICIR': 0.15544109770719383,
+ 'Rank IC': 0.05106703262131902,
+ 'Rank ICIR': 0.24458899620940666}
+[2110274:MainThread](2026-03-30 17:39:18,243) INFO - qlib.backtest caller - [__init__.py:93] - Create new exchange
+[2110274:MainThread](2026-03-30 17:39:23,981) WARNING - qlib.online operator - [exchange.py:219] - $close field data contains nan.
+[2110274:MainThread](2026-03-30 17:39:23,982) WARNING - qlib.online operator - [exchange.py:219] - $close field data contains nan.
+[2110274:MainThread](2026-03-30 17:39:24,164) WARNING - qlib.BaseExecutor - [executor.py:121] - `common_infra` is not set for <qlib.backtest.executor.SimulatorExecutor object at 0x7f4a8abb8c10>
+backtest loop:   0%|          | 0/871 [00:00<?, ?it/s]/data/lyc/quant/qlib/qlib/utils/index_data.py:481: RuntimeWarning: Mean of empty slice
+  return np.nanmean(self.data)
+backtest loop:   1%|          | 9/871 [00:00<00:10, 86.01it/s]backtest loop:   2%|▏         | 19/871 [00:00<00:09, 88.26it/s]backtest loop:   3%|▎         | 30/871 [00:00<00:08, 96.54it/s]backtest loop:   5%|▍         | 41/871 [00:00<00:08, 101.50it/s]backtest loop:   6%|▌         | 53/871 [00:00<00:07, 106.08it/s]backtest loop:   7%|▋         | 64/871 [00:00<00:07, 102.20it/s]backtest loop:   9%|▊         | 75/871 [00:00<00:07, 103.50it/s]backtest loop:  10%|▉         | 86/871 [00:00<00:07, 99.87it/s] backtest loop:  11%|█▏        | 98/871 [00:00<00:07, 104.99it/s]backtest loop:  13%|█▎        | 109/871 [00:01<00:07, 104.25it/s]backtest loop:  14%|█▍        | 121/871 [00:01<00:06, 108.56it/s]backtest loop:  15%|█▌        | 133/871 [00:01<00:06, 111.07it/s]backtest loop:  17%|█▋        | 145/871 [00:01<00:06, 108.20it/s]backtest loop:  18%|█▊        | 157/871 [00:01<00:06, 109.57it/s]backtest loop:  19%|█▉        | 169/871 [00:01<00:06, 107.41it/s]backtest loop:  21%|██        | 181/871 [00:01<00:06, 109.71it/s]backtest loop:  22%|██▏       | 193/871 [00:01<00:06, 109.67it/s]backtest loop:  23%|██▎       | 204/871 [00:01<00:06, 105.25it/s]backtest loop:  25%|██▍       | 215/871 [00:02<00:06, 106.09it/s]backtest loop:  26%|██▌       | 227/871 [00:02<00:05, 108.66it/s]backtest loop:  27%|██▋       | 239/871 [00:02<00:05, 107.96it/s]backtest loop:  29%|██▉       | 251/871 [00:02<00:05, 110.41it/s]backtest loop:  30%|███       | 263/871 [00:02<00:08, 71.83it/s] backtest loop:  32%|███▏      | 276/871 [00:02<00:07, 81.21it/s]backtest loop:  33%|███▎      | 288/871 [00:02<00:06, 87.45it/s]backtest loop:  35%|███▍      | 301/871 [00:02<00:05, 96.83it/s]backtest loop:  36%|███▌      | 312/871 [00:03<00:05, 99.10it/s]backtest loop:  37%|███▋      | 324/871 [00:03<00:05, 100.74it/s]backtest loop:  38%|███▊      | 335/871 [00:03<00:05, 103.18it/s]backtest loop:  40%|███▉      | 347/871 [00:03<00:04, 107.10it/s]backtest loop:  41%|████      | 359/871 [00:03<00:04, 106.35it/s]backtest loop:  43%|████▎     | 371/871 [00:03<00:04, 109.54it/s]backtest loop:  44%|████▍     | 383/871 [00:03<00:04, 108.14it/s]backtest loop:  45%|████▌     | 395/871 [00:03<00:04, 111.24it/s]backtest loop:  47%|████▋     | 408/871 [00:03<00:04, 110.64it/s]backtest loop:  48%|████▊     | 420/871 [00:04<00:03, 113.16it/s]backtest loop:  50%|████▉     | 432/871 [00:04<00:03, 110.44it/s]backtest loop:  51%|█████     | 444/871 [00:04<00:03, 112.84it/s]backtest loop:  52%|█████▏    | 456/871 [00:04<00:03, 112.64it/s]backtest loop:  54%|█████▎    | 468/871 [00:04<00:03, 109.72it/s]backtest loop:  55%|█████▌    | 480/871 [00:04<00:03, 111.78it/s]backtest loop:  56%|█████▋    | 492/871 [00:04<00:03, 108.76it/s]backtest loop:  58%|█████▊    | 504/871 [00:04<00:03, 110.90it/s]backtest loop:  59%|█████▉    | 516/871 [00:04<00:03, 105.21it/s]backtest loop:  61%|██████    | 527/871 [00:05<00:03, 106.47it/s]backtest loop:  62%|██████▏   | 538/871 [00:05<00:03, 106.97it/s]backtest loop:  63%|██████▎   | 549/871 [00:05<00:03, 102.68it/s]backtest loop:  64%|██████▍   | 560/871 [00:05<00:02, 104.39it/s]backtest loop:  66%|██████▌   | 571/871 [00:05<00:03, 98.90it/s] backtest loop:  67%|██████▋   | 582/871 [00:05<00:02, 101.83it/s]backtest loop:  68%|██████▊   | 593/871 [00:05<00:02, 104.01it/s]backtest loop:  69%|██████▉   | 605/871 [00:05<00:02, 102.90it/s]backtest loop:  71%|███████   | 616/871 [00:05<00:02, 104.88it/s]backtest loop:  72%|███████▏  | 628/871 [00:06<00:02, 108.11it/s]backtest loop:  73%|███████▎  | 640/871 [00:06<00:02, 105.76it/s]backtest loop:  75%|███████▍  | 652/871 [00:06<00:02, 108.34it/s]backtest loop:  76%|███████▌  | 664/871 [00:06<00:01, 106.22it/s]backtest loop:  77%|███████▋  | 675/871 [00:06<00:01, 104.41it/s]backtest loop:  79%|███████▉  | 687/871 [00:06<00:01, 107.06it/s]backtest loop:  80%|████████  | 699/871 [00:06<00:01, 105.66it/s]backtest loop:  82%|████████▏ | 710/871 [00:06<00:01, 104.09it/s]backtest loop:  83%|████████▎ | 722/871 [00:06<00:01, 106.84it/s]backtest loop:  84%|████████▍ | 733/871 [00:07<00:01, 100.88it/s]backtest loop:  86%|████████▌ | 745/871 [00:07<00:01, 104.66it/s]backtest loop:  87%|████████▋ | 756/871 [00:07<00:01, 106.14it/s]backtest loop:  88%|████████▊ | 767/871 [00:07<00:01, 102.94it/s]backtest loop:  89%|████████▉ | 778/871 [00:07<00:00, 103.76it/s]backtest loop:  91%|█████████ | 789/871 [00:07<00:00, 104.08it/s]backtest loop:  92%|█████████▏| 800/871 [00:07<00:00, 105.71it/s]backtest loop:  93%|█████████▎| 811/871 [00:07<00:00, 102.26it/s]backtest loop:  94%|█████████▍| 823/871 [00:07<00:00, 101.80it/s]backtest loop:  96%|█████████▌| 835/871 [00:08<00:00, 104.91it/s]backtest loop:  97%|█████████▋| 846/871 [00:08<00:00, 102.25it/s]backtest loop:  99%|█████████▊| 858/871 [00:08<00:00, 106.92it/s]backtest loop: 100%|█████████▉| 870/871 [00:08<00:00, 108.90it/s]backtest loop: 100%|██████████| 871/871 [00:08<00:00, 104.28it/s]
+[2110274:MainThread](2026-03-30 17:39:32,560) INFO - qlib.workflow - [record_temp.py:515] - Portfolio analysis record 'port_analysis_1day.pkl' has been saved as the artifact of the Experiment 2
+'The following are analysis results of benchmark return(1day).'
+                       risk
+mean               0.000477
+std                0.012295
+annualized_return  0.113561
+information_ratio  0.598699
+max_drawdown      -0.370479
+'The following are analysis results of the excess return without cost(1day).'
+                       risk
+mean              -0.000242
+std                0.004327
+annualized_return -0.057483
+information_ratio -0.861048
+max_drawdown      -0.219927
+'The following are analysis results of the excess return with cost(1day).'
+                       risk
+mean              -0.000516
+std                0.004335
+annualized_return -0.122703
+information_ratio -1.834724
+max_drawdown      -0.442870
+[2110274:MainThread](2026-03-30 17:39:32,570) INFO - qlib.workflow - [record_temp.py:540] - Indicator analysis record 'indicator_analysis_1day.pkl' has been saved as the artifact of the Experiment 2
+'The following are analysis results of indicators(1day).'
+     value
+ffr    1.0
+pa     0.0
+pos    0.0
+{'IC': 0.035737136413240764, '1day.excess_return_without_cost.information_ratio': -0.8610478169702327, '1day.excess_return_with_cost.std': 0.004335074224268265, '1day.excess_return_without_cost.mean': -0.0002415245227820548, '1day.excess_return_without_cost.std': 0.004327354169513231, '1day.excess_return_without_cost.max_drawdown': -0.21992707080863844, '1day.pos': 0.0, '1day.pa': 0.0, '1day.excess_return_with_cost.information_ratio': -1.834723682876499, 'Rank IC': 0.05106703262131902, '1day.ffr': 1.0, 'Rank ICIR': 0.24458899620940666, '1day.excess_return_with_cost.mean': -0.0005155594196947136, '1day.excess_return_without_cost.annualized_return': -0.05748283642212904, '1day.excess_return_with_cost.annualized_return': -0.12270314188734184, 'ICIR': 0.15544109770719383, '1day.excess_return_with_cost.max_drawdown': -0.44287013796387553}
+{'1day.excess_return_without_cost.annualized_return': [-0.07442453002712063,
+                                                       -0.05748283642212904],
+ '1day.excess_return_without_cost.information_ratio': [-1.1032272754994537,
+                                                       -0.8610478169702327],
+ 'IC': [0.03965725107501504, 0.035737136413240764],
+ 'ICIR': [0.1687474963260272, 0.15544109770719383],
+ 'Rank IC': [0.05949570826832666, 0.05106703262131902],
+ 'Rank ICIR': [0.28105422251443474, 0.24458899620940666]}
+[2110274:MainThread](2026-03-30 17:39:33,128) INFO - qlib.timer - [log.py:127] - Time cost: 0.000s | waiting `async_log` Done
+------------------------
+seed: 2
+Epoch 0, train_loss 1.076090, val_loss 0.997079 | IC 0.0604, ICIR 0.2868, RankIC 0.0546, RankICIR 0.2612
+Epoch 1, train_loss 1.022883, val_loss 0.992701 | IC 0.0840, ICIR 0.3617, RankIC 0.0781, RankICIR 0.3420
+Epoch 2, train_loss 1.007290, val_loss 0.992510 | IC 0.0817, ICIR 0.3531, RankIC 0.0767, RankICIR 0.3376
+Epoch 3, train_loss 0.999370, val_loss 0.991962 | IC 0.0830, ICIR 0.3641, RankIC 0.0776, RankICIR 0.3474
+Epoch 4, train_loss 0.996751, val_loss 0.990695 | IC 0.0876, ICIR 0.3742, RankIC 0.0796, RankICIR 0.3490
+Epoch 5, train_loss 0.992754, val_loss 0.990623 | IC 0.0876, ICIR 0.3729, RankIC 0.0803, RankICIR 0.3501
+Epoch 6, train_loss 0.991849, val_loss 0.989884 | IC 0.0904, ICIR 0.3868, RankIC 0.0807, RankICIR 0.3550
+Epoch 7, train_loss 0.989300, val_loss 0.990744 | IC 0.0848, ICIR 0.3747, RankIC 0.0769, RankICIR 0.3465
+Epoch 8, train_loss 0.988141, val_loss 0.989278 | IC 0.0930, ICIR 0.4026, RankIC 0.0850, RankICIR 0.3744
+Epoch 9, train_loss 0.987637, val_loss 0.989891 | IC 0.0921, ICIR 0.4028, RankIC 0.0852, RankICIR 0.3795
+Epoch 10, train_loss 0.985283, val_loss 0.988723 | IC 0.0993, ICIR 0.4183, RankIC 0.0927, RankICIR 0.4032
+Epoch 11, train_loss 0.983812, val_loss 0.989297 | IC 0.0996, ICIR 0.4132, RankIC 0.0906, RankICIR 0.3864
+Epoch 12, train_loss 0.983978, val_loss 0.988358 | IC 0.1000, ICIR 0.4214, RankIC 0.0907, RankICIR 0.3915
+Epoch 13, train_loss 0.982467, val_loss 0.989291 | IC 0.0981, ICIR 0.4166, RankIC 0.0899, RankICIR 0.3899
+Epoch 14, train_loss 0.981158, val_loss 0.987871 | IC 0.1051, ICIR 0.4500, RankIC 0.0962, RankICIR 0.4232
+Epoch 15, train_loss 0.980593, val_loss 0.989359 | IC 0.1012, ICIR 0.4260, RankIC 0.0938, RankICIR 0.4041
+Epoch 16, train_loss 0.979820, val_loss 0.988393 | IC 0.1015, ICIR 0.4357, RankIC 0.0942, RankICIR 0.4140
+Epoch 17, train_loss 0.978953, val_loss 0.990892 | IC 0.0916, ICIR 0.4023, RankIC 0.0855, RankICIR 0.3799
+Epoch 18, train_loss 0.977768, val_loss 0.990684 | IC 0.0937, ICIR 0.4073, RankIC 0.0879, RankICIR 0.3898
+Epoch 19, train_loss 0.977596, val_loss 0.990623 | IC 0.0931, ICIR 0.4167, RankIC 0.0880, RankICIR 0.4026
+Epoch 20, train_loss 0.975757, val_loss 0.991989 | IC 0.0924, ICIR 0.4051, RankIC 0.0866, RankICIR 0.3900
+Epoch 21, train_loss 0.975214, val_loss 0.990879 | IC 0.0960, ICIR 0.4248, RankIC 0.0915, RankICIR 0.4170
+Epoch 22, train_loss 0.974980, val_loss 0.991482 | IC 0.0953, ICIR 0.4224, RankIC 0.0890, RankICIR 0.4005
+Epoch 23, train_loss 0.973531, val_loss 0.992151 | IC 0.0920, ICIR 0.4134, RankIC 0.0859, RankICIR 0.3946
+Epoch 24, train_loss 0.972541, val_loss 0.991625 | IC 0.0973, ICIR 0.4295, RankIC 0.0923, RankICIR 0.4185
+Epoch 25, train_loss 0.971238, val_loss 0.993273 | IC 0.0936, ICIR 0.4099, RankIC 0.0902, RankICIR 0.4058
+Epoch 26, train_loss 0.971222, val_loss 0.993378 | IC 0.0903, ICIR 0.4119, RankIC 0.0855, RankICIR 0.3964
+Epoch 27, train_loss 0.969547, val_loss 0.993563 | IC 0.0900, ICIR 0.3923, RankIC 0.0868, RankICIR 0.3921
+Epoch 28, train_loss 0.969763, val_loss 0.992646 | IC 0.0949, ICIR 0.4142, RankIC 0.0905, RankICIR 0.4054
+Epoch 29, train_loss 0.969054, val_loss 0.992239 | IC 0.0957, ICIR 0.4270, RankIC 0.0914, RankICIR 0.4168
+Epoch 30, train_loss 0.966831, val_loss 0.996221 | IC 0.0963, ICIR 0.4149, RankIC 0.0922, RankICIR 0.4119
+Epoch 31, train_loss 0.966223, val_loss 0.993582 | IC 0.0957, ICIR 0.4231, RankIC 0.0927, RankICIR 0.4221
+Epoch 32, train_loss 0.965921, val_loss 0.995162 | IC 0.0900, ICIR 0.4046, RankIC 0.0856, RankICIR 0.3971
+Epoch 33, train_loss 0.964840, val_loss 0.994488 | IC 0.0932, ICIR 0.4200, RankIC 0.0883, RankICIR 0.4102
+Epoch 34, train_loss 0.963644, val_loss 0.996779 | IC 0.0884, ICIR 0.4023, RankIC 0.0838, RankICIR 0.3908
+Epoch 35, train_loss 0.962902, val_loss 0.995536 | IC 0.0971, ICIR 0.4304, RankIC 0.0916, RankICIR 0.4187
+Epoch 36, train_loss 0.961195, val_loss 0.996119 | IC 0.0910, ICIR 0.4134, RankIC 0.0864, RankICIR 0.4024
+Epoch 37, train_loss 0.960248, val_loss 0.997901 | IC 0.0837, ICIR 0.3923, RankIC 0.0790, RankICIR 0.3768
+Epoch 38, train_loss 0.959533, val_loss 0.998710 | IC 0.0945, ICIR 0.4188, RankIC 0.0902, RankICIR 0.4133
+Epoch 39, train_loss 0.959048, val_loss 0.996766 | IC 0.0893, ICIR 0.4136, RankIC 0.0836, RankICIR 0.3973
+[2110274:MainThread](2026-03-30 18:10:28,700) INFO - qlib.workflow - [exp.py:258] - Experiment 3 starts running ...
+[2110274:MainThread](2026-03-30 18:10:28,706) INFO - qlib.workflow - [recorder.py:341] - Recorder ff6ba306b081453da49d4567ecc05fcb starts running under Experiment 3 ...
+[2110274:MainThread](2026-03-30 18:10:32,837) INFO - qlib.workflow - [record_temp.py:198] - Signal record 'pred.pkl' has been saved as the artifact of the Experiment 3
+'The following are prediction results of the MASTERModel model.'
+                              0
+datetime   instrument          
+2017-01-03 SH600000   -0.003591
+           SH600005   -0.042239
+           SH600008    0.040798
+           SH600009    0.106890
+           SH600010   -0.121485
+{'IC': 0.044873490026466095,
+ 'ICIR': 0.18849368990929352,
+ 'Rank IC': 0.05687456271064611,
+ 'Rank ICIR': 0.26428773853482}
+[2110274:MainThread](2026-03-30 18:10:33,444) INFO - qlib.backtest caller - [__init__.py:93] - Create new exchange
+[2110274:MainThread](2026-03-30 18:10:39,028) WARNING - qlib.online operator - [exchange.py:219] - $close field data contains nan.
+[2110274:MainThread](2026-03-30 18:10:39,030) WARNING - qlib.online operator - [exchange.py:219] - $close field data contains nan.
+[2110274:MainThread](2026-03-30 18:10:39,208) WARNING - qlib.BaseExecutor - [executor.py:121] - `common_infra` is not set for <qlib.backtest.executor.SimulatorExecutor object at 0x7f4aadc33a00>
+backtest loop:   0%|          | 0/871 [00:00<?, ?it/s]/data/lyc/quant/qlib/qlib/utils/index_data.py:481: RuntimeWarning: Mean of empty slice
+  return np.nanmean(self.data)
+backtest loop:   1%|          | 10/871 [00:00<00:09, 94.51it/s]backtest loop:   2%|▏         | 20/871 [00:00<00:08, 95.24it/s]backtest loop:   4%|▎         | 32/871 [00:00<00:07, 105.38it/s]backtest loop:   5%|▌         | 44/871 [00:00<00:07, 106.16it/s]backtest loop:   7%|▋         | 57/871 [00:00<00:07, 111.89it/s]backtest loop:   8%|▊         | 69/871 [00:00<00:07, 109.73it/s]backtest loop:   9%|▉         | 81/871 [00:00<00:07, 109.20it/s]backtest loop:  11%|█         | 94/871 [00:00<00:06, 115.27it/s]backtest loop:  12%|█▏        | 106/871 [00:00<00:06, 114.22it/s]backtest loop:  14%|█▎        | 119/871 [00:01<00:06, 114.52it/s]backtest loop:  15%|█▌        | 132/871 [00:01<00:06, 117.34it/s]backtest loop:  17%|█▋        | 144/871 [00:01<00:06, 115.32it/s]backtest loop:  18%|█▊        | 157/871 [00:01<00:05, 119.25it/s]backtest loop:  19%|█▉        | 169/871 [00:01<00:05, 117.10it/s]backtest loop:  21%|██        | 182/871 [00:01<00:05, 120.54it/s]backtest loop:  22%|██▏       | 195/871 [00:01<00:05, 117.94it/s]backtest loop:  24%|██▍       | 208/871 [00:01<00:05, 121.02it/s]backtest loop:  25%|██▌       | 221/871 [00:02<00:08, 79.49it/s] backtest loop:  27%|██▋       | 234/871 [00:02<00:07, 86.80it/s]backtest loop:  28%|██▊       | 247/871 [00:02<00:06, 96.39it/s]backtest loop:  30%|██▉       | 259/871 [00:02<00:06, 100.57it/s]backtest loop:  31%|███       | 272/871 [00:02<00:05, 107.89it/s]backtest loop:  33%|███▎      | 284/871 [00:02<00:05, 106.92it/s]backtest loop:  34%|███▍      | 298/871 [00:02<00:05, 112.33it/s]backtest loop:  36%|███▌      | 311/871 [00:02<00:04, 114.07it/s]backtest loop:  37%|███▋      | 324/871 [00:02<00:04, 113.35it/s]backtest loop:  39%|███▊      | 337/871 [00:03<00:04, 117.72it/s]backtest loop:  40%|████      | 349/871 [00:03<00:04, 115.53it/s]backtest loop:  41%|████▏     | 361/871 [00:03<00:04, 115.57it/s]backtest loop:  43%|████▎     | 373/871 [00:03<00:04, 114.40it/s]backtest loop:  44%|████▍     | 386/871 [00:03<00:04, 118.31it/s]backtest loop:  46%|████▌     | 398/871 [00:03<00:04, 115.81it/s]backtest loop:  47%|████▋     | 411/871 [00:03<00:03, 119.40it/s]backtest loop:  49%|████▊     | 423/871 [00:03<00:03, 117.42it/s]backtest loop:  50%|█████     | 436/871 [00:03<00:03, 120.63it/s]backtest loop:  52%|█████▏    | 449/871 [00:04<00:03, 118.57it/s]backtest loop:  53%|█████▎    | 462/871 [00:04<00:03, 115.99it/s]backtest loop:  55%|█████▍    | 475/871 [00:04<00:03, 118.13it/s]backtest loop:  56%|█████▌    | 487/871 [00:04<00:03, 115.41it/s]backtest loop:  57%|█████▋    | 500/871 [00:04<00:03, 113.62it/s]backtest loop:  59%|█████▉    | 513/871 [00:04<00:03, 116.12it/s]backtest loop:  60%|██████    | 525/871 [00:04<00:03, 112.72it/s]backtest loop:  62%|██████▏   | 537/871 [00:04<00:02, 114.22it/s]backtest loop:  63%|██████▎   | 549/871 [00:04<00:02, 111.32it/s]backtest loop:  64%|██████▍   | 561/871 [00:05<00:02, 113.19it/s]backtest loop:  66%|██████▌   | 573/871 [00:05<00:02, 110.68it/s]backtest loop:  67%|██████▋   | 586/871 [00:05<00:02, 109.93it/s]backtest loop:  69%|██████▊   | 598/871 [00:05<00:02, 112.02it/s]backtest loop:  70%|███████   | 610/871 [00:05<00:02, 109.81it/s]backtest loop:  72%|███████▏  | 623/871 [00:05<00:02, 114.08it/s]backtest loop:  73%|███████▎  | 635/871 [00:05<00:02, 111.71it/s]backtest loop:  74%|███████▍  | 647/871 [00:05<00:01, 113.55it/s]backtest loop:  76%|███████▌  | 659/871 [00:05<00:01, 112.18it/s]backtest loop:  77%|███████▋  | 671/871 [00:06<00:01, 110.82it/s]backtest loop:  79%|███████▊  | 684/871 [00:06<00:01, 110.38it/s]backtest loop:  80%|████████  | 697/871 [00:06<00:01, 114.39it/s]backtest loop:  81%|████████▏ | 709/871 [00:06<00:01, 109.77it/s]backtest loop:  83%|████████▎ | 721/871 [00:06<00:01, 112.52it/s]backtest loop:  84%|████████▍ | 733/871 [00:06<00:01, 107.16it/s]backtest loop:  86%|████████▌ | 745/871 [00:06<00:01, 110.61it/s]backtest loop:  87%|████████▋ | 757/871 [00:06<00:01, 109.54it/s]backtest loop:  88%|████████▊ | 769/871 [00:06<00:00, 112.45it/s]backtest loop:  90%|████████▉ | 781/871 [00:07<00:00, 114.22it/s]backtest loop:  91%|█████████ | 793/871 [00:07<00:00, 111.22it/s]backtest loop:  92%|█████████▏| 805/871 [00:07<00:00, 110.98it/s]backtest loop:  94%|█████████▍| 817/871 [00:07<00:00, 108.02it/s]backtest loop:  95%|█████████▌| 828/871 [00:07<00:00, 104.74it/s]backtest loop:  97%|█████████▋| 841/871 [00:07<00:00, 110.06it/s]backtest loop:  98%|█████████▊| 853/871 [00:07<00:00, 109.54it/s]backtest loop:  99%|█████████▉| 866/871 [00:07<00:00, 110.24it/s]backtest loop: 100%|██████████| 871/871 [00:07<00:00, 111.24it/s]
+[2110274:MainThread](2026-03-30 18:10:47,079) INFO - qlib.workflow - [record_temp.py:515] - Portfolio analysis record 'port_analysis_1day.pkl' has been saved as the artifact of the Experiment 3
+'The following are analysis results of benchmark return(1day).'
+                       risk
+mean               0.000477
+std                0.012295
+annualized_return  0.113561
+information_ratio  0.598699
+max_drawdown      -0.370479
+'The following are analysis results of the excess return without cost(1day).'
+                       risk
+mean              -0.000239
+std                0.004232
+annualized_return -0.056776
+information_ratio -0.869618
+max_drawdown      -0.240870
+'The following are analysis results of the excess return with cost(1day).'
+                       risk
+mean              -0.000456
+std                0.004238
+annualized_return -0.108538
+information_ratio -1.660277
+max_drawdown      -0.412629
+[2110274:MainThread](2026-03-30 18:10:47,088) INFO - qlib.workflow - [record_temp.py:540] - Indicator analysis record 'indicator_analysis_1day.pkl' has been saved as the artifact of the Experiment 3
+'The following are analysis results of indicators(1day).'
+     value
+ffr    1.0
+pa     0.0
+pos    0.0
+{'IC': 0.044873490026466095, '1day.excess_return_without_cost.information_ratio': -0.8696178903088811, '1day.excess_return_with_cost.std': 0.004237537614234115, '1day.excess_return_without_cost.mean': -0.0002385551076002563, '1day.excess_return_without_cost.std': 0.004232029947477267, '1day.excess_return_without_cost.max_drawdown': -0.24087016092769448, '1day.pa': 0.0, '1day.excess_return_with_cost.information_ratio': -1.6602766914346596, 'Rank IC': 0.05687456271064611, '1day.ffr': 1.0, 'Rank ICIR': 0.26428773853482, '1day.excess_return_with_cost.mean': -0.00045604275286150055, '1day.excess_return_without_cost.annualized_return': -0.056776115608861, '1day.excess_return_with_cost.annualized_return': -0.10853817518103713, 'ICIR': 0.18849368990929352, '1day.excess_return_with_cost.max_drawdown': -0.41262940489033445}
+{'1day.excess_return_without_cost.annualized_return': [-0.07442453002712063,
+                                                       -0.05748283642212904,
+                                                       -0.056776115608861],
+ '1day.excess_return_without_cost.information_ratio': [-1.1032272754994537,
+                                                       -0.8610478169702327,
+                                                       -0.8696178903088811],
+ 'IC': [0.03965725107501504, 0.035737136413240764, 0.044873490026466095],
+ 'ICIR': [0.1687474963260272, 0.15544109770719383, 0.18849368990929352],
+ 'Rank IC': [0.05949570826832666, 0.05106703262131902, 0.05687456271064611],
+ 'Rank ICIR': [0.28105422251443474, 0.24458899620940666, 0.26428773853482]}
+[2110274:MainThread](2026-03-30 18:10:47,579) INFO - qlib.timer - [log.py:127] - Time cost: 0.000s | waiting `async_log` Done
+IC: 0.0400892925049073 +- 0.0037423908743236503
+ICIR: 0.17089409464750485 +- 0.013578767152799091
+Rank IC: 0.0558124345334306 +- 0.0035220004248761117
+Rank ICIR: 0.26331031908622043 +- 0.014902901148279895
+1day.excess_return_without_cost.annualized_return: -0.06289449401937022 +- 0.00815807008762866
+1day.excess_return_without_cost.information_ratio: -0.9446309942595225 +- 0.11219906968303839
