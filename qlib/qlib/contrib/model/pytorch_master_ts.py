@@ -239,7 +239,7 @@ class DailyBatchSamplerRandom(Sampler):
         self.data_source = data_source
         self.shuffle = shuffle
         # calculate number of samples in each batch
-        self.daily_count = pd.Series(index=self.data_source.get_index()).groupby("datetime").size().values
+        self.daily_count = pd.Series(index=self.data_source.get_index(),dtype="float64").groupby("datetime").size().values
         self.daily_index = np.roll(np.cumsum(self.daily_count), 1)  # calculate begin index of each batch
         self.daily_index[0] = 0
 
@@ -259,7 +259,7 @@ class DailyBatchSamplerRandom(Sampler):
 
 class MASTERModel(Model):
     def __init__(self, d_feat: int = 158, d_model: int = 256, t_nhead: int = 4, s_nhead: int = 2, gate_input_start_index=158, gate_input_end_index=221,
-            T_dropout_rate=0.5, S_dropout_rate=0.5, beta=None, n_epochs = 40, lr = 8e-6, GPU=0, seed=0, train_stop_loss_thred=None, save_path = 'model/', save_prefix= '', benchmark = 'SH000300', market = 'csi300', only_backtest = False):
+            T_dropout_rate=0.5, S_dropout_rate=0.5, beta=None, n_epochs = 40, lr = 1e-5, GPU=0, seed=0, train_stop_loss_thred=None, save_path = 'model/', save_prefix= '', benchmark = 'SH000300', market = 'csi300', only_backtest = False):
         
         self.d_model = d_model
         self.d_feat = d_feat
@@ -284,9 +284,9 @@ class MASTERModel(Model):
 
         self.fitted = False
         if self.market == 'csi300':
-            self.beta = 10
-        else:
             self.beta = 5
+        else:
+            self.beta = 2
         if self.seed is not None:
             np.random.seed(self.seed)
             torch.manual_seed(self.seed)
@@ -360,7 +360,38 @@ class MASTERModel(Model):
             losses.append(loss.item())
 
         return float(np.mean(losses))
+    
+    def ic_epoch(self, data_loader):
+        """Compute mean IC, ICIR, RankIC, RankICIR over all trading days in the loader."""
+        from scipy.stats import spearmanr
+        self.model.eval()
+        ic_list, ric_list = [], []
 
+        for data in data_loader:
+            data = torch.squeeze(data, dim=0)
+            feature = data[:, :, 0:-1].to(self.device)
+            label = data[:, -1, -1].numpy()
+
+            with torch.no_grad():
+                pred = self.model(feature.float()).detach().cpu().numpy()
+
+            mask = ~np.isnan(label)
+            if mask.sum() < 5:
+                continue
+            ic = np.corrcoef(pred[mask], label[mask])[0, 1]
+            ric, _ = spearmanr(pred[mask], label[mask])
+            ic_list.append(ic)
+            ric_list.append(ric)
+
+        ic_arr  = np.array(ic_list)
+        ric_arr = np.array(ric_list)
+        return {
+            "IC":     float(np.nanmean(ic_arr)),
+            "ICIR":   float(np.nanmean(ic_arr) / (np.nanstd(ic_arr) + 1e-12)),
+            "RankIC": float(np.nanmean(ric_arr)),
+            "RankICIR": float(np.nanmean(ric_arr) / (np.nanstd(ric_arr) + 1e-12)),
+        }
+    
     def _init_data_loader(self, data, shuffle=True, drop_last=True):
         sampler = DailyBatchSamplerRandom(data, shuffle)
         data_loader = DataLoader(data, sampler=sampler, drop_last=drop_last)
@@ -383,8 +414,15 @@ class MASTERModel(Model):
         for step in range(self.n_epochs):
             train_loss = self.train_epoch(train_loader)
             val_loss = self.test_epoch(valid_loader)
-
-            print("Epoch %d, train_loss %.6f, valid_loss %.6f " % (step, train_loss, val_loss))
+            ic_metrics = self.ic_epoch(valid_loader)
+            print(
+                "Epoch %d, train_loss %.6f, val_loss %.6f | "
+                "IC %.4f, ICIR %.4f, RankIC %.4f, RankICIR %.4f" % (
+                    step, train_loss, val_loss,
+                    ic_metrics["IC"], ic_metrics["ICIR"],
+                    ic_metrics["RankIC"], ic_metrics["RankICIR"],
+                )
+            )
             if best_val_loss > val_loss:
                 best_param = copy.deepcopy(self.model.state_dict())
                 best_val_loss = val_loss
